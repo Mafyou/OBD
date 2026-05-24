@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/Etc/">
+    <File Path=".github/CLAUDE.md" />
+    <File Path=".github/copilot-instructions.md" />
+    <File Path="design.md" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Fronts/">
+    <Project Path="src/Fronts/OBD.Mobile.Lib/OBD.Mobile.Lib.csproj" Id="f00ffcd9-9fb1-4576-927f-5968c51c4c3b" />
+    <Project Path="src/Fronts/OBD.Mobile/OBD.Mobile.csproj" Id="806a6009-ac4c-4abc-b9a0-873f878a6866">
+      <Deploy Solution="Debug|*" />
+    </Project>
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="tests/OBD.Mobile.Lib.UnitTests/OBD.Mobile.Lib.UnitTests.csproj" Id="93801d5c-a194-4909-aa75-23473ba15250" />
+  </Folder>
+</Solution>
