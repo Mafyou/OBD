@@ -2,6 +2,31 @@
 
 Application mobile pensée pour accompagner une personne en CDI pendant son onboarding. La promesse produit est simple : aider à réussir son arrivée dans l'entreprise sans se perdre dans les informations, les personnes à retenir et les habitudes internes.
 
+## Fiche Play Store
+
+### Titre de l'application
+OBD Onboarding Assistant
+
+### Description courte
+Réussis ton onboarding CDI avec contacts, notes sectorisées et repères clés.
+
+### Description longue
+Réussir un onboarding n'est pas simple : nouvelles personnes, nouvelles règles, nouvelles routines. OBD t'aide à structurer rapidement ce que tu dois retenir pour gagner en clarté, en autonomie et en sérénité dès tes premiers jours en entreprise.
+
+Fonctionnalités principales :
+- 👥 Contacts onboarding : enregistre collègues, postes, secteurs et notes courtes.
+- 🗂️ Notes par secteurs : classe tes informations par domaines avec notes texte et croquis.
+- #️⃣ Hashtags cliquables : relie un mot-clé à un croquis existant en un tap.
+- 🔒 Notes sensibles : protège les contenus personnels via authentification biométrique.
+- 🔎 Recherche globale : retrouve instantanément contacts, notes, titres, mots-clés et secteurs.
+- ⚙️ Repères de travail : centralise réunions habituelles, télétravail et informations N+1.
+
+Public cible :
+OBD est conçue pour les personnes en CDI qui démarrent dans une nouvelle entreprise et veulent une mémoire personnelle simple, structurée et confidentielle.
+
+Appel à l'action :
+Télécharge OBD et transforme ton onboarding en parcours clair, organisé et efficace dès aujourd'hui.
+
 ## Positionnement
 
 - **Public cible** : une personne en CDI, en phase d'arrivée dans une entreprise.
