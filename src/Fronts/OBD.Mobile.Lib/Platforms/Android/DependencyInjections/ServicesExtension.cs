@@ -1,6 +1,6 @@
 ﻿namespace OBD.Mobile.Lib.DependencyInjections;
 
-public static class ServicesExtension
+public static partial class ServicesExtension
 {
     extension(IServiceCollection services)
     {
@@ -10,7 +10,7 @@ public static class ServicesExtension
             services.AddSingleton<INoteService, NoteService>();
             services.AddSingleton<ISectorService, SectorService>();
             services.AddSingleton<INoteLinkService, NoteLinkService>();
-            services.AddSingleton<IReperesTravailService, ReperesTravailService>();
+            services.AddSingleton<IWorkHabitsService, WorkHabitsService>();
         }
     }
 }

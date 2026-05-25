@@ -86,7 +86,7 @@ public class DataSeeder(DatabaseContext db)
             CreatedAt = DateTime.UtcNow
         });
 
-        await db.InsertAsync(new ReperesTravail
+        await db.InsertAsync(new WorkHabits
         {
             RegularMeetings = "Daily 9h30 · Rétro vendredi 16h · 1:1 mardi 10h",
             RemoteWorkDays = "Lundi et vendredi",

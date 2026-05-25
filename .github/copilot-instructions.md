@@ -12,6 +12,7 @@
 - Quand l'utilisateur référence un projet ou une méthode spécifique, n'appliquer les modifications que dans ce périmètre exact.
 - Tout doit être en anglais dans le code, même les commentaires et les noms de variables, méthodes, classes, etc. (sauf exceptions très ponctuelles comme des messages d'erreur destinés à l'utilisateur final qui peut être francophone).
 - Les Entry ont toujours un Keyboard à la valeur Chat, sauf si c'est un champ de mot de passe où il faut mettre Keyboard à Text et IsPassword à true.
+- No newline at the end of file.
 
 ## Code Style
 - N'oublie pas:
@@ -39,6 +40,3 @@
   - Jamais de Frame, toujours des Border
   - Mettre les styles dans Styles.xaml
   - Ne jamais hardcoder les couleurs mais les mettre deans Colors.xaml
-
-## Document Formatting
-- Le CV ResumeFuture.cshtml doit tenir sur exactement une page A4 à l'impression, pas plus.

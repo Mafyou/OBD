@@ -1,9 +1,9 @@
 namespace OBD.Mobile.Lib.Data;
 
-public class DatabaseContext
+public class DatabaseContext(string databasePath)
 {
     private SQLiteAsyncConnection? _connection;
-    private readonly string _dbPath = Path.Combine(FileSystem.AppDataDirectory, "obd.db3");
+    private readonly string _dbPath = databasePath;
 
     private async ValueTask<SQLiteAsyncConnection> GetConnectionAsync()
     {
@@ -17,7 +17,7 @@ public class DatabaseContext
         await _connection.CreateTableAsync<Sector>();
         await _connection.CreateTableAsync<Note>();
         await _connection.CreateTableAsync<NoteLink>();
-        await _connection.CreateTableAsync<ReperesTravail>();
+        await _connection.CreateTableAsync<WorkHabits>();
         return _connection;
     }
 

@@ -1,6 +1,7 @@
 namespace OBD.Mobile.Lib.Models;
 
-public class ReperesTravail
+[Table("ReperesTravail")]
+public class WorkHabits
 {
     [PrimaryKey, AutoIncrement]
     public int Id { get; set; }

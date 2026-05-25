@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Splash : actif pendant OnCreate — doit aussi hériter de MaterialComponents -->
+    <style name="Maui.SplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#065F46</item>
+        <item name="colorPrimaryDark">#065F46</item>
+        <item name="colorAccent">#10B981</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
+    </style>
+
+    <!-- Thème principal après démarrage -->
     <style name="Maui.MainTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">#065F46</item>
         <item name="colorPrimaryDark">#065F46</item>
