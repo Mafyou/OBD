@@ -10,24 +10,52 @@
     Shell.TabBarForegroundColor="{StaticResource AccentPrimary}"
     Shell.TabBarTitleColor="{StaticResource AccentPrimary}"
     Shell.TabBarUnselectedColor="{StaticResource TextSecondary}"
-    Shell.BackgroundColor="{StaticResource BackgroundPrimary}">
+    Shell.BackgroundColor="{StaticResource AccentDark}">
 
     <Shell.ToolbarItems>
-        <ToolbarItem Text="🔍" Clicked="OnSearchClicked" Order="Primary" />
+        <ToolbarItem Clicked="OnSearchClicked" Order="Primary">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="&#xE8B6;"
+                                 FontFamily="MaterialSymbols"
+                                 Size="24"
+                                 Color="{StaticResource TextPrimary}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
     </Shell.ToolbarItems>
 
     <TabBar>
         <ShellContent
             Title="Personnes"
-            ContentTemplate="{DataTemplate persons:PersonsPage}" />
+            ContentTemplate="{DataTemplate persons:PersonsPage}">
+            <ShellContent.Icon>
+                <FontImageSource Glyph="&#xE7FD;"
+                                 FontFamily="MaterialSymbols"
+                                 Size="24"
+                                 Color="White" />
+            </ShellContent.Icon>
+        </ShellContent>
 
         <ShellContent
             Title="Notes"
-            ContentTemplate="{DataTemplate notes:NotesPage}" />
+            ContentTemplate="{DataTemplate notes:NotesPage}">
+            <ShellContent.Icon>
+                <FontImageSource Glyph="&#xE873;"
+                                 FontFamily="MaterialSymbols"
+                                 Size="24"
+                                 Color="White" />
+            </ShellContent.Icon>
+        </ShellContent>
 
         <ShellContent
             Title="Paramètres"
-            ContentTemplate="{DataTemplate parameters:ParametersPage}" />
+            ContentTemplate="{DataTemplate parameters:ParametersPage}">
+            <ShellContent.Icon>
+                <FontImageSource Glyph="&#xE8B8;"
+                                 FontFamily="MaterialSymbols"
+                                 Size="24"
+                                 Color="White" />
+            </ShellContent.Icon>
+        </ShellContent>
     </TabBar>
 
 </Shell>

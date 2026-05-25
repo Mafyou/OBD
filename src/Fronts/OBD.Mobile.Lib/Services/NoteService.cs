@@ -12,8 +12,8 @@ public class NoteService(DatabaseContext db) : INoteService
 
     public Task<List<Note>> SearchAsync(string query)
         => db.QueryAsync<Note>(
-            "SELECT * FROM Note WHERE (Content LIKE ? OR Keywords LIKE ?) AND IsSensitive = 0",
-            $"%{query}%", $"%{query}%");
+            "SELECT * FROM Note WHERE (Content LIKE ? OR Keywords LIKE ? OR Title LIKE ?) AND IsSensitive = 0",
+            $"%{query}%", $"%{query}%", $"%{query}%");
 
     public Task<Note?> GetAsync(int id) => db.GetAsync<Note>(id);
 

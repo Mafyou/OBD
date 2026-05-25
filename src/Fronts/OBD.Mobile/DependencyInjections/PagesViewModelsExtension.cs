@@ -1,4 +1,4 @@
-﻿namespace OBD.Mobile.Extensions;
+﻿namespace OBD.Mobile.DependencyInjections;
 
 public static class PagesViewModelsExtension
 {
@@ -11,10 +11,11 @@ public static class PagesViewModelsExtension
             services.AddSingletonWithShellRoute<SectorDetailsPage, SectorDetailsViewModel>(nameof(SectorDetailsPage));
             services.AddSingletonWithShellRoute<NotesPage, NotesViewModel>(nameof(NotesPage));
             services.AddSingletonWithShellRoute<NotesSectorPage, NotesSectorViewModel>(nameof(NotesSectorPage));
-            services.AddSingletonWithShellRoute<NoteDetailPage, NoteDetailViewModel>(nameof(NoteDetailPage));
-            services.AddSingletonWithShellRoute<SketchDetailsPage, SketchDetailsViewModel>(nameof(SketchDetailsPage));
+            services.AddTransientWithShellRoute<NoteDetailPage, NoteDetailViewModel>(nameof(NoteDetailPage));
+            services.AddTransientWithShellRoute<SketchDetailsPage, SketchDetailsViewModel>(nameof(SketchDetailsPage));
             services.AddSingletonWithShellRoute<SearchPage, SearchViewModel>(nameof(SearchPage));
             services.AddSingletonWithShellRoute<ParametersPage, ParametersViewModel>(nameof(ParametersPage));
+            services.AddSingletonWithShellRoute<SensitiveNotesPage, SensitiveNotesViewModel>(nameof(SensitiveNotesPage));
         }
     }
 }

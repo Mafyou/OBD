@@ -9,14 +9,37 @@
              Shell.NavBarIsVisible="False"
              BackgroundColor="{StaticResource BackgroundPrimary}">
 
-    <Grid RowDefinitions="Auto,*">
+    <Grid RowDefinitions="Auto,Auto,*">
 
-        <SearchBar Grid.Row="0"
+        <!-- Header -->
+        <Grid Grid.Row="0"
+              BackgroundColor="{StaticResource AccentDark}"
+              ColumnDefinitions="*,Auto"
+              Padding="16,12,8,12">
+            <Label Grid.Column="0"
+                   Text="Personnes"
+                   FontFamily="GeistSemiBold"
+                   FontSize="20"
+                   TextColor="{StaticResource TextPrimary}"
+                   VerticalOptions="Center" />
+            <Button Grid.Column="1"
+                    Text="&#xE8B6;"
+                    FontFamily="MaterialSymbols"
+                    Clicked="OnSearchClicked"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource TextPrimary}"
+                    FontSize="22"
+                    Padding="8,0"
+                    HeightRequest="44" />
+        </Grid>
+
+        <!-- Filtre local -->
+        <SearchBar Grid.Row="1"
                    Text="{Binding SearchQuery}"
-                   Placeholder="Rechercher..."
+                   Placeholder="Filtrer..."
                    Margin="16,8" />
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
 
             <CollectionView ItemsSource="{Binding Persons}">
                 <CollectionView.EmptyView>
@@ -54,11 +77,12 @@
             </CollectionView>
 
             <!-- FAB -->
-            <Button Text="+"
+            <Button Text="&#xE145;"
+                    FontFamily="MaterialSymbols"
                     Command="{Binding OpenDetailCommand}"
                     BackgroundColor="{StaticResource AccentPrimary}"
                     TextColor="{StaticResource BackgroundPrimary}"
-                    FontSize="24"
+                    FontSize="26"
                     WidthRequest="56"
                     HeightRequest="56"
                     CornerRadius="28"

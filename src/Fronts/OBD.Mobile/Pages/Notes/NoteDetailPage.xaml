@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:OBD.Mobile.ViewModels"
+             xmlns:models="clr-namespace:OBD.Mobile.Lib.Models;assembly=OBD.Mobile.Lib"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="OBD.Mobile.Pages.Notes.NoteDetailPage"
              x:DataType="vm:NoteDetailViewModel"
@@ -13,47 +14,147 @@
         <toolkit:InvertedBoolConverter x:Key="InvertedBool" />
     </ContentPage.Resources>
 
-    <ScrollView>
-        <VerticalStackLayout Spacing="12" Padding="16">
+    <Grid>
 
-            <Border BackgroundColor="{StaticResource BackgroundSurface}"
-                    StrokeThickness="0" Padding="4">
-                <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
-                <Editor Placeholder="Contenu de la note"
-                        Text="{Binding Note.Content}"
-                        TextColor="{StaticResource TextPrimary}"
-                        PlaceholderColor="{StaticResource TextSecondary}"
-                        BackgroundColor="Transparent"
-                        AutoSize="TextChanges"
-                        MinimumHeightRequest="120" />
-            </Border>
+        <!-- ── Mode visualisation ── -->
+        <Grid IsVisible="{Binding IsViewMode}" RowDefinitions="*,Auto">
 
-            <Border BackgroundColor="{StaticResource BackgroundSurface}"
-                    StrokeThickness="0" Padding="4,0">
-                <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
-                <Entry Placeholder="Mots-clés (séparés par des virgules)"
-                       Keyboard="Chat"
-                       Text="{Binding Note.Keywords}"
-                       TextColor="{StaticResource TextPrimary}"
-                       PlaceholderColor="{StaticResource TextSecondary}"
-                       BackgroundColor="Transparent" />
-            </Border>
+            <ScrollView Grid.Row="0">
+                <VerticalStackLayout Spacing="12" Padding="16">
 
-            <Button Text="Sauvegarder"
-                    Command="{Binding SaveCommand}"
+                    <!-- Contenu avec #hashtags colorés (FormattedText injecté depuis code-behind) -->
+                    <Border BackgroundColor="{StaticResource BackgroundSurface}"
+                            StrokeThickness="0" Padding="16">
+                        <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                        <Label x:Name="ContentLabel"
+                               Text="{Binding Note.Content}"
+                               TextColor="{StaticResource TextPrimary}"
+                               LineBreakMode="WordWrap"
+                               FontSize="15" />
+                    </Border>
+
+                    <!-- Mots-clés -->
+                    <Label Text="{Binding Note.Keywords}"
+                           TextColor="{StaticResource TextSecondary}"
+                           FontSize="13"
+                           Margin="4,0"
+                           IsVisible="{Binding Note.Keywords, Converter={toolkit:IsNotNullConverter}}" />
+
+                    <!-- Croquis liés -->
+                    <Label Text="Croquis liés"
+                           FontFamily="GeistSemiBold"
+                           FontSize="13"
+                           TextColor="{StaticResource TextSecondary}"
+                           Margin="4,4,0,0"
+                           IsVisible="{Binding HasLinks}" />
+
+                    <CollectionView ItemsSource="{Binding Links}"
+                                    IsVisible="{Binding HasLinks}"
+                                    HeightRequest="160">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:NoteLink">
+                                <Border Margin="0,3"
+                                        BackgroundColor="{StaticResource BackgroundSurface}"
+                                        StrokeThickness="0" Padding="12,8">
+                                    <Border.StrokeShape><RoundRectangle CornerRadius="10" /></Border.StrokeShape>
+                                    <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+                                        <Label Grid.Column="0"
+                                               Text="{Binding Word, StringFormat='#{0}'}"
+                                               FontFamily="GeistSemiBold"
+                                               FontSize="14"
+                                               TextColor="{StaticResource AccentPrimary}"
+                                               VerticalOptions="Center" />
+                                        <Label Grid.Column="1"
+                                               Text="{Binding SketchTitle, StringFormat=' → {0}'}"
+                                               FontSize="13"
+                                               TextColor="{StaticResource TextSecondary}"
+                                               VerticalOptions="Center" />
+                                        <Button Grid.Column="2"
+                                                Text="Voir"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:NoteDetailViewModel}}, Path=OpenLinkedSketchCommand}"
+                                                CommandParameter="{Binding .}"
+                                                BackgroundColor="{StaticResource AccentPrimary}"
+                                                TextColor="{StaticResource BackgroundPrimary}"
+                                                FontSize="12" CornerRadius="8"
+                                                Padding="10,0" HeightRequest="32" Margin="8,0,4,0" />
+                                        <Button Grid.Column="3"
+                                                Text="&#xE5CD;"
+                                                FontFamily="MaterialSymbols"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:NoteDetailViewModel}}, Path=RemoveLinkCommand}"
+                                                CommandParameter="{Binding .}"
+                                                BackgroundColor="Transparent"
+                                                TextColor="#EF4444"
+                                                FontSize="18" CornerRadius="8"
+                                                Padding="8,0" HeightRequest="32" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Label Text="Tapez un #mot dans la note, puis touchez-le pour le lier à un croquis."
+                           TextColor="{StaticResource TextSecondary}"
+                           FontSize="12"
+                           FontAttributes="Italic"
+                           Margin="4,0"
+                           IsVisible="{Binding HasLinks, Converter={StaticResource InvertedBool}}" />
+
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <Button Grid.Row="1"
+                    Text="Modifier"
+                    Command="{Binding EditCommand}"
                     BackgroundColor="{StaticResource AccentPrimary}"
                     TextColor="{StaticResource BackgroundPrimary}"
                     CornerRadius="12"
-                    Margin="0,8,0,0" />
+                    Margin="16,0,16,24" />
+        </Grid>
 
-            <Button Text="Supprimer"
-                    Command="{Binding DeleteCommand}"
-                    IsVisible="{Binding IsNew, Converter={StaticResource InvertedBool}}"
-                    BackgroundColor="Transparent"
-                    TextColor="#EF4444"
-                    CornerRadius="12" />
+        <!-- ── Mode édition ── -->
+        <ScrollView IsVisible="{Binding IsEditMode}">
+            <VerticalStackLayout Spacing="12" Padding="16">
 
-        </VerticalStackLayout>
-    </ScrollView>
+                <Border BackgroundColor="{StaticResource BackgroundSurface}"
+                        StrokeThickness="0" Padding="4">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                    <Editor Placeholder="Contenu de la note — utilisez #mot pour lier à un croquis"
+                            Keyboard="Chat"
+                            Text="{Binding Note.Content}"
+                            TextColor="{StaticResource TextPrimary}"
+                            PlaceholderColor="{StaticResource TextSecondary}"
+                            BackgroundColor="Transparent"
+                            AutoSize="TextChanges"
+                            MinimumHeightRequest="160" />
+                </Border>
+
+                <Border BackgroundColor="{StaticResource BackgroundSurface}"
+                        StrokeThickness="0" Padding="4,0">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                    <Entry Placeholder="Mots-clés (séparés par des virgules)"
+                           Text="{Binding Note.Keywords}"
+                           TextColor="{StaticResource TextPrimary}"
+                           PlaceholderColor="{StaticResource TextSecondary}"
+                           BackgroundColor="Transparent" />
+                </Border>
+
+                <Button Text="Sauvegarder"
+                        Command="{Binding SaveCommand}"
+                        BackgroundColor="{StaticResource AccentPrimary}"
+                        TextColor="{StaticResource BackgroundPrimary}"
+                        CornerRadius="12"
+                        Margin="0,8,0,0" />
+
+                <Button Text="Supprimer"
+                        Command="{Binding DeleteCommand}"
+                        IsVisible="{Binding IsNew, Converter={StaticResource InvertedBool}}"
+                        BackgroundColor="Transparent"
+                        TextColor="#EF4444"
+                        CornerRadius="12" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
 
 </ContentPage>

@@ -9,34 +9,69 @@
              Shell.NavBarIsVisible="False"
              BackgroundColor="{StaticResource BackgroundPrimary}">
 
-    <CollectionView ItemsSource="{Binding Sectors}" Margin="0,24,0,0">
-        <CollectionView.EmptyView>
-            <Label Text="Aucun secteur — ajoutez-en dans les paramètres"
-                   TextColor="{StaticResource TextSecondary}"
-                   HorizontalOptions="Center"
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Header -->
+        <Grid Grid.Row="0"
+              BackgroundColor="{StaticResource AccentDark}"
+              ColumnDefinitions="*,Auto,Auto"
+              Padding="16,12,8,12">
+            <Label Grid.Column="0"
+                   Text="Notes"
+                   FontFamily="GeistSemiBold"
+                   FontSize="20"
+                   TextColor="{StaticResource TextPrimary}"
                    VerticalOptions="Center" />
-        </CollectionView.EmptyView>
-        <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="model:Sector">
-                <Border Margin="16,4"
-                        BackgroundColor="{StaticResource BackgroundSurface}"
-                        StrokeThickness="0"
-                        Padding="16,14">
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="12" />
-                    </Border.StrokeShape>
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:NotesViewModel}}, Path=OpenSectorCommand}"
-                            CommandParameter="{Binding .}" />
-                    </Border.GestureRecognizers>
-                    <Label Text="{Binding Name}"
-                           FontFamily="GeistSemiBold"
-                           FontSize="15"
-                           TextColor="{StaticResource TextPrimary}" />
-                </Border>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+            <Button Grid.Column="1"
+                    Text="&#xE897;"
+                    FontFamily="MaterialSymbols"
+                    Clicked="OnSensitiveClicked"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource TextPrimary}"
+                    FontSize="22"
+                    Padding="8,0"
+                    HeightRequest="44" />
+            <Button Grid.Column="2"
+                    Text="&#xE8B6;"
+                    FontFamily="MaterialSymbols"
+                    Clicked="OnSearchClicked"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource TextPrimary}"
+                    FontSize="22"
+                    Padding="8,0"
+                    HeightRequest="44" />
+        </Grid>
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Sectors}" Margin="0,8,0,0">
+            <CollectionView.EmptyView>
+                <Label Text="Aucun secteur — ajoutez-en dans les paramètres"
+                       TextColor="{StaticResource TextSecondary}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Sector">
+                    <Border Margin="16,4"
+                            BackgroundColor="{StaticResource BackgroundSurface}"
+                            StrokeThickness="0"
+                            Padding="16,14">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:NotesViewModel}}, Path=OpenSectorCommand}"
+                                CommandParameter="{Binding .}" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Name}"
+                               FontFamily="GeistSemiBold"
+                               FontSize="15"
+                               TextColor="{StaticResource TextPrimary}" />
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
 
 </ContentPage>

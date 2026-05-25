@@ -14,4 +14,7 @@ public partial class PersonsPage : ContentPage
         if (BindingContext is PersonsViewModel vm)
             vm.LoadCommand.Execute(null);
     }
+
+    private async void OnSearchClicked(object? sender, EventArgs e)
+        => await Shell.Current.GoToAsync(nameof(SearchPage));
 }

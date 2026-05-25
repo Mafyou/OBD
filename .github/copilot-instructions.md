@@ -10,6 +10,8 @@
 - Toujours compiler uniquement le projet dans le quel on est.
 - Compiler juste le projet où on a fait des changements, pas la solution entière.
 - Quand l'utilisateur référence un projet ou une méthode spécifique, n'appliquer les modifications que dans ce périmètre exact.
+- Tout doit être en anglais dans le code, même les commentaires et les noms de variables, méthodes, classes, etc. (sauf exceptions très ponctuelles comme des messages d'erreur destinés à l'utilisateur final qui peut être francophone).
+- Les Entry ont toujours un Keyboard à la valeur Chat, sauf si c'est un champ de mot de passe où il faut mettre Keyboard à Text et IsPassword à true.
 
 ## Code Style
 - N'oublie pas:
@@ -24,7 +26,7 @@
   - CancellationToken s'appelle toujours stoppingToken dans les méthodes async
 
 ## Logging and Testing
-- Pour les logs, toujours utiliser Serilog (https://serilog.net) avec logs circulaires quand on dépasse 500 messages.
+- Pour les logs, toujours utiliser ceux de Microsoft (https://learn.microsoft.com/en-us/dotnet/core/extensions/logging) avec logs circulaires quand on dépasse 500 messages.
 - Pour les tests unitaires et intégrations, toujours utiliser xUnit (https://xunit.net), Shouldly et Moq.
 
 ## Web Development

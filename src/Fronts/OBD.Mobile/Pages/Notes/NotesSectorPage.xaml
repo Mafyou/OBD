@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:OBD.Mobile.ViewModels"
              xmlns:model="clr-namespace:OBD.Mobile.Lib.Models;assembly=OBD.Mobile.Lib"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Name="ThisPage"
              x:Class="OBD.Mobile.Pages.Notes.NotesSectorPage"
              x:DataType="vm:NotesSectorViewModel"
              Title="{Binding SectorName}"
@@ -31,6 +33,11 @@
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type vm:NotesSectorViewModel}}, Path=OpenNoteDetailCommand}"
                                 CommandParameter="{Binding .}" />
                         </Border.GestureRecognizers>
+                        <Border.Behaviors>
+                            <toolkit:TouchBehavior
+                                LongPressCompleted="OnNoteLongPressed"
+                                LongPressDuration="600" />
+                        </Border.Behaviors>
                         <VerticalStackLayout Spacing="4">
                             <Label Text="{Binding DisplayText}"
                                    TextColor="{StaticResource TextPrimary}"
@@ -48,20 +55,22 @@
         <!-- FABs -->
         <VerticalStackLayout HorizontalOptions="End" VerticalOptions="End"
                              Margin="0,0,20,20" Spacing="12">
-            <Button Text="✏"
+            <Button Text="&#xE3C9;"
+                    FontFamily="MaterialSymbols"
                     Command="{Binding OpenNewSketchCommand}"
                     BackgroundColor="{StaticResource BackgroundSurface}"
                     TextColor="{StaticResource AccentPrimary}"
                     WidthRequest="48" HeightRequest="48"
                     CornerRadius="24"
-                    FontSize="20" Padding="0" />
-            <Button Text="+"
+                    FontSize="22" Padding="0" />
+            <Button Text="&#xE145;"
+                    FontFamily="MaterialSymbols"
                     Command="{Binding OpenNewTextNoteCommand}"
                     BackgroundColor="{StaticResource AccentPrimary}"
                     TextColor="{StaticResource BackgroundPrimary}"
                     WidthRequest="56" HeightRequest="56"
                     CornerRadius="28"
-                    FontSize="24" Padding="0" />
+                    FontSize="26" Padding="0" />
         </VerticalStackLayout>
     </Grid>
 

@@ -92,7 +92,7 @@
     </Style>
 
     <Style TargetType="Shell" ApplyToDerivedTypes="True">
-        <Setter Property="Shell.BackgroundColor" Value="{StaticResource BackgroundPrimary}" />
+        <Setter Property="Shell.BackgroundColor" Value="{StaticResource AccentDark}" />
         <Setter Property="Shell.ForegroundColor" Value="{StaticResource TextPrimary}" />
         <Setter Property="Shell.TitleColor" Value="{StaticResource TextPrimary}" />
         <Setter Property="Shell.NavBarHasShadow" Value="False" />

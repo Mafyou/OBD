@@ -6,6 +6,9 @@ public class SectorService(DatabaseContext db) : ISectorService
 
     public Task<Sector?> GetAsync(int id) => db.GetAsync<Sector>(id);
 
+    public Task<List<Sector>> SearchAsync(string query)
+        => db.QueryAsync<Sector>("SELECT * FROM Sector WHERE Name LIKE ?", $"%{query}%");
+
     public Task<int> InsertAsync(Sector secteur) => db.InsertAsync(secteur);
 
     public Task<int> UpdateAsync(Sector secteur) => db.UpdateAsync(secteur);

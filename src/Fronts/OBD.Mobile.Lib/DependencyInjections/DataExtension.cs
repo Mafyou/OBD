@@ -1,4 +1,4 @@
-﻿namespace OBD.Mobile.Extensions;
+﻿namespace OBD.Mobile.Lib.DependencyInjections;
 
 public static class DataExtension
 {

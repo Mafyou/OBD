@@ -1,6 +1,6 @@
 namespace OBD.Mobile.ViewModels;
 
-public partial class SearchViewModel(IPersonService personService, INoteService noteService) : ObservableObject
+public partial class SearchViewModel(IPersonService personService, INoteService noteService, ISectorService sectorService) : ObservableObject
 {
     [ObservableProperty]
     public partial string SearchQuery { get; set; } = string.Empty;
@@ -36,14 +36,19 @@ public partial class SearchViewModel(IPersonService personService, INoteService 
         IsSearching = true;
         HasSearched = true;
 
-        var persons = await personService.SearchAsync(query);
-        var notes = await noteService.SearchAsync(query);
+        var personsTask = personService.SearchAsync(query);
+        var notesTask = noteService.SearchAsync(query);
+        var sectorsTask = sectorService.SearchAsync(query);
+
+        await Task.WhenAll(personsTask, notesTask, sectorsTask);
 
         var items = new List<SearchResult>();
-        items.AddRange(persons.Select(p =>
+        items.AddRange(personsTask.Result.Select(p =>
             new SearchResult(ResultType.Person, p.Name, p.Position, p.Id, 0, TypeNote.Text)));
-        items.AddRange(notes.Select(n =>
+        items.AddRange(notesTask.Result.Select(n =>
             new SearchResult(ResultType.Note, n.DisplayText, n.Keywords, n.Id, n.SectorId, n.Type)));
+        items.AddRange(sectorsTask.Result.Select(s =>
+            new SearchResult(ResultType.Sector, s.Name, "Secteur", s.Id, s.Id, TypeNote.Text)));
 
         Results = new ObservableCollection<SearchResult>(items);
         HasResults = items.Count > 0;
@@ -56,6 +61,8 @@ public partial class SearchViewModel(IPersonService personService, INoteService 
     {
         if (item.ResultType == ResultType.Person)
             await Shell.Current.GoToAsync($"{nameof(PersonDetailsPage)}?id={item.Id}");
+        else if (item.ResultType == ResultType.Sector)
+            await Shell.Current.GoToAsync($"{nameof(NotesSectorPage)}?sectorid={item.Id}");
         else if (item.NoteType == TypeNote.Sketch)
             await Shell.Current.GoToAsync($"{nameof(SketchDetailsPage)}?noteid={item.Id}&sectorid={item.SectorId}");
         else

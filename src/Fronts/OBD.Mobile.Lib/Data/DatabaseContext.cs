@@ -16,6 +16,7 @@ public class DatabaseContext
         await _connection.CreateTableAsync<Person>();
         await _connection.CreateTableAsync<Sector>();
         await _connection.CreateTableAsync<Note>();
+        await _connection.CreateTableAsync<NoteLink>();
         await _connection.CreateTableAsync<ReperesTravail>();
         return _connection;
     }

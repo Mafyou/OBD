@@ -47,7 +47,7 @@ public partial class SketchDetailsViewModel(INoteService noteService) : Observab
         {
             Note = await noteService.GetAsync(noteId) ?? new Note { SectorId = sectorId, Type = TypeNote.Sketch };
             IsNew = false;
-            PageTitle = "Croquis";
+            PageTitle = string.IsNullOrEmpty(Note.Title) ? "Croquis" : Note.Title;
 
             if (!string.IsNullOrEmpty(Note.Content))
             {
@@ -77,6 +77,7 @@ public partial class SketchDetailsViewModel(INoteService noteService) : Observab
         }
 
         Note.Type = TypeNote.Sketch;
+        PageTitle = string.IsNullOrEmpty(Note.Title) ? "Croquis" : Note.Title;
 
         if (IsNew)
             await noteService.InsertAsync(Note);

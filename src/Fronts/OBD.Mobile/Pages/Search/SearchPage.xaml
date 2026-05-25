@@ -15,9 +15,10 @@
 
     <Grid RowDefinitions="Auto,*">
 
-        <SearchBar Grid.Row="0"
+        <SearchBar x:Name="MainSearchBar"
+                   Grid.Row="0"
                    Text="{Binding SearchQuery}"
-                   Placeholder="Rechercher contacts et notes..."
+                   Placeholder="Rechercher contacts, notes, secteurs..."
                    Margin="16,8" />
 
         <Grid Grid.Row="1">

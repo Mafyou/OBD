@@ -14,4 +14,7 @@ public partial class ParametersPage : ContentPage
         if (BindingContext is ParametersViewModel vm)
             vm.LoadCommand.Execute(null);
     }
+
+    private async void OnSearchClicked(object? sender, EventArgs e)
+        => await Shell.Current.GoToAsync(nameof(SearchPage));
 }

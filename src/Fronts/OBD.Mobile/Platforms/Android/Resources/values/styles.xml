@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Maui.MainTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#065F46</item>
+        <item name="colorPrimaryDark">#065F46</item>
+        <item name="colorAccent">#10B981</item>
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
+</resources>
