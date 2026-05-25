@@ -7,4 +7,7 @@ public partial class PersonDetailsPage : ContentPage
         InitializeComponent();
         BindingContext = vm;
     }
+
+    private async void OnGoToParametersClicked(object? sender, EventArgs e)
+        => await Shell.Current.GoToAsync("//ParametersPage");
 }

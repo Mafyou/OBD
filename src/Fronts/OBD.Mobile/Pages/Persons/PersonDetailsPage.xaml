@@ -16,6 +16,32 @@
     <ScrollView>
         <VerticalStackLayout Spacing="12" Padding="16">
 
+            <!-- Avertissement si aucun secteur -->
+            <Border IsVisible="{Binding HasNoSectors}"
+                    BackgroundColor="#2D1F00"
+                    Stroke="#F59E0B"
+                    StrokeThickness="1"
+                    Padding="12">
+                <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Aucun secteur configuré"
+                           FontFamily="GeistSemiBold"
+                           FontSize="14"
+                           TextColor="#F59E0B" />
+                    <Label Text="Pour associer une personne à un secteur, créez d'abord un secteur dans les Paramètres."
+                           FontSize="13"
+                           TextColor="{StaticResource TextSecondary}" />
+                    <Button Text="Aller aux Paramètres"
+                            Clicked="OnGoToParametersClicked"
+                            BackgroundColor="#F59E0B"
+                            TextColor="#1A1A1A"
+                            CornerRadius="8"
+                            FontSize="13"
+                            HeightRequest="36"
+                            HorizontalOptions="Start" />
+                </VerticalStackLayout>
+            </Border>
+
             <Border BackgroundColor="{StaticResource BackgroundSurface}"
                     StrokeThickness="0" Padding="4,0">
                 <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>

@@ -49,14 +49,14 @@ public partial class SketchDetailsViewModel(INoteService noteService) : Observab
             IsNew = false;
             PageTitle = string.IsNullOrEmpty(Note.Title) ? "Croquis" : Note.Title;
 
+            IsViewMode = true;
+            IsEditMode = false;
+
             if (!string.IsNullOrEmpty(Note.Content))
             {
                 var bytes = Convert.FromBase64String(Note.Content);
                 CurrentImage = ImageSource.FromStream(() => new MemoryStream(bytes));
             }
-
-            IsViewMode = true;
-            IsEditMode = false;
         }
     }
 

@@ -16,6 +16,9 @@ public partial class PersonDetailsViewModel(IPersonService personneService, ISec
     public partial bool IsNew { get; set; } = true;
 
     [ObservableProperty]
+    public partial bool HasNoSectors { get; set; }
+
+    [ObservableProperty]
     public partial string PageTitle { get; set; } = "Nouvelle personne";
 
     public int PersonId
@@ -27,6 +30,7 @@ public partial class PersonDetailsViewModel(IPersonService personneService, ISec
     {
         var secteurs = await secteurService.GetAllAsync();
         Sectors = new ObservableCollection<Sector>(secteurs);
+        HasNoSectors = Sectors.Count == 0;
 
         if (id is 0)
         {
