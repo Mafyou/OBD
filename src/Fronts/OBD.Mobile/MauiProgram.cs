@@ -1,25 +1,29 @@
-﻿using Microsoft.Extensions.Logging;
+namespace OBD.Mobile;
 
-namespace OBD.Mobile
+public static class MauiProgram
 {
-    public static class MauiProgram
+    public static MauiApp CreateMauiApp()
     {
-        public static MauiApp CreateMauiApp()
-        {
-            var builder = MauiApp.CreateBuilder();
-            builder
-                .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+        var builder = MauiApp.CreateBuilder();
+        builder
+            .UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
+            .ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("Geist-SemiBold.ttf", "GeistSemiBold");
+                fonts.AddFont("MaterialSymbolsOutlined-SemiBold.ttf", "MaterialSymbols");
+            });
+
+        builder.Services.AddData();
+
+        builder.Services.AddServices();
+
+        builder.Services.AddPagesViewModels();
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
 
-            return builder.Build();
-        }
+        return builder.Build();
     }
 }

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:OBD.Mobile.ViewModels"
+             xmlns:model="clr-namespace:OBD.Mobile.Lib.Models;assembly=OBD.Mobile.Lib"
+             x:Class="OBD.Mobile.Pages.Persons.PersonsPage"
+             x:DataType="vm:PersonsViewModel"
+             Title="Personnes"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource BackgroundPrimary}">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <SearchBar Grid.Row="0"
+                   Text="{Binding SearchQuery}"
+                   Placeholder="Rechercher..."
+                   Margin="16,8" />
+
+        <Grid Grid.Row="1">
+
+            <CollectionView ItemsSource="{Binding Persons}">
+                <CollectionView.EmptyView>
+                    <Label Text="Aucune personne"
+                           TextColor="{StaticResource TextSecondary}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Person">
+                        <Border Margin="16,4"
+                                BackgroundColor="{StaticResource BackgroundSurface}"
+                                StrokeThickness="0"
+                                Padding="16,12">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PersonsViewModel}}, Path=OpenDetailCommand}"
+                                    CommandParameter="{Binding .}" />
+                            </Border.GestureRecognizers>
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="{Binding Name}"
+                                       FontFamily="GeistSemiBold"
+                                       FontSize="15"
+                                       TextColor="{StaticResource TextPrimary}" />
+                                <Label Text="{Binding Position}"
+                                       FontSize="13"
+                                       TextColor="{StaticResource TextSecondary}" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- FAB -->
+            <Button Text="+"
+                    Command="{Binding OpenDetailCommand}"
+                    BackgroundColor="{StaticResource AccentPrimary}"
+                    TextColor="{StaticResource BackgroundPrimary}"
+                    FontSize="24"
+                    WidthRequest="56"
+                    HeightRequest="56"
+                    CornerRadius="28"
+                    HorizontalOptions="End"
+                    VerticalOptions="End"
+                    Margin="0,0,24,24" />
+
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

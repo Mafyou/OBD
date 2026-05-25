@@ -3,12 +3,31 @@
     x:Class="OBD.Mobile.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:OBD.Mobile"
-    Title="OBD.Mobile">
+    xmlns:persons="clr-namespace:OBD.Mobile.Pages.Persons"
+    xmlns:notes="clr-namespace:OBD.Mobile.Pages.Notes"
+    xmlns:parameters="clr-namespace:OBD.Mobile.Pages.Parameters"
+    Shell.TabBarBackgroundColor="{StaticResource BackgroundSurface}"
+    Shell.TabBarForegroundColor="{StaticResource AccentPrimary}"
+    Shell.TabBarTitleColor="{StaticResource AccentPrimary}"
+    Shell.TabBarUnselectedColor="{StaticResource TextSecondary}"
+    Shell.BackgroundColor="{StaticResource BackgroundPrimary}">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <Shell.ToolbarItems>
+        <ToolbarItem Text="🔍" Clicked="OnSearchClicked" Order="Primary" />
+    </Shell.ToolbarItems>
+
+    <TabBar>
+        <ShellContent
+            Title="Personnes"
+            ContentTemplate="{DataTemplate persons:PersonsPage}" />
+
+        <ShellContent
+            Title="Notes"
+            ContentTemplate="{DataTemplate notes:NotesPage}" />
+
+        <ShellContent
+            Title="Paramètres"
+            ContentTemplate="{DataTemplate parameters:ParametersPage}" />
+    </TabBar>
 
 </Shell>

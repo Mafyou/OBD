@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:OBD.Mobile.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="OBD.Mobile.Pages.Persons.PersonDetailsPage"
+             x:DataType="vm:PersonDetailsViewModel"
+             Title="{Binding PageTitle}"
+             Shell.TabBarIsVisible="False"
+             BackgroundColor="{StaticResource BackgroundPrimary}">
+
+    <ContentPage.Resources>
+        <toolkit:InvertedBoolConverter x:Key="InvertedBool" />
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="12" Padding="16">
+
+            <Border BackgroundColor="{StaticResource BackgroundSurface}"
+                    StrokeThickness="0" Padding="4,0">
+                <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                <Entry Placeholder="Nom *"
+                       Keyboard="Chat"
+                       Text="{Binding Person.Name}"
+                       TextColor="{StaticResource TextPrimary}"
+                       PlaceholderColor="{StaticResource TextSecondary}"
+                       BackgroundColor="Transparent" />
+            </Border>
+
+            <Border BackgroundColor="{StaticResource BackgroundSurface}"
+                    StrokeThickness="0" Padding="4,0">
+                <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                <Entry Placeholder="Poste"
+                       Keyboard="Chat"
+                       Text="{Binding Person.Position}"
+                       TextColor="{StaticResource TextPrimary}"
+                       PlaceholderColor="{StaticResource TextSecondary}"
+                       BackgroundColor="Transparent" />
+            </Border>
+
+            <Border BackgroundColor="{StaticResource BackgroundSurface}"
+                    StrokeThickness="0" Padding="4,0">
+                <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                <Picker Title="Secteur"
+                        ItemsSource="{Binding Sectors}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding SelectedSector}"
+                        TextColor="{StaticResource TextPrimary}"
+                        TitleColor="{StaticResource TextSecondary}"
+                        BackgroundColor="Transparent" />
+            </Border>
+
+            <Border BackgroundColor="{StaticResource BackgroundSurface}"
+                    StrokeThickness="0" Padding="4">
+                <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                <Editor Placeholder="Note courte"
+                        Text="{Binding Person.Memo}"
+                        TextColor="{StaticResource TextPrimary}"
+                        PlaceholderColor="{StaticResource TextSecondary}"
+                        BackgroundColor="Transparent"
+                        AutoSize="TextChanges"
+                        MinimumHeightRequest="80" />
+            </Border>
+
+            <Button Text="Sauvegarder"
+                    Command="{Binding SaveCommand}"
+                    BackgroundColor="{StaticResource AccentPrimary}"
+                    TextColor="{StaticResource BackgroundPrimary}"
+                    CornerRadius="12"
+                    Margin="0,8,0,0" />
+
+            <Button Text="Supprimer"
+                    Command="{Binding DeleteCommand}"
+                    IsVisible="{Binding IsNew, Converter={StaticResource InvertedBool}}"
+                    BackgroundColor="Transparent"
+                    TextColor="#EF4444"
+                    CornerRadius="12" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

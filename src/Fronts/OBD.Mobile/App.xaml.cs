@@ -1,17 +1,18 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿namespace OBD.Mobile;
 
-namespace OBD.Mobile
+public partial class App : Application
 {
-    public partial class App : Application
+    public App(DatabaseContext db)
     {
-        public App()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        UserAppTheme = AppTheme.Dark;
+#if DEBUG
+        _ = new DataSeeder(db).SeedAsync();
+#endif
+    }
 
-        protected override Window CreateWindow(IActivationState? activationState)
-        {
-            return new Window(new AppShell());
-        }
+    protected override Window CreateWindow(IActivationState? activationState)
+    {
+        return new Window(new AppShell());
     }
 }

@@ -1,10 +1,12 @@
-﻿namespace OBD.Mobile
+namespace OBD.Mobile;
+
+public partial class AppShell : Shell
 {
-    public partial class AppShell : Shell
+    public AppShell()
     {
-        public AppShell()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
+
+    private async void OnSearchClicked(object? sender, EventArgs e)
+        => await Shell.Current.GoToAsync(nameof(SearchPage));
 }

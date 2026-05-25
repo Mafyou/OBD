@@ -1,0 +1,15 @@
+global using CommunityToolkit.Maui;
+global using CommunityToolkit.Mvvm.ComponentModel;
+global using CommunityToolkit.Mvvm.Input;
+global using Microsoft.Extensions.Logging;
+global using OBD.Mobile.Extensions;
+global using OBD.Mobile.Lib.Abstractions;
+global using OBD.Mobile.Lib.Data;
+global using OBD.Mobile.Lib.Models;
+global using OBD.Mobile.Lib.Services;
+global using OBD.Mobile.Pages.Notes;
+global using OBD.Mobile.Pages.Parameters;
+global using OBD.Mobile.Pages.Persons;
+global using OBD.Mobile.Pages.Search;
+global using OBD.Mobile.ViewModels;
+global using System.Collections.ObjectModel;

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:OBD.Mobile.ViewModels"
+             xmlns:model="clr-namespace:OBD.Mobile.Lib.Models;assembly=OBD.Mobile.Lib"
+             x:Class="OBD.Mobile.Pages.Parameters.ParametersPage"
+             x:DataType="vm:ParametersViewModel"
+             Title="Paramètres"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource BackgroundPrimary}">
+
+    <Grid RowDefinitions="*">
+        <ScrollView>
+            <VerticalStackLayout Spacing="16" Padding="16">
+
+                <!-- Work habits -->
+                <Label Text="Repères de travail"
+                       FontFamily="GeistSemiBold"
+                       FontSize="18"
+                       TextColor="{StaticResource TextPrimary}" />
+
+                <Border BackgroundColor="{StaticResource BackgroundSurface}"
+                        StrokeThickness="0" Padding="16">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                    <VerticalStackLayout Spacing="12">
+                        <Entry Placeholder="Réunions habituelles"
+                               Keyboard="Chat"
+                               Text="{Binding WorkHabits.RegularMeetings}"
+                               TextColor="{StaticResource TextPrimary}"
+                               PlaceholderColor="{StaticResource TextSecondary}"
+                               BackgroundColor="Transparent" />
+                        <Entry Placeholder="Jours de télétravail"
+                               Keyboard="Chat"
+                               Text="{Binding WorkHabits.RemoteWorkDays}"
+                               TextColor="{StaticResource TextPrimary}"
+                               PlaceholderColor="{StaticResource TextSecondary}"
+                               BackgroundColor="Transparent" />
+                        <Entry Placeholder="N+1"
+                               Keyboard="Chat"
+                               Text="{Binding WorkHabits.Manager}"
+                               TextColor="{StaticResource TextPrimary}"
+                               PlaceholderColor="{StaticResource TextSecondary}"
+                               BackgroundColor="Transparent" />
+                        <Button Text="Sauvegarder"
+                                Command="{Binding SaveWorkHabitsCommand}"
+                                BackgroundColor="{StaticResource AccentPrimary}"
+                                TextColor="{StaticResource BackgroundPrimary}"
+                                CornerRadius="8" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Sectors -->
+                <Grid ColumnDefinitions="*,Auto" Margin="0,8,0,0">
+                    <Label Text="Secteurs"
+                           FontFamily="GeistSemiBold"
+                           FontSize="18"
+                           TextColor="{StaticResource TextPrimary}"
+                           VerticalOptions="Center" />
+                    <Button Grid.Column="1"
+                            Text="+"
+                            Command="{Binding OpenSectorDetailCommand}"
+                            BackgroundColor="{StaticResource AccentPrimary}"
+                            TextColor="{StaticResource BackgroundPrimary}"
+                            WidthRequest="36"
+                            HeightRequest="36"
+                            CornerRadius="18"
+                            FontSize="18"
+                            Padding="0" />
+                </Grid>
+
+                <CollectionView ItemsSource="{Binding Sectors}">
+                    <CollectionView.EmptyView>
+                        <Label Text="Aucun secteur"
+                               TextColor="{StaticResource TextSecondary}"
+                               Margin="0,4" />
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Sector">
+                            <Border Margin="0,4"
+                                    BackgroundColor="{StaticResource BackgroundSurface}"
+                                    StrokeThickness="0"
+                                    Padding="16,12">
+                                <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ParametersViewModel}}, Path=OpenSectorDetailCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+                                <Label Text="{Binding Name}"
+                                       TextColor="{StaticResource TextPrimary}" />
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

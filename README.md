@@ -106,9 +106,7 @@ Non exposées dans la navigation principale. Accessibles via un geste discret (�
 - Fiches contacts minimales.
 - Secteurs personnalisables.
 - Notes texte avec mots-clés.
-- Croquis simples reliés à des mots-clés.
 - Repères de travail : réunions habituelles, TT, N+1.
-- Section sensible masquée par défaut.
 - Recherche globale contacts + notes.
 
 ## Valeur produit
