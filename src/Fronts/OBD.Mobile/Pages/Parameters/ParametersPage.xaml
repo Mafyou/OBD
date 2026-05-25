@@ -117,6 +117,99 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
+                <!-- À propos -->
+                <Label Text="À propos"
+                       FontFamily="GeistSemiBold"
+                       FontSize="18"
+                       TextColor="{StaticResource TextPrimary}"
+                       Margin="0,8,0,0" />
+
+                <Border BackgroundColor="{StaticResource BackgroundSurface}"
+                        StrokeThickness="0" Padding="16">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                    <VerticalStackLayout Spacing="12">
+
+                        <Label TextColor="{StaticResource TextSecondary}"
+                               FontSize="14">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Créé par " />
+                                    <Span Text="Mafyou"
+                                          FontFamily="GeistSemiBold"
+                                          TextColor="{StaticResource TextPrimary}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <BoxView HeightRequest="1"
+                                 BackgroundColor="{StaticResource BackgroundPrimary}"
+                                 Opacity="0.5" />
+
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnPrivacyPolicyClicked" />
+                            </Grid.GestureRecognizers>
+                            <Label Grid.Column="0"
+                                   Text="Politique de confidentialité"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   FontSize="14"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="1"
+                                   Text="&#xE5C8;"
+                                   FontFamily="MaterialSymbols"
+                                   TextColor="{StaticResource TextSecondary}"
+                                   FontSize="18"
+                                   VerticalOptions="Center" />
+                        </Grid>
+
+                        <BoxView HeightRequest="1"
+                                 BackgroundColor="{StaticResource BackgroundPrimary}"
+                                 Opacity="0.5" />
+
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnRepoClicked" />
+                            </Grid.GestureRecognizers>
+                            <VerticalStackLayout Grid.Column="0" Spacing="2" VerticalOptions="Center">
+                                <Label Text="Code source"
+                                       TextColor="{StaticResource TextPrimary}"
+                                       FontSize="14" />
+                                <Label Text="Open source — GitHub"
+                                       TextColor="{StaticResource TextSecondary}"
+                                       FontSize="12" />
+                            </VerticalStackLayout>
+                            <Label Grid.Column="1"
+                                   Text="&#xE5C8;"
+                                   FontFamily="MaterialSymbols"
+                                   TextColor="{StaticResource TextSecondary}"
+                                   FontSize="18"
+                                   VerticalOptions="Center" />
+                        </Grid>
+
+                        <BoxView HeightRequest="1"
+                                 BackgroundColor="{StaticResource BackgroundPrimary}"
+                                 Opacity="0.5" />
+
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnPromoPageClicked" />
+                            </Grid.GestureRecognizers>
+                            <Label Grid.Column="0"
+                                   Text="Page de présentation"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   FontSize="14"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="1"
+                                   Text="&#xE5C8;"
+                                   FontFamily="MaterialSymbols"
+                                   TextColor="{StaticResource TextSecondary}"
+                                   FontSize="18"
+                                   VerticalOptions="Center" />
+                        </Grid>
+
+                    </VerticalStackLayout>
+                </Border>
+
             </VerticalStackLayout>
         </ScrollView>
 
