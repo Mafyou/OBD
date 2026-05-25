@@ -63,7 +63,7 @@ public partial class SearchViewModel(IPersonService personService, INoteService 
             await Shell.Current.GoToAsync($"{nameof(PersonDetailsPage)}?id={item.Id}");
         else if (item.ResultType == ResultType.Sector)
             await Shell.Current.GoToAsync($"{nameof(NotesSectorPage)}?sectorid={item.Id}");
-        else if (item.NoteType == TypeNote.Sketch)
+        else if (item.NoteType != TypeNote.Text)
             await Shell.Current.GoToAsync($"{nameof(SketchDetailsPage)}?noteid={item.Id}&sectorid={item.SectorId}");
         else
             await Shell.Current.GoToAsync($"{nameof(NoteDetailPage)}?noteid={item.Id}&sectorid={item.SectorId}");

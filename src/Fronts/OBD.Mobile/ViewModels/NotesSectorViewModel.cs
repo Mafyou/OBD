@@ -36,7 +36,7 @@ public partial class NotesSectorViewModel(ISectorService secteurService, INoteSe
     [RelayCommand]
     private async Task OpenNoteDetailAsync(Note note)
     {
-        var route = note.Type == TypeNote.Sketch ? nameof(SketchDetailsPage) : nameof(NoteDetailPage);
+        var route = note.Type == TypeNote.Text ? nameof(NoteDetailPage) : nameof(SketchDetailsPage);
         await Shell.Current.GoToAsync($"{route}?noteid={note.Id}&sectorid={_sectorId}");
     }
 

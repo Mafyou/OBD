@@ -18,6 +18,7 @@ public class DatabaseContext(string databasePath)
         await _connection.CreateTableAsync<Note>();
         await _connection.CreateTableAsync<NoteLink>();
         await _connection.CreateTableAsync<WorkHabits>();
+        await MigrateNoteLinkAsync();
         return _connection;
     }
 
@@ -55,5 +56,16 @@ public class DatabaseContext(string databasePath)
     {
         var conn = await GetConnectionAsync();
         return await conn.QueryAsync<T>(query, args);
+    }
+
+    private async Task MigrateNoteLinkAsync()
+    {
+        // Ajoute la colonne PhotoId si elle n'existe pas encore (appareils anciens)
+        try { await _connection!.ExecuteAsync("ALTER TABLE NoteLink ADD COLUMN PhotoId INTEGER NOT NULL DEFAULT 0"); }
+        catch { /* déjà présente */ }
+
+        // Fusionne les liens photo vers SketchId et nettoie
+        await _connection!.ExecuteAsync(
+            "UPDATE NoteLink SET SketchId = PhotoId WHERE SketchId = 0 AND PhotoId != 0");
     }
 }

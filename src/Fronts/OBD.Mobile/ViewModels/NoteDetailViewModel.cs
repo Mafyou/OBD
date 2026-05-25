@@ -66,11 +66,13 @@ public partial class NoteDetailViewModel(INoteService noteService, INoteLinkServ
     private async Task RefreshLinksAsync()
     {
         var rawLinks = await noteLinkService.GetByNoteAsync(Note.Id);
-        var sketches = await noteService.GetAllAsync();
-        var sketchMap = sketches.Where(n => n.Type == TypeNote.Sketch).ToDictionary(n => n.Id);
+        var allNotes = await noteService.GetAllAsync();
+        var visualMap = allNotes
+            .Where(n => n.Type != TypeNote.Text)
+            .ToDictionary(n => n.Id);
 
         foreach (var link in rawLinks)
-            link.SketchTitle = sketchMap.TryGetValue(link.SketchId, out var s) ? s.DisplayText : "Croquis";
+            link.LinkedTitle = visualMap.TryGetValue(link.SketchId, out var s) ? s.DisplayText : "Visuel";
 
         Links = new ObservableCollection<NoteLink>(rawLinks);
         HasLinks = Links.Count > 0;
@@ -121,25 +123,25 @@ public partial class NoteDetailViewModel(INoteService noteService, INoteLinkServ
             return;
         }
 
-        var allSketches = await noteService.GetAllAsync();
-        var sketches = allSketches.Where(n => n.Type == TypeNote.Sketch).ToList();
+        var allNotes = await noteService.GetAllAsync();
+        var visuals = allNotes.Where(n => n.Type != TypeNote.Text).ToList();
 
-        if (sketches.Count == 0)
+        if (visuals.Count == 0)
         {
-            await Shell.Current.DisplayAlertAsync("Aucun croquis", "Créez d'abord un croquis dans ce secteur.", "OK");
+            await Shell.Current.DisplayAlertAsync("Aucun visuel", "Créez d'abord un croquis ou une photo dans ce secteur.", "OK");
             return;
         }
 
-        var options = sketches.Select(s => s.DisplayText).ToArray();
+        var options = visuals.Select(s => s.DisplayText).ToArray();
         var chosen = await Shell.Current.DisplayActionSheetAsync($"Lier #{word} à :", "Annuler", null, options);
 
         if (string.IsNullOrEmpty(chosen) || chosen == "Annuler")
             return;
 
-        var sketch = sketches.FirstOrDefault(s => s.DisplayText == chosen);
-        if (sketch is null) return;
+        var visual = visuals.FirstOrDefault(s => s.DisplayText == chosen);
+        if (visual is null) return;
 
-        await noteLinkService.InsertAsync(new NoteLink { NoteId = Note.Id, Word = word, SketchId = sketch.Id });
+        await noteLinkService.InsertAsync(new NoteLink { NoteId = Note.Id, Word = word, SketchId = visual.Id });
         await RefreshLinksAsync();
         ContentRendered?.Invoke();
     }

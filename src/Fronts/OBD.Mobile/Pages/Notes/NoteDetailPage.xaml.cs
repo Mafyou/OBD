@@ -1,13 +1,11 @@
-using System.Text.RegularExpressions;
-
 namespace OBD.Mobile.Pages.Notes;
 
 public partial class NoteDetailPage : ContentPage
 {
     private readonly NoteDetailViewModel _vm;
 
-    private static readonly Color AccentColor = Color.FromArgb("#10B981");
-    private static readonly Color TextColor = Color.FromArgb("#F1F5F9");
+    private static Color AccentColor => (Color)Application.Current!.Resources["AccentPrimary"];
+    private static Color TextColor => (Color)Application.Current!.Resources["TextPrimary"];
 
     public NoteDetailPage(NoteDetailViewModel vm)
     {
@@ -20,7 +18,6 @@ public partial class NoteDetailPage : ContentPage
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
-        // Déclencher le rendu si le mode vue est déjà actif (ex: après Save)
         if (_vm.IsViewMode)
             RenderHashtags();
     }
@@ -29,6 +26,27 @@ public partial class NoteDetailPage : ContentPage
     {
         base.OnDisappearing();
         _vm.ContentRendered -= RenderHashtags;
+    }
+
+    private async void OnDeleteClicked(object? sender, EventArgs e)
+    {
+        var popup = new ConfirmPopup(
+            "Supprimer cette note ?",
+            "Cette action est irréversible.",
+            confirmText: "Supprimer",
+            isDanger: true);
+        var result = await App.Current!.Windows[0].Page!.ShowPopupAsync<bool>(popup, new PopupOptions
+        {
+            CanBeDismissedByTappingOutsideOfPopup = true,
+            Shadow = null,
+            Shape = null,
+        });
+        if (result.WasDismissedByTappingOutsideOfPopup)
+            return;
+        if (result.Result is true && _vm.DeleteCommand is IAsyncRelayCommand asyncCmd)
+            await asyncCmd.ExecuteAsync(null);
+        else
+            _vm.EditCommand.Execute(null);
     }
 
     private void RenderHashtags()

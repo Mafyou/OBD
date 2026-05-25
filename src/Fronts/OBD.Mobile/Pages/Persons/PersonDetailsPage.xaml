@@ -18,8 +18,8 @@
 
             <!-- Avertissement si aucun secteur -->
             <Border IsVisible="{Binding HasNoSectors}"
-                    BackgroundColor="#2D1F00"
-                    Stroke="#F59E0B"
+                    BackgroundColor="{StaticResource WarningBackground}"
+                    Stroke="{StaticResource WarningColor}"
                     StrokeThickness="1"
                     Padding="12">
                 <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
@@ -27,14 +27,14 @@
                     <Label Text="Aucun secteur configuré"
                            FontFamily="GeistSemiBold"
                            FontSize="14"
-                           TextColor="#F59E0B" />
+                           TextColor="{StaticResource WarningColor}" />
                     <Label Text="Pour associer une personne à un secteur, créez d'abord un secteur dans les Paramètres."
                            FontSize="13"
                            TextColor="{StaticResource TextSecondary}" />
                     <Button Text="Aller aux Paramètres"
                             Clicked="OnGoToParametersClicked"
-                            BackgroundColor="#F59E0B"
-                            TextColor="#1A1A1A"
+                            BackgroundColor="{StaticResource WarningColor}"
+                            TextColor="{StaticResource WarningOnColor}"
                             CornerRadius="8"
                             FontSize="13"
                             HeightRequest="36"
@@ -99,7 +99,7 @@
                     Command="{Binding DeleteCommand}"
                     IsVisible="{Binding IsNew, Converter={StaticResource InvertedBool}}"
                     BackgroundColor="Transparent"
-                    TextColor="#EF4444"
+                    TextColor="{StaticResource DangerColor}"
                     CornerRadius="12" />
 
         </VerticalStackLayout>

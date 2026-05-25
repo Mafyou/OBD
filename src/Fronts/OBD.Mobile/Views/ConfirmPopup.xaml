@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               xmlns:system="clr-namespace:System;assembly=mscorlib"
+               x:TypeArguments="system:Boolean"
+               BackgroundColor="Transparent"
+               x:Class="OBD.Mobile.Views.ConfirmPopup">
+
+    <Border BackgroundColor="{StaticResource BackgroundSurface}" StrokeThickness="0">
+        <Border.StrokeShape><RoundRectangle CornerRadius="16" /></Border.StrokeShape>
+    <VerticalStackLayout Spacing="20" Padding="28,24" MinimumWidthRequest="300">
+
+        <Label x:Name="TitleLabel"
+               TextColor="{StaticResource TextPrimary}"
+               FontFamily="GeistSemiBold"
+               FontSize="17"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Center" />
+
+        <Label x:Name="MessageLabel"
+               TextColor="{StaticResource TextSecondary}"
+               FontSize="14"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Center" />
+
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="12" Margin="0,4,0,0">
+            <Button Grid.Column="0"
+                    Text="Annuler"
+                    Clicked="OnCancelClicked"
+                    BackgroundColor="{StaticResource BackgroundPrimary}"
+                    TextColor="{StaticResource TextPrimary}"
+                    CornerRadius="12"
+                    HeightRequest="44" />
+            <Button Grid.Column="1"
+                    x:Name="ConfirmButton"
+                    Clicked="OnConfirmClicked"
+                    TextColor="{StaticResource ColorWhite}"
+                    CornerRadius="12"
+                    HeightRequest="44" />
+        </Grid>
+
+    </VerticalStackLayout>
+    </Border>
+
+</toolkit:Popup>

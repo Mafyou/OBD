@@ -53,4 +53,30 @@ public class NoteTests
 
         note.DisplayText.ShouldBe("Summary");
     }
+
+    [Fact]
+    public void DisplayText_ShouldReturnPhotoPlaceholder_WhenTypeIsPhotoAndTitleIsEmpty()
+    {
+        var note = new Note
+        {
+            Type = TypeNote.Photo,
+            Title = string.Empty,
+            Content = "base64data"
+        };
+
+        note.DisplayText.ShouldBe("📷 Photo");
+    }
+
+    [Fact]
+    public void DisplayText_ShouldReturnPhotoTitle_WhenTypeIsPhotoAndTitleIsProvided()
+    {
+        var note = new Note
+        {
+            Type = TypeNote.Photo,
+            Title = "Reunion",
+            Content = "base64data"
+        };
+
+        note.DisplayText.ShouldBe("📷 Reunion");
+    }
 }

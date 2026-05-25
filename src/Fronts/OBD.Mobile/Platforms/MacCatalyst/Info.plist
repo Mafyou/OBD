@@ -36,5 +36,9 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Utilisé pour prendre des photos et les ajouter à vos notes</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Utilisé pour choisir des photos depuis votre galerie et les ajouter à vos notes</string>
 </dict>
 </plist>

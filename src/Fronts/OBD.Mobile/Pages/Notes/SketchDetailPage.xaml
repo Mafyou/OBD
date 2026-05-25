@@ -63,18 +63,91 @@
                 <Image Source="{Binding CurrentImage}"
                        Opacity="1"
                        Aspect="AspectFit"
-                       IsVisible="{Binding IsNew, Converter={StaticResource InvertedBool}}" />
+                       IsVisible="{Binding HasBackground}" />
                 <toolkit:DrawingView x:Name="DrawingCanvas"
                                      BackgroundColor="Transparent"
-                                     LineColor="{StaticResource TextPrimary}"
+                                     LineColor="{Binding LineColor}"
                                      LineWidth="3"
                                      IsMultiLineModeEnabled="True" />
             </Grid>
 
             <!-- Buttons -->
             <VerticalStackLayout Grid.Row="2" Spacing="8" Padding="16,0,16,16">
+
+                <!-- Couleur du trait -->
+                <Label Text="Couleur du trait"
+                       TextColor="{StaticResource TextSecondary}"
+                       FontSize="11"
+                       HorizontalOptions="Center" />
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="16">
+                    <Border BackgroundColor="{StaticResource ColorWhite}" WidthRequest="32" HeightRequest="32"
+                            Stroke="Transparent" StrokeThickness="3">
+                        <Border.StrokeShape><Ellipse /></Border.StrokeShape>
+                        <Border.Triggers>
+                            <DataTrigger TargetType="Border" Binding="{Binding SelectedColorName}" Value="White">
+                                <Setter Property="Stroke" Value="{StaticResource AccentPrimary}" />
+                            </DataTrigger>
+                        </Border.Triggers>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SetLineColorCommand}" CommandParameter="White" />
+                        </Border.GestureRecognizers>
+                    </Border>
+                    <Border BackgroundColor="{StaticResource AccentPrimary}" WidthRequest="32" HeightRequest="32"
+                            Stroke="Transparent" StrokeThickness="3">
+                        <Border.StrokeShape><Ellipse /></Border.StrokeShape>
+                        <Border.Triggers>
+                            <DataTrigger TargetType="Border" Binding="{Binding SelectedColorName}" Value="Green">
+                                <Setter Property="Stroke" Value="{StaticResource ColorWhite}" />
+                            </DataTrigger>
+                        </Border.Triggers>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SetLineColorCommand}" CommandParameter="Green" />
+                        </Border.GestureRecognizers>
+                    </Border>
+                    <Border BackgroundColor="{StaticResource DangerColor}" WidthRequest="32" HeightRequest="32"
+                            Stroke="Transparent" StrokeThickness="3">
+                        <Border.StrokeShape><Ellipse /></Border.StrokeShape>
+                        <Border.Triggers>
+                            <DataTrigger TargetType="Border" Binding="{Binding SelectedColorName}" Value="Red">
+                                <Setter Property="Stroke" Value="{StaticResource AccentPrimary}" />
+                            </DataTrigger>
+                        </Border.Triggers>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SetLineColorCommand}" CommandParameter="Red" />
+                        </Border.GestureRecognizers>
+                    </Border>
+                </HorizontalStackLayout>
+
+                <!-- Fond photo -->
+                <Label Text="Fond photo"
+                       TextColor="{StaticResource TextSecondary}"
+                       FontSize="11"
+                       HorizontalOptions="Center" />
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                    <Button Grid.Column="0"
+                            Text="&#xE3B0;"
+                            FontFamily="MaterialSymbols"
+                            Command="{Binding TakePhotoAsBackgroundCommand}"
+                            BackgroundColor="{StaticResource BackgroundSurface}"
+                            TextColor="{StaticResource TextPrimary}"
+                            CornerRadius="12"
+                            HeightRequest="40"
+                            FontSize="20"
+                            ToolTipProperties.Text="Prendre une photo comme fond" />
+                    <Button Grid.Column="1"
+                            Text="&#xE410;"
+                            FontFamily="MaterialSymbols"
+                            Command="{Binding PickPhotoAsBackgroundCommand}"
+                            BackgroundColor="{StaticResource BackgroundSurface}"
+                            TextColor="{StaticResource TextPrimary}"
+                            CornerRadius="12"
+                            HeightRequest="40"
+                            FontSize="20"
+                            ToolTipProperties.Text="Choisir une photo depuis la galerie" />
+                </Grid>
                 <Button Text="Tout effacer"
                         Clicked="OnClearClicked"
+                        IsEnabled="{Binding CanClear}"
                         BackgroundColor="{StaticResource BackgroundSurface}"
                         TextColor="{StaticResource TextPrimary}"
                         CornerRadius="12" />
@@ -84,10 +157,10 @@
                         TextColor="{StaticResource BackgroundPrimary}"
                         CornerRadius="12" />
                 <Button Text="Supprimer"
-                        Command="{Binding DeleteCommand}"
+                        Clicked="OnDeleteClicked"
                         IsVisible="{Binding IsNew, Converter={StaticResource InvertedBool}}"
                         BackgroundColor="Transparent"
-                        TextColor="#EF4444"
+                        TextColor="{StaticResource DangerColor}"
                         CornerRadius="12" />
             </VerticalStackLayout>
 

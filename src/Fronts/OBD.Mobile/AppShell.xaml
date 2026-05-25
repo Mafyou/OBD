@@ -31,7 +31,7 @@
                 <FontImageSource Glyph="&#xE7FD;"
                                  FontFamily="MaterialSymbols"
                                  Size="24"
-                                 Color="White" />
+                                 Color="{StaticResource ColorWhite}" />
             </ShellContent.Icon>
         </ShellContent>
 
@@ -42,7 +42,7 @@
                 <FontImageSource Glyph="&#xE873;"
                                  FontFamily="MaterialSymbols"
                                  Size="24"
-                                 Color="White" />
+                                 Color="{StaticResource ColorWhite}" />
             </ShellContent.Icon>
         </ShellContent>
 
@@ -53,7 +53,7 @@
                 <FontImageSource Glyph="&#xE8B8;"
                                  FontFamily="MaterialSymbols"
                                  Size="24"
-                                 Color="White" />
+                                 Color="{StaticResource ColorWhite}" />
             </ShellContent.Icon>
         </ShellContent>
     </TabBar>

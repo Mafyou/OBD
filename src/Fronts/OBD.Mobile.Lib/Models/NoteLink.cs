@@ -8,5 +8,5 @@ public class NoteLink
     public int SketchId { get; set; }
 
     [Ignore]
-    public string SketchTitle { get; set; } = string.Empty;
+    public string LinkedTitle { get; set; } = string.Empty;
 }

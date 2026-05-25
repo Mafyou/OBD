@@ -12,6 +12,11 @@
     <Color x:Key="TextPrimary">#F1F5F9</Color>
     <Color x:Key="TextSecondary">#64748B</Color>
     <Color x:Key="Separator">#2A2D34</Color>
+    <Color x:Key="DangerColor">#EF4444</Color>
+    <Color x:Key="WarningColor">#F59E0B</Color>
+    <Color x:Key="WarningBackground">#2D1F00</Color>
+    <Color x:Key="WarningOnColor">#1A1A1A</Color>
+    <Color x:Key="ColorWhite">#FFFFFF</Color>
 
     <!-- Brushes -->
     <SolidColorBrush x:Key="BackgroundPrimaryBrush" Color="{StaticResource BackgroundPrimary}" />

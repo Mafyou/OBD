@@ -3,11 +3,11 @@ namespace OBD.Mobile.Lib.UnitTests.Models;
 public class NoteLinkTests
 {
     [Fact]
-    public void SketchTitle_ShouldDefaultToEmptyString()
+    public void LinkedTitle_ShouldDefaultToEmptyString()
     {
         var noteLink = new NoteLink();
 
-        noteLink.SketchTitle.ShouldBe(string.Empty);
+        noteLink.LinkedTitle.ShouldBe(string.Empty);
     }
 
     [Fact]
@@ -19,13 +19,21 @@ public class NoteLinkTests
             NoteId = 11,
             Word = "keyword",
             SketchId = 12,
-            SketchTitle = "Sketch"
+            LinkedTitle = "Visuel"
         };
 
         noteLink.Id.ShouldBe(10);
         noteLink.NoteId.ShouldBe(11);
         noteLink.Word.ShouldBe("keyword");
         noteLink.SketchId.ShouldBe(12);
-        noteLink.SketchTitle.ShouldBe("Sketch");
+        noteLink.LinkedTitle.ShouldBe("Visuel");
+    }
+
+    [Fact]
+    public void SketchId_ShouldDefaultToZero()
+    {
+        var noteLink = new NoteLink();
+
+        noteLink.SketchId.ShouldBe(0);
     }
 }

@@ -2,6 +2,8 @@ namespace OBD.Mobile.Pages.Notes;
 
 public partial class NotesPage : ContentPage
 {
+    private DateTime? _lastBackPressTime;
+
     public NotesPage(NotesViewModel vm)
     {
         InitializeComponent();
@@ -13,6 +15,19 @@ public partial class NotesPage : ContentPage
         base.OnAppearing();
         if (BindingContext is NotesViewModel vm)
             vm.LoadSectorsCommand.Execute(null);
+    }
+
+    protected override bool OnBackButtonPressed()
+    {
+        var now = DateTime.UtcNow;
+        if (_lastBackPressTime.HasValue && (now - _lastBackPressTime.Value).TotalSeconds < 2)
+        {
+            _lastBackPressTime = null;
+            return false;
+        }
+        _lastBackPressTime = now;
+        _ = Toast.Make("Appuyez à nouveau pour quitter").Show();
+        return true;
     }
 
     private async void OnSearchClicked(object? sender, EventArgs e)

@@ -40,8 +40,8 @@
                            Margin="4,0"
                            IsVisible="{Binding Note.Keywords, Converter={toolkit:IsNotNullConverter}}" />
 
-                    <!-- Croquis liés -->
-                    <Label Text="Croquis liés"
+                    <!-- Visuels liés -->
+                    <Label Text="Visuels liés"
                            FontFamily="GeistSemiBold"
                            FontSize="13"
                            TextColor="{StaticResource TextSecondary}"
@@ -65,7 +65,7 @@
                                                TextColor="{StaticResource AccentPrimary}"
                                                VerticalOptions="Center" />
                                         <Label Grid.Column="1"
-                                               Text="{Binding SketchTitle, StringFormat=' → {0}'}"
+                                               Text="{Binding LinkedTitle, StringFormat=' → {0}'}"
                                                FontSize="13"
                                                TextColor="{StaticResource TextSecondary}"
                                                VerticalOptions="Center" />
@@ -83,7 +83,7 @@
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type vm:NoteDetailViewModel}}, Path=RemoveLinkCommand}"
                                                 CommandParameter="{Binding .}"
                                                 BackgroundColor="Transparent"
-                                                TextColor="#EF4444"
+                                                TextColor="{StaticResource DangerColor}"
                                                 FontSize="18" CornerRadius="8"
                                                 Padding="8,0" HeightRequest="32" />
                                     </Grid>
@@ -92,7 +92,7 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
 
-                    <Label Text="Tapez un #mot dans la note, puis touchez-le pour le lier à un croquis."
+                    <Label Text="Tapez un #mot dans la note, puis touchez-le pour le lier à un croquis ou une photo."
                            TextColor="{StaticResource TextSecondary}"
                            FontSize="12"
                            FontAttributes="Italic"
@@ -118,7 +118,7 @@
                 <Border BackgroundColor="{StaticResource BackgroundSurface}"
                         StrokeThickness="0" Padding="4">
                     <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
-                    <Editor Placeholder="Contenu de la note — utilisez #mot pour lier à un croquis"
+                    <Editor Placeholder="Contenu de la note — utilisez #mot pour lier à un croquis ou une photo"
 
                             Text="{Binding Note.Content}"
                             TextColor="{StaticResource TextPrimary}"
@@ -146,10 +146,10 @@
                         Margin="0,8,0,0" />
 
                 <Button Text="Supprimer"
-                        Command="{Binding DeleteCommand}"
+                        Clicked="OnDeleteClicked"
                         IsVisible="{Binding IsNew, Converter={StaticResource InvertedBool}}"
                         BackgroundColor="Transparent"
-                        TextColor="#EF4444"
+                        TextColor="{StaticResource DangerColor}"
                         CornerRadius="12" />
 
             </VerticalStackLayout>

@@ -1,5 +1,8 @@
 global using CommunityToolkit.Maui;
+global using CommunityToolkit.Maui.Alerts;
 global using CommunityToolkit.Maui.Core;
+global using CommunityToolkit.Maui.Extensions;
+global using CommunityToolkit.Maui.Views;
 global using CommunityToolkit.Mvvm.ComponentModel;
 global using CommunityToolkit.Mvvm.Input;
 global using Microsoft.Extensions.Logging;
@@ -14,6 +17,7 @@ global using OBD.Mobile.Pages.Parameters;
 global using OBD.Mobile.Pages.Persons;
 global using OBD.Mobile.Pages.Search;
 global using OBD.Mobile.ViewModels;
+global using OBD.Mobile.Views;
 global using Plugin.Fingerprint;
 global using Plugin.Fingerprint.Abstractions;
 global using System.Collections.ObjectModel;

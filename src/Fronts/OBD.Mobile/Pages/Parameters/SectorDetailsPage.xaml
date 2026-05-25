@@ -36,7 +36,7 @@
                 Command="{Binding DeleteCommand}"
                 IsVisible="{Binding IsNew, Converter={StaticResource InvertedBool}}"
                 BackgroundColor="Transparent"
-                TextColor="#EF4444"
+                TextColor="{StaticResource DangerColor}"
                 CornerRadius="12" />
 
     </VerticalStackLayout>
