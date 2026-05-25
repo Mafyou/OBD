@@ -51,7 +51,7 @@
                     StrokeThickness="0" Padding="4,0" Margin="16,12,16,0">
                 <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
                 <Entry Placeholder="Nom du croquis (optionnel)"
-                       Keyboard="Chat"
+
                        Text="{Binding Note.Title}"
                        TextColor="{StaticResource TextPrimary}"
                        PlaceholderColor="{StaticResource TextSecondary}"

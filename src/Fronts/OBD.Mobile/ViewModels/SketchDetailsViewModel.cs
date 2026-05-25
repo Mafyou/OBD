@@ -67,13 +67,17 @@ public partial class SketchDetailsViewModel(INoteService noteService) : Observab
         IsEditMode = true;
     }
 
-    public async Task SaveAsync(Stream? imageStream)
+    public async Task SaveAsync(Stream? imageStream, bool clearImage = false)
     {
         if (imageStream is not null)
         {
             using var mem = new MemoryStream();
             await imageStream.CopyToAsync(mem);
             Note.Content = Convert.ToBase64String(mem.ToArray());
+        }
+        else if (clearImage)
+        {
+            Note.Content = string.Empty;
         }
 
         Note.Type = TypeNote.Sketch;

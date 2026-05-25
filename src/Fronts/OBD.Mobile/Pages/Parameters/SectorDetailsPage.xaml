@@ -19,7 +19,6 @@
                 StrokeThickness="0" Padding="4,0">
             <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
             <Entry Placeholder="Nom du secteur *"
-                   Keyboard="Chat"
                    Text="{Binding Sector.Name}"
                    TextColor="{StaticResource TextPrimary}"
                    PlaceholderColor="{StaticResource TextSecondary}"

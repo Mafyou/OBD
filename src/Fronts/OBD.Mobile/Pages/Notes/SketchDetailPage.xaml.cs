@@ -3,6 +3,7 @@ namespace OBD.Mobile.Pages.Notes;
 public partial class SketchDetailsPage : ContentPage
 {
     private readonly SketchDetailsViewModel _vm;
+    private bool _isImageCleared;
 
     public SketchDetailsPage(SketchDetailsViewModel vm)
     {
@@ -15,10 +16,15 @@ public partial class SketchDetailsPage : ContentPage
     {
         base.OnNavigatedTo(args);
         DrawingCanvas.Lines.Clear();
+        _isImageCleared = false;
     }
 
     private void OnClearClicked(object? sender, EventArgs e)
-        => DrawingCanvas.Lines.Clear();
+    {
+        DrawingCanvas.Lines.Clear();
+        _vm.CurrentImage = null;
+        _isImageCleared = true;
+    }
 
     private async void OnSaveClicked(object? sender, EventArgs e)
     {
@@ -37,7 +43,7 @@ public partial class SketchDetailsPage : ContentPage
         }
         else
         {
-            await _vm.SaveAsync(null);
+            await _vm.SaveAsync(null, clearImage: _isImageCleared);
         }
     }
 }

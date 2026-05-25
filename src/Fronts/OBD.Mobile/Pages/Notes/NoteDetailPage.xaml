@@ -119,7 +119,7 @@
                         StrokeThickness="0" Padding="4">
                     <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
                     <Editor Placeholder="Contenu de la note — utilisez #mot pour lier à un croquis"
-                            Keyboard="Chat"
+
                             Text="{Binding Note.Content}"
                             TextColor="{StaticResource TextPrimary}"
                             PlaceholderColor="{StaticResource TextSecondary}"

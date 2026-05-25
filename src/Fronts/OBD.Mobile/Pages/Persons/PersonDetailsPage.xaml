@@ -20,7 +20,7 @@
                     StrokeThickness="0" Padding="4,0">
                 <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
                 <Entry Placeholder="Nom *"
-                       Keyboard="Chat"
+
                        Text="{Binding Person.Name}"
                        TextColor="{StaticResource TextPrimary}"
                        PlaceholderColor="{StaticResource TextSecondary}"
@@ -31,7 +31,7 @@
                     StrokeThickness="0" Padding="4,0">
                 <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
                 <Entry Placeholder="Poste"
-                       Keyboard="Chat"
+
                        Text="{Binding Person.Position}"
                        TextColor="{StaticResource TextPrimary}"
                        PlaceholderColor="{StaticResource TextSecondary}"

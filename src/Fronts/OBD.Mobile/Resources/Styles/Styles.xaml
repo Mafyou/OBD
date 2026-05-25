@@ -44,6 +44,7 @@
         <Setter Property="FontFamily" Value="GeistSemiBold" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="PlaceholderColor" Value="{StaticResource TextSecondary}" />
+        <Setter Property="Keyboard" Value="Text" />
         <Setter Property="MinimumHeightRequest" Value="44" />
         <Setter Property="MinimumWidthRequest" Value="44" />
     </Style>
@@ -54,6 +55,7 @@
         <Setter Property="FontFamily" Value="GeistSemiBold" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="PlaceholderColor" Value="{StaticResource TextSecondary}" />
+        <Setter Property="Keyboard" Value="Text" />
         <Setter Property="MinimumHeightRequest" Value="44" />
         <Setter Property="MinimumWidthRequest" Value="44" />
     </Style>
