@@ -110,15 +110,28 @@ jobs:
 
           P12_PASSWORD_CLEAN="$(printf '%s' "$P12_PASSWORD" | tr -d '\r\n')"
 
+          echo "P12 file size: $(wc -c < "$CERTIFICATE_PATH") bytes"
+
+          # Verify P12 is readable with the given password
+          openssl pkcs12 -in "$CERTIFICATE_PATH" -nokeys -passin "pass:$P12_PASSWORD_CLEAN" -legacy 2>/dev/null \
+            || openssl pkcs12 -in "$CERTIFICATE_PATH" -nokeys -passin "pass:$P12_PASSWORD_CLEAN" 2>/dev/null \
+            || { echo "ERROR: Cannot read P12 — wrong password or corrupt file"; exit 1; }
+
           security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
           security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
-          security import "$CERTIFICATE_PATH" -P "$P12_PASSWORD_CLEAN" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
+          security import "$CERTIFICATE_PATH" -P "$P12_PASSWORD_CLEAN" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH" \
+            || { echo "ERROR: security import failed"; exit 1; }
           security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
           security list-keychains -d user -s "$KEYCHAIN_PATH" login.keychain-db
+          security find-identity -v "$KEYCHAIN_PATH"
           security find-identity -v -p codesigning "$KEYCHAIN_PATH"
           SIGNING_IDENTITY=$(security find-identity -v -p codesigning "$KEYCHAIN_PATH" | grep -oE '"[^"]+"' | head -n 1 | tr -d '"')
           echo "Signing identity: $SIGNING_IDENTITY"
+          if [ -z "$SIGNING_IDENTITY" ]; then
+            echo "ERROR: No valid codesigning identity found in keychain"
+            exit 1
+          fi
           echo "signing_identity=$SIGNING_IDENTITY" >> "$GITHUB_OUTPUT"
 
           PP_PLIST="$RUNNER_TEMP/build_pp.plist"
