@@ -117,8 +117,11 @@ jobs:
           security list-keychains -d user -s "$KEYCHAIN_PATH" login.keychain-db
           security find-identity -v -p codesigning "$KEYCHAIN_PATH"
 
+          PP_UUID=$(security cms -D -i "$PP_PATH" 2>/dev/null | /usr/libexec/PlistBuddy -c 'Print :UUID' /dev/stdin)
+          echo "Provisioning profile UUID: $PP_UUID"
+
           mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
-          cp "$PP_PATH" "$HOME/Library/MobileDevice/Provisioning Profiles/"
+          cp "$PP_PATH" "$HOME/Library/MobileDevice/Provisioning Profiles/${PP_UUID}.mobileprovision"
           ls -la "$HOME/Library/MobileDevice/Provisioning Profiles"
 
       - name: 📦 Publish signed IPA
