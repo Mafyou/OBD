@@ -93,6 +93,7 @@ jobs:
           -p:EnableCodeSigning=false
 
       - name: 🔐 Configure signing assets
+        id: signing
         if: github.event_name != 'pull_request'
         env:
           BUILD_CERTIFICATE_BASE64: ${{ secrets.IOS_CERTIFICATE_P12 }}
@@ -121,6 +122,7 @@ jobs:
           security cms -D -i "$PP_PATH" > "$PP_PLIST"
           PP_UUID=$(/usr/libexec/PlistBuddy -c 'Print :UUID' "$PP_PLIST")
           echo "Provisioning profile UUID: $PP_UUID"
+          echo "pp_uuid=$PP_UUID" >> "$GITHUB_OUTPUT"
 
           mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
           cp "$PP_PATH" "$HOME/Library/MobileDevice/Provisioning Profiles/${PP_UUID}.mobileprovision"
@@ -140,7 +142,7 @@ jobs:
           -p:RuntimeIdentifier=ios-arm64
           -p:EnableCodeSigning=true
           -p:CodesignKey="${{ env.IOS_SIGNING_IDENTITY }}"
-          -p:CodesignProvision="${{ env.IOS_PROVISIONING_PROFILE_NAME }}"
+          -p:CodesignProvision="${{ steps.signing.outputs.pp_uuid }}"
 
       - name: 🔎 Locate IPA
         if: github.event_name != 'pull_request'
