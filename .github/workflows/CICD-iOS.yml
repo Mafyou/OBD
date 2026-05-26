@@ -11,22 +11,22 @@ on:
   # push:
   #   branches: [main]
   #   paths:
-  #     - 'src/Fronts/OBD/**'
-  #     - 'src/Fronts/OBD.Lib/**'
+  #     - 'src/Fronts/OBD.Mobile/**'
+  #     - 'src/Fronts/OBD.Mobile.Lib/**'
   #     - 'src/Shared/**'
   #     - '.github/workflows/CICD-iOS.yml'
   # pull_request:
   #   branches: [main]
   #   paths:
-  #     - 'src/Fronts/OBD/**'
-  #     - 'src/Fronts/OBD.Lib/**'
+  #     - 'src/Fronts/OBD.Mobile/**'
+  #     - 'src/Fronts/OBD.Mobile.Lib/**'
   #     - 'src/Shared/**'
   #     - '.github/workflows/CICD-iOS.yml'
   workflow_dispatch:
 
 env:
   DOTNET_VERSION: '10.0.100'
-  IOS_PROJECT: 'src/Fronts/OBD/OBD.csproj'
+  IOS_PROJECT: 'src/Fronts/OBD.Mobile/OBD.Mobile.csproj'
   IOS_FRAMEWORK: 'net10.0-ios'
 
 concurrency:
@@ -142,10 +142,10 @@ jobs:
         id: ipa
         shell: bash
         run: |
-          IPA_PATH=$(find src/Fronts/OBD/bin/Release/${{ env.IOS_FRAMEWORK }}/ios-arm64/publish -name '*.ipa' | head -n 1)
+          IPA_PATH=$(find src/Fronts/OBD.Mobile/bin/Release/${{ env.IOS_FRAMEWORK }}/ios-arm64/publish -name '*.ipa' | head -n 1)
 
           if [ -z "$IPA_PATH" ]; then
-            IPA_PATH=$(find src/Fronts/OBD/bin/Release/${{ env.IOS_FRAMEWORK }} -name '*.ipa' | head -n 1)
+            IPA_PATH=$(find src/Fronts/OBD.Mobile/bin/Release/${{ env.IOS_FRAMEWORK }} -name '*.ipa' | head -n 1)
           fi
 
           if [ -z "$IPA_PATH" ]; then
