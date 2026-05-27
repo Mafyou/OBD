@@ -13,12 +13,15 @@ public class DatabaseContext(string databasePath)
         _connection = new SQLiteAsyncConnection(_dbPath,
             SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
 
-        await _connection.CreateTableAsync<Person>();
+
         await _connection.CreateTableAsync<Sector>();
+        await _connection.CreateTableAsync<Person>();
         await _connection.CreateTableAsync<Note>();
         await _connection.CreateTableAsync<NoteLink>();
         await _connection.CreateTableAsync<WorkHabits>();
         await MigrateNoteLinkAsync();
+        await MigrateWorkHabitsAsync();
+
         return _connection;
     }
 
@@ -67,5 +70,56 @@ public class DatabaseContext(string databasePath)
         // Fusionne les liens photo vers SketchId et nettoie
         await _connection!.ExecuteAsync(
             "UPDATE NoteLink SET SketchId = PhotoId WHERE SketchId = 0 AND PhotoId != 0");
+    }
+
+    private async Task MigrateWorkHabitsAsync()
+    {
+        var oldTableExists = await _connection!.ExecuteScalarAsync<int>(
+            "SELECT COUNT(1) FROM sqlite_master WHERE type='table' AND name='ReperesTravail'");
+        if (oldTableExists is 0)
+            return;
+
+        var oldRows = await _connection.QueryAsync<LegacyWorkHabits>(
+            "SELECT Id, RegularMeetings, RemoteWorkDays, Manager FROM ReperesTravail");
+        if (oldRows.Count is 0)
+            return;
+
+        var persons = await _connection.Table<Person>().ToListAsync();
+        var existing = await _connection.Table<WorkHabits>().ToListAsync();
+
+        foreach (var old in oldRows)
+        {
+            var managerId = persons
+                .FirstOrDefault(p => string.Equals(p.Name, old.Manager, StringComparison.OrdinalIgnoreCase))?.Id ?? 0;
+
+            var current = existing.FirstOrDefault(w => w.Id == old.Id);
+            if (current is null)
+            {
+                await _connection.InsertAsync(new WorkHabits
+                {
+                    Id = old.Id,
+                    RegularMeetings = old.RegularMeetings,
+                    RemoteWorkDays = old.RemoteWorkDays,
+                    ManagerId = managerId
+                });
+            }
+            else
+            {
+                current.RegularMeetings = old.RegularMeetings;
+                current.RemoteWorkDays = old.RemoteWorkDays;
+                current.ManagerId = managerId;
+                await _connection.UpdateAsync(current);
+            }
+        }
+
+        await _connection.ExecuteAsync("DROP TABLE IF EXISTS ReperesTravail");
+    }
+
+    private sealed class LegacyWorkHabits
+    {
+        public int Id { get; set; }
+        public string RegularMeetings { get; set; } = string.Empty;
+        public string RemoteWorkDays { get; set; } = string.Empty;
+        public string Manager { get; set; } = string.Empty;
     }
 }

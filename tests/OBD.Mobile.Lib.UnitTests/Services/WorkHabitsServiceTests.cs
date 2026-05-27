@@ -23,14 +23,14 @@ public class WorkHabitsServiceTests
         {
             RegularMeetings = "Daily",
             RemoteWorkDays = "Monday",
-            Manager = "Sophie"
+            ManagerId = 12
         };
 
         await service.SaveAsync(workHabits);
 
         var saved = await service.GetAsync();
         saved.ShouldNotBeNull();
-        saved.Manager.ShouldBe("Sophie");
+        saved.ManagerId.ShouldBe(12);
     }
 
     [Fact]
@@ -42,19 +42,19 @@ public class WorkHabitsServiceTests
         {
             RegularMeetings = "Daily",
             RemoteWorkDays = "Monday",
-            Manager = "Sophie"
+            ManagerId = 12
         };
 
         await service.SaveAsync(workHabits);
 
         var saved = await service.GetAsync();
         saved.ShouldNotBeNull();
-        saved.Manager = "Laura";
+        saved.ManagerId = 42;
 
         await service.SaveAsync(saved);
 
         var updated = await service.GetAsync();
         updated.ShouldNotBeNull();
-        updated.Manager.ShouldBe("Laura");
+        updated.ManagerId.ShouldBe(42);
     }
 }

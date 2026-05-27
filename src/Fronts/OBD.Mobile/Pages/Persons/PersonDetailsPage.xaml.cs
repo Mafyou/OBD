@@ -9,5 +9,5 @@ public partial class PersonDetailsPage : ContentPage
     }
 
     private async void OnGoToParametersClicked(object? sender, EventArgs e)
-        => await Shell.Current.GoToAsync("//ParametersPage");
+        => await Shell.Current.GoToAsync($"//{nameof(ParametersPage)}");
 }

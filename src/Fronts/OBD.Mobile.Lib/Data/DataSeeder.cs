@@ -17,13 +17,14 @@ public class DataSeeder(DatabaseContext db)
         await db.InsertAsync(design);
         await db.InsertAsync(management);
 
-        await db.InsertAsync(new Person
+        var sophie = new Person
         {
             Name = "Sophie Martin",
             Position = "Engineering Manager",
             SectorId = management.Id,
             Memo = "Mon N+1. Réunion 1:1 tous les mardis à 10h."
-        });
+        };
+        await db.InsertAsync(sophie);
         await db.InsertAsync(new Person
         {
             Name = "Thomas Dubois",
@@ -90,7 +91,41 @@ public class DataSeeder(DatabaseContext db)
         {
             RegularMeetings = "Daily 9h30 · Rétro vendredi 16h · 1:1 mardi 10h",
             RemoteWorkDays = "Lundi et vendredi",
-            Manager = "Sophie Martin"
+            ManagerId = sophie.Id
+        });
+    }
+
+    public async Task SeedIfEmptyAsync()
+    {
+        var existing = await db.GetAllAsync<Sector>();
+        if (existing.Count > 0) return;
+
+        var product = new Sector { Name = "Produit" };
+
+        await db.InsertAsync(product);
+
+        var john = new Person
+        {
+            Name = "John Doe",
+            Position = "Product Owner",
+            SectorId = product.Id,
+            Memo = "Valider les specs avec lui avant tout dev."
+        };
+        await db.InsertAsync(john);
+        await db.InsertAsync(new Note
+        {
+            SectorId = product.Id,
+            Type = TypeNote.Text,
+            Content = "Une fois les specs sont rédigées. Toujours valider avec John avant de commencer un ticket.",
+            Keywords = "specs,validation",
+            CreatedAt = DateTime.UtcNow
+        });
+
+        await db.InsertAsync(new WorkHabits
+        {
+            RegularMeetings = "Daily 9h30 · Rétro vendredi 16h · 1:1 mardi 10h",
+            RemoteWorkDays = "Lundi et vendredi",
+            ManagerId = john.Id
         });
     }
 }

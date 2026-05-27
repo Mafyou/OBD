@@ -21,13 +21,14 @@ public class EntityDefaultsTests
     }
 
     [Fact]
-    public void WorkHabits_ShouldInitializeStringPropertiesWithEmptyValues()
+    public void WorkHabits_ShouldInitializePropertiesWithExpectedDefaults()
     {
         var workHabits = new WorkHabits();
 
         workHabits.RegularMeetings.ShouldBe(string.Empty);
         workHabits.RemoteWorkDays.ShouldBe(string.Empty);
-        workHabits.Manager.ShouldBe(string.Empty);
+        workHabits.ManagerId.ShouldBe(0);
+        workHabits.Manager.ShouldBeNull();
     }
 
     [Fact]

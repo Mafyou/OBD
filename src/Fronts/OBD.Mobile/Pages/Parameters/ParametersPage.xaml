@@ -58,12 +58,13 @@
                                TextColor="{StaticResource TextPrimary}"
                                PlaceholderColor="{StaticResource TextSecondary}"
                                BackgroundColor="Transparent" />
-                        <Entry Placeholder="N+1"
-
-                               Text="{Binding WorkHabits.Manager}"
-                               TextColor="{StaticResource TextPrimary}"
-                               PlaceholderColor="{StaticResource TextSecondary}"
-                               BackgroundColor="Transparent" />
+                        <Picker Title="N+1"
+                                ItemsSource="{Binding Persons}"
+                                ItemDisplayBinding="{Binding Name}"
+                                SelectedItem="{Binding SelectedManager}"
+                                TextColor="{StaticResource TextPrimary}"
+                                TitleColor="{StaticResource TextSecondary}"
+                                BackgroundColor="Transparent" />
                         <Button Text="Sauvegarder"
                                 Command="{Binding SaveWorkHabitsCommand}"
                                 BackgroundColor="{StaticResource AccentPrimary}"

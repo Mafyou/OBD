@@ -1,6 +1,6 @@
 namespace OBD.Mobile.ViewModels;
 
-public partial class PersonsViewModel(IPersonService personneService) : ObservableObject
+public partial class PersonsViewModel(IPersonService personneService, ISectorService secteurService) : ObservableObject
 {
     [ObservableProperty]
     public partial ObservableCollection<Person> Persons { get; set; } = [];
@@ -14,10 +14,25 @@ public partial class PersonsViewModel(IPersonService personneService) : Observab
     [RelayCommand]
     private async Task LoadAsync(CancellationToken stoppingToken)
     {
+        if (Application.Current is App app)
+            await app.StartupReady;
+
         IsLoading = true;
+
         var list = string.IsNullOrWhiteSpace(SearchQuery)
             ? await personneService.GetAllAsync()
             : await personneService.SearchAsync(SearchQuery);
+
+        var sectors = await secteurService.GetAllAsync();
+        var sectorsById = sectors.ToDictionary(s => s.Id, s => s.Name);
+
+        foreach (var person in list)
+        {
+            person.SectorName = sectorsById.TryGetValue(person.SectorId, out var sectorName)
+                ? sectorName
+                : string.Empty;
+        }
+
         Persons = new ObservableCollection<Person>(list);
         IsLoading = false;
     }

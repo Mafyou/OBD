@@ -67,7 +67,7 @@
                                        FontFamily="GeistSemiBold"
                                        FontSize="15"
                                        TextColor="{StaticResource TextPrimary}" />
-                                <Label Text="{Binding Position}"
+                                <Label Text="{Binding SectorAndPosition}"
                                        FontSize="13"
                                        TextColor="{StaticResource TextSecondary}" />
                             </VerticalStackLayout>
