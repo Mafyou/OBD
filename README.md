@@ -1,35 +1,60 @@
 # OBD : On-Boarding Day
 
-Application mobile pensée pour accompagner une personne en CDI pendant son onboarding. La promesse produit est simple : aider à réussir son arrivée dans l'entreprise sans se perdre dans les informations, les personnes à retenir et les habitudes internes.
+Application mobile pensée pour accompagner une personne en entreprise pendant son onboarding. La promesse produit est simple : aider à réussir son arrivée dans l'entreprise sans se perdre dans les informations, les personnes à retenir et les habitudes internes.
 
 ## Fiche Play Store
 
 ### Titre de l'application
-OBD Onboarding Assistant
+OBD Assistant Onboarding
 
 ### Description courte
-Réussis ton onboarding CDI avec contacts, notes sectorisées et repères clés.
+Réussis ton onboarding en entreprise avec contacts, notes, croquis et repères essentiels.
 
 ### Description longue
-Réussir un onboarding n'est pas simple : nouvelles personnes, nouvelles règles, nouvelles routines. OBD t'aide à structurer rapidement ce que tu dois retenir pour gagner en clarté, en autonomie et en sérénité dès tes premiers jours en entreprise.
+Commencer un nouveau contrat peut vite devenir stressant : trop d'informations, trop de nouvelles personnes, et peu de temps pour tout retenir. OBD t'aide à organiser ton onboarding pas à pas pour rester serein, structuré et efficace dès les premiers jours.
 
 Fonctionnalités principales :
-- 👥 Contacts onboarding : enregistre collègues, postes, secteurs et notes courtes.
-- 🗂️ Notes par secteurs : classe tes informations par domaines avec notes texte et croquis.
-- #️⃣ Hashtags cliquables : relie un mot-clé à un croquis existant en un tap.
-- 🔒 Notes sensibles : protège les contenus personnels via authentification biométrique.
-- 🔎 Recherche globale : retrouve instantanément contacts, notes, titres, mots-clés et secteurs.
-- ⚙️ Repères de travail : centralise réunions habituelles, télétravail et informations N+1.
+- 👥 Contacts onboarding : enregistre collègues, postes, secteurs et notes rapides.
+- 🗂️ Notes par secteurs : structure tes informations avec notes texte et croquis.
+- #️⃣ Hashtags cliquables : relie un mot-clé à un croquis en un tap.
+- 🔒 Notes sensibles : protège tes contenus personnels avec la biométrie.
+- 🔎 Recherche globale : retrouve vite contacts, notes, titres et mots-clés.
+- ⚙️ Repères de travail : centralise réunions, télétravail et informations N+1.
 
 Public cible :
-OBD est conçue pour les personnes en CDI qui démarrent dans une nouvelle entreprise et veulent une mémoire personnelle simple, structurée et confidentielle.
+OBD s'adresse aux personnes en entreprise qui rejoignent une nouvelle entreprise et veulent une mémoire personnelle claire, simple et confidentielle.
 
 Appel à l'action :
-Télécharge OBD et transforme ton onboarding en parcours clair, organisé et efficace dès aujourd'hui.
+Télécharge OBD sur Google Play et transforme ton onboarding en parcours clair, organisé et maîtrisé.
+
+## Fiche App Store
+
+### Titre de l'application
+OBD Assistant Onboarding
+
+### Description courte
+Réussis ton arrivée en entreprise avec contacts, notes sectorisées, croquis et repères de travail.
+
+### Description longue
+Ton arrivée en entreprise mérite un vrai support personnel : entre nouveaux collègues, règles internes et habitudes de travail, il est facile d'oublier l'essentiel. OBD t'aide à garder une vision claire de ton onboarding et à mémoriser ce qui compte, au bon moment.
+
+Fonctionnalités principales :
+-  Contacts utiles : conserve noms, postes, secteurs et notes courtes.
+-  Organisation par secteurs : classe les informations pour les retrouver facilement.
+-  Notes et croquis : combine texte, dessins et mots-clés selon tes besoins.
+-  Liens intelligents : associe des hashtags à des croquis existants.
+-  Confidentialité : protège les notes sensibles avec Face ID ou empreinte.
+-  Recherche rapide : accède immédiatement aux infos clés de ton onboarding.
+
+Public cible :
+OBD est conçue pour les nouveaux collaborateurs en entreprise qui veulent gagner en autonomie, réduire leur charge mentale et réussir leur intégration.
+
+Appel à l'action :
+Télécharge OBD sur l'App Store et démarre ton onboarding avec une méthode simple, structurée et efficace.
 
 ## Positionnement
 
-- **Public cible** : une personne en CDI, en phase d'arrivée dans une entreprise.
+- **Public cible** : une personne en entreprise, en phase d'arrivée dans une nouvelle entreprise.
 - **Usage principal** : centraliser les repères utiles dès les premiers jours puis garder une base simple de suivi dans le temps.
 - **Promesse** : un onboarding réussi.
 

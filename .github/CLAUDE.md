@@ -1,18 +1,18 @@
-﻿## Fiche Play Store
+﻿## Fiche Play Store et l'App Store
 Bien inspecter les sources du projet pour ne rien louper.
 Lorsqu'on demande de faire la fiche Play Store, voici ce qui est attendu :
 
 ### Titre de l'application
-- Maximum 30 caractères
+- Maximum 30 caractères pour Google Play
 - Doit inclure le nom de l'app et un mot-clé principal
 
 ### Description courte
-- Maximum 80 caractères
+- Maximum 80 caractères pour Google Play et 170 pour l'App Store
 - Accroche percutante qui donne envie de télécharger
 - Pas de smileys.
 
 ### Description longue
-- Maximum 4000 caractères
+- Maximum 4000 caractères pour Google Play et 4000 pour l'App Store
 - Structure recommandée :
   1. Paragraphe d'accroche (problème résolu)
   2. Fonctionnalités principales (liste à puces avec emojis)
