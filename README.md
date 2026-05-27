@@ -1,5 +1,7 @@
 # OBD : On-Boarding Day
 
+[Google Play](https://play.google.com/store/apps/details?id=fr.mafyou.obd)
+
 Application mobile pensée pour accompagner une personne en entreprise pendant son onboarding. La promesse produit est simple : aider à réussir son arrivée dans l'entreprise sans se perdre dans les informations, les personnes à retenir et les habitudes internes.
 
 ## Fiche Play Store
