@@ -6,6 +6,8 @@ public static class PagesViewModelsExtension
     {
         public void AddPagesViewModels()
         {
+            services.AddSingleton<AppShell>();
+            services.AddSingletonWithShellRoute<OnboardingPage, OnboardingViewModel>(nameof(OnboardingPage));
             services.AddSingletonWithShellRoute<PersonsPage, PersonsViewModel>(nameof(PersonsPage));
             services.AddSingletonWithShellRoute<PersonDetailsPage, PersonDetailsViewModel>(nameof(PersonDetailsPage));
             services.AddSingletonWithShellRoute<SectorDetailsPage, SectorDetailsViewModel>(nameof(SectorDetailsPage));

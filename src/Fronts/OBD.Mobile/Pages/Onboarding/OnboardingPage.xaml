@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:OBD.Mobile.ViewModels"
+             x:Class="OBD.Mobile.Pages.Onboarding.OnboardingPage"
+             x:DataType="vm:OnboardingViewModel"
+             BackgroundColor="{StaticResource BackgroundPrimary}"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid RowDefinitions="*,Auto,*" Padding="32">
+
+        <!-- Logo + titre -->
+        <VerticalStackLayout Grid.Row="1" Spacing="32" VerticalOptions="Center">
+
+            <Image Source="logo.png"
+                   HeightRequest="80"
+                   Aspect="AspectFit"
+                   HorizontalOptions="Center" />
+
+            <Label Text="Bienvenue sur OBD"
+                   FontSize="26"
+                   FontFamily="GeistSemiBold"
+                   TextColor="{StaticResource TextPrimary}"
+                   HorizontalOptions="Center" />
+
+            <Label Text="Comment souhaitez-vous démarrer ?"
+                   FontSize="15"
+                   TextColor="{StaticResource TextSecondary}"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center" />
+
+            <!-- Choix pré-rempli -->
+            <Border BackgroundColor="{StaticResource BackgroundSurface}"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="20,16">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ChoosePrefilledCommand}" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="OBD pré-rempli"
+                           FontSize="16"
+                           FontFamily="GeistSemiBold"
+                           TextColor="{StaticResource AccentPrimary}" />
+                    <Label Text="Démarrez avec des exemples de personnes, secteurs et notes pour découvrir l'application."
+                           FontSize="13"
+                           TextColor="{StaticResource TextSecondary}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Choix vide -->
+            <Border BackgroundColor="{StaticResource BackgroundSurface}"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="20,16">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ChooseEmptyCommand}" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="OBD vide"
+                           FontSize="16"
+                           FontFamily="GeistSemiBold"
+                           TextColor="{StaticResource TextPrimary}" />
+                    <Label Text="Repartez de zéro et construisez votre OBD à votre rythme."
+                           FontSize="13"
+                           TextColor="{StaticResource TextSecondary}" />
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+
+    </Grid>
+
+</ContentPage>

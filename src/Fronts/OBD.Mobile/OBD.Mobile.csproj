@@ -34,8 +34,8 @@
 		<ApplicationId>fr.mafyou.obd</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.8</ApplicationDisplayVersion>
-		<ApplicationVersion>9</ApplicationVersion>
+		<ApplicationDisplayVersion>1.9</ApplicationDisplayVersion>
+		<ApplicationVersion>10</ApplicationVersion>
 
 		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
 		<WindowsPackageType>None</WindowsPackageType>
@@ -53,10 +53,10 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.png" Color="#0F1318" />
+		<MauiIcon Include="Resources\AppIcon\appicon.png" Color="#0F1117" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#0F1318" BaseSize="256,256" />
+		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#0F1117" BaseSize="256,256" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -85,6 +85,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Pages\Onboarding\OnboardingPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ConfirmPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -11,11 +11,13 @@ public class DataSeeder(DatabaseContext db)
         var product = new Sector { Name = "Produit" };
         var design = new Sector { Name = "Design" };
         var management = new Sector { Name = "Management" };
+        var rh = new Sector { Name = "RH" };
 
         await db.InsertAsync(dev);
         await db.InsertAsync(product);
         await db.InsertAsync(design);
         await db.InsertAsync(management);
+        await db.InsertAsync(rh);
 
         var sophie = new Person
         {
@@ -38,6 +40,13 @@ public class DataSeeder(DatabaseContext db)
             Position = "Product Owner",
             SectorId = product.Id,
             Memo = "Valider les specs avec elle avant tout dev."
+        });
+        await db.InsertAsync(new Person
+        {
+            Name = "Alice Dupont",
+            Position = "Responsable RH",
+            SectorId = rh.Id,
+            Memo = "Gérer les questions RH et les congés."
         });
         await db.InsertAsync(new Person
         {

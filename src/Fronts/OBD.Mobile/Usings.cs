@@ -13,6 +13,7 @@ global using OBD.Mobile.Lib.DependencyInjections;
 global using OBD.Mobile.Lib.Models;
 global using OBD.Mobile.Lib.Services;
 global using OBD.Mobile.Pages.Notes;
+global using OBD.Mobile.Pages.Onboarding;
 global using OBD.Mobile.Pages.Parameters;
 global using OBD.Mobile.Pages.Persons;
 global using OBD.Mobile.Pages.Search;

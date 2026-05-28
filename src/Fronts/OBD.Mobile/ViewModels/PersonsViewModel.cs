@@ -14,9 +14,6 @@ public partial class PersonsViewModel(IPersonService personneService, ISectorSer
     [RelayCommand]
     private async Task LoadAsync(CancellationToken stoppingToken)
     {
-        if (Application.Current is App app)
-            await app.StartupReady;
-
         IsLoading = true;
 
         var list = string.IsNullOrWhiteSpace(SearchQuery)
