@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:OBD.Mobile.ViewModels"
              xmlns:model="clr-namespace:OBD.Mobile.Lib.Models;assembly=OBD.Mobile.Lib"
+             xmlns:strings="clr-namespace:OBD.Mobile.Lib.Resources.Strings;assembly=OBD.Mobile.Lib"
              x:Class="OBD.Mobile.Pages.Persons.PersonsPage"
              x:DataType="vm:PersonsViewModel"
-             Title="Personnes"
+             Title="{strings:Translate Shell_Persons}"
              Shell.NavBarIsVisible="False"
              BackgroundColor="{StaticResource BackgroundPrimary}">
 
@@ -17,7 +18,7 @@
               ColumnDefinitions="*,Auto"
               Padding="16,12,8,12">
             <Label Grid.Column="0"
-                   Text="Personnes"
+                   Text="{strings:Translate Shell_Persons}"
                    FontFamily="GeistSemiBold"
                    FontSize="20"
                    TextColor="{StaticResource TextPrimary}"
@@ -36,14 +37,14 @@
         <!-- Filtre local -->
         <SearchBar Grid.Row="1"
                    Text="{Binding SearchQuery}"
-                   Placeholder="Filtrer..."
+                   Placeholder="{strings:Translate Persons_FilterPlaceholder}"
                    Margin="16,8" />
 
         <Grid Grid.Row="2">
 
             <CollectionView ItemsSource="{Binding Persons}">
                 <CollectionView.EmptyView>
-                    <Label Text="Aucune personne"
+                    <Label Text="{strings:Translate Persons_Empty}"
                            TextColor="{StaticResource TextSecondary}"
                            HorizontalOptions="Center"
                            VerticalOptions="Center" />

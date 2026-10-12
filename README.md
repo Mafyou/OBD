@@ -1,5 +1,7 @@
 # OBD : On-Boarding Day
 
+> **Version :** 1.9 (build 10) · **Technologie :** .NET MAUI 10 · Android / iOS · C# 14
+
 [Google Play](https://play.google.com/store/apps/details?id=fr.mafyou.obd)
 [App Store](https://apps.apple.com/fr/app/obd-on-boarding-day/id6773454327)
 
@@ -73,6 +75,14 @@ Lors d'un onboarding, tout est nouveau :
 L'application doit donc rester simple, personnelle et rapide à utiliser au quotidien.
 
 ## Fonctionnalités
+
+### 0. Premier lancement
+
+Au premier démarrage, l'utilisateur choisit entre :
+- **OBD pré-rempli** : jeu de données d'exemple (personnes, secteurs, notes) pour découvrir l'application.
+- **OBD vide** : démarrage à zéro.
+
+Ce choix n'est proposé qu'une seule fois (mémorisé via les préférences de l'appareil).
 
 ### 1. Fiches contacts
 
@@ -149,7 +159,7 @@ Cette application n'essaie pas de remplacer les outils internes de l'entreprise.
 
 - **.NET 10 MAUI** — Android, iOS, macCatalyst, Windows.
 - **CommunityToolkit.Mvvm 8.4.2** — `[ObservableProperty]`, `[RelayCommand]`, source generators AOT-friendly.
-- **CommunityToolkit.Maui 14.1.1** — `DrawingView` pour les croquis, `TouchBehavior` pour les appuis longs.
+- **CommunityToolkit.Maui 14.2.0** — `DrawingView` pour les croquis, `TouchBehavior` pour les appuis longs.
 - **SQLite-net-PCL** — stockage local, migration automatique des colonnes.
 - **Plugin.Fingerprint** — authentification biométrique (empreinte / Face ID).
 - **Material Symbols Outlined** — icônes via font intégrée.
@@ -160,11 +170,19 @@ Cette application n'essaie pas de remplacer les outils internes de l'entreprise.
 ## Architecture
 
 ```
-OBD.Mobile               → Application MAUI (pages, ViewModels, extensions DI)
-OBD.Mobile.Lib           → Modèles, services, DatabaseContext
-  ├── Platforms/Android  → DI platform-specific
-  └── Platforms/iOS      → DI platform-specific
-OBD.Mobile.Lib.UnitTests → Tests xUnit
+src/Fronts/
+  OBD.Mobile               → Application MAUI (pages, ViewModels, extensions DI)
+  OBD.Mobile.Lib           → Modèles, services, DatabaseContext
+    ├── Platforms/Android  → DI platform-specific
+    └── Platforms/iOS      → DI platform-specific
+tests/
+  OBD.Mobile.Lib.UnitTests → Tests xUnit / Shouldly / Moq (cible OBD.Mobile.Lib)
 ```
 
 Règle : tout ce qui n'est pas ViewModel ou page va dans `OBD.Mobile.Lib`.
+
+## Contact
+
+- 🌐 Site Web : [https://mafyouit.tech/apps](https://mafyouit.tech/apps)
+- 📧 Email : [contact@mafyouit.tech](mailto:contact@mafyouit.tech)
+- 🆘 Support : [https://mafyouit.tech/AskHelp](https://mafyouit.tech/AskHelp)

@@ -18,6 +18,7 @@ public static class PagesViewModelsExtension
             services.AddSingletonWithShellRoute<SearchPage, SearchViewModel>(nameof(SearchPage));
             services.AddSingletonWithShellRoute<ParametersPage, ParametersViewModel>(nameof(ParametersPage));
             services.AddSingletonWithShellRoute<SensitiveNotesPage, SensitiveNotesViewModel>(nameof(SensitiveNotesPage));
+            services.AddTransientWithShellRoute<LogsPage, LogsViewModel>(nameof(LogsPage));
         }
     }
 }

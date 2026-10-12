@@ -16,8 +16,8 @@ public class Note
     [Ignore]
     public string DisplayText => Type switch
     {
-        TypeNote.Sketch => string.IsNullOrEmpty(Title) ? "✏ Croquis" : $"✏ {Title}",
-        TypeNote.Photo => string.IsNullOrEmpty(Title) ? "📷 Photo" : $"📷 {Title}",
+        TypeNote.Sketch => string.IsNullOrEmpty(Title) ? $"✏ {AppResources.GetString("Model_SketchLabel")}" : $"✏ {Title}",
+        TypeNote.Photo => string.IsNullOrEmpty(Title) ? $"📷 {AppResources.GetString("Model_PhotoLabel")}" : $"📷 {Title}",
         _ => string.IsNullOrEmpty(Title) ? Content : Title,
     };
 }

@@ -34,5 +34,7 @@
 	<string>Utilisé pour prendre des photos et les ajouter à vos notes</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Utilisé pour choisir des photos depuis votre galerie et les ajouter à vos notes</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>

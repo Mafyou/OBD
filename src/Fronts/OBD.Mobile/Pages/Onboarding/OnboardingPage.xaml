@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:OBD.Mobile.ViewModels"
+             xmlns:strings="clr-namespace:OBD.Mobile.Lib.Resources.Strings;assembly=OBD.Mobile.Lib"
              x:Class="OBD.Mobile.Pages.Onboarding.OnboardingPage"
              x:DataType="vm:OnboardingViewModel"
              BackgroundColor="{StaticResource BackgroundPrimary}"
@@ -17,13 +18,13 @@
                    Aspect="AspectFit"
                    HorizontalOptions="Center" />
 
-            <Label Text="Bienvenue sur OBD"
+            <Label Text="{strings:Translate Onboarding_Welcome}"
                    FontSize="26"
                    FontFamily="GeistSemiBold"
                    TextColor="{StaticResource TextPrimary}"
                    HorizontalOptions="Center" />
 
-            <Label Text="Comment souhaitez-vous démarrer ?"
+            <Label Text="{strings:Translate Onboarding_HowStart}"
                    FontSize="15"
                    TextColor="{StaticResource TextSecondary}"
                    HorizontalOptions="Center"
@@ -37,11 +38,11 @@
                     <TapGestureRecognizer Command="{Binding ChoosePrefilledCommand}" />
                 </Border.GestureRecognizers>
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="OBD pré-rempli"
+                    <Label Text="{strings:Translate Onboarding_PrefilledTitle}"
                            FontSize="16"
                            FontFamily="GeistSemiBold"
                            TextColor="{StaticResource AccentPrimary}" />
-                    <Label Text="Démarrez avec des exemples de personnes, secteurs et notes pour découvrir l'application."
+                    <Label Text="{strings:Translate Onboarding_PrefilledDesc}"
                            FontSize="13"
                            TextColor="{StaticResource TextSecondary}" />
                 </VerticalStackLayout>
@@ -55,11 +56,11 @@
                     <TapGestureRecognizer Command="{Binding ChooseEmptyCommand}" />
                 </Border.GestureRecognizers>
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="OBD vide"
+                    <Label Text="{strings:Translate Onboarding_EmptyTitle}"
                            FontSize="16"
                            FontFamily="GeistSemiBold"
                            TextColor="{StaticResource TextPrimary}" />
-                    <Label Text="Repartez de zéro et construisez votre OBD à votre rythme."
+                    <Label Text="{strings:Translate Onboarding_EmptyDesc}"
                            FontSize="13"
                            TextColor="{StaticResource TextSecondary}" />
                 </VerticalStackLayout>

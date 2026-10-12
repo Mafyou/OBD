@@ -9,7 +9,7 @@ public partial class SketchDetailsViewModel(INoteService noteService) : Observab
     public partial bool IsNew { get; set; } = true;
 
     [ObservableProperty]
-    public partial string PageTitle { get; set; } = "Nouveau croquis";
+    public partial string PageTitle { get; set; } = AppResources.GetString("SketchDetail_NewTitle");
 
     [ObservableProperty]
     public partial ImageSource? CurrentImage { get; set; }
@@ -70,13 +70,13 @@ public partial class SketchDetailsViewModel(INoteService noteService) : Observab
             IsNew = true;
             IsViewMode = false;
             IsEditMode = true;
-            PageTitle = "Nouveau croquis";
+            PageTitle = AppResources.GetString("SketchDetail_NewTitle");
         }
         else
         {
             Note = await noteService.GetAsync(noteId) ?? new Note { SectorId = sectorId, Type = TypeNote.Sketch };
             IsNew = false;
-            PageTitle = string.IsNullOrEmpty(Note.Title) ? "Croquis" : Note.Title;
+            PageTitle = string.IsNullOrEmpty(Note.Title) ? AppResources.GetString("SketchDetail_DefaultTitle") : Note.Title;
 
             IsViewMode = true;
             IsEditMode = false;
@@ -110,7 +110,7 @@ public partial class SketchDetailsViewModel(INoteService noteService) : Observab
         }
 
         Note.Type = TypeNote.Sketch;
-        PageTitle = string.IsNullOrEmpty(Note.Title) ? "Croquis" : Note.Title;
+        PageTitle = string.IsNullOrEmpty(Note.Title) ? AppResources.GetString("SketchDetail_DefaultTitle") : Note.Title;
 
         if (IsNew)
             await noteService.InsertAsync(Note);
@@ -130,7 +130,7 @@ public partial class SketchDetailsViewModel(INoteService noteService) : Observab
         }
         catch (Exception)
         {
-            await Shell.Current.DisplayAlertAsync("Erreur", "Impossible d'accéder à la caméra.", "OK");
+            await Dialogs.AlertAsync(AppResources.GetString("Common_Error"), AppResources.GetString("SketchDetail_CameraErrorMessage"), AppResources.GetString("Common_Ok"));
         }
     }
 
@@ -144,7 +144,7 @@ public partial class SketchDetailsViewModel(INoteService noteService) : Observab
         }
         catch (Exception)
         {
-            await Shell.Current.DisplayAlertAsync("Erreur", "Impossible d'accéder à la galerie.", "OK");
+            await Dialogs.AlertAsync(AppResources.GetString("Common_Error"), AppResources.GetString("SketchDetail_GalleryErrorMessage"), AppResources.GetString("Common_Ok"));
         }
     }
 
@@ -159,7 +159,7 @@ public partial class SketchDetailsViewModel(INoteService noteService) : Observab
     }
 
     [RelayCommand]
-    private async Task DeleteAsync()
+    private async Task DeleteAsync(CancellationToken stoppingToken)
     {
         await noteService.DeleteAsync(Note);
         await Shell.Current.GoToAsync("..");

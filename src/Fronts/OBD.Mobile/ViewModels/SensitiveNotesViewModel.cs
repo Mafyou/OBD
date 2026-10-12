@@ -6,7 +6,7 @@ public partial class SensitiveNotesViewModel(INoteService noteService) : Observa
     public partial ObservableCollection<Note> Notes { get; set; } = [];
 
     [RelayCommand]
-    public async Task LoadAsync()
+    public async Task LoadAsync(CancellationToken stoppingToken)
     {
         var list = await noteService.GetSensiblesAsync();
         Notes = new ObservableCollection<Note>(list);
@@ -20,7 +20,7 @@ public partial class SensitiveNotesViewModel(INoteService noteService) : Observa
     }
 
     [RelayCommand]
-    private async Task UnmarkSensitiveAsync(Note note)
+    private async Task UnmarkSensitiveAsync(Note note, CancellationToken stoppingToken)
     {
         note.IsSensitive = false;
         await noteService.UpdateAsync(note);

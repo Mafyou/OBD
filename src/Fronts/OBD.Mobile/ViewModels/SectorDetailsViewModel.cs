@@ -10,7 +10,7 @@ public partial class SectorDetailsViewModel(ISectorService secteurService) : Obs
     public partial bool IsNew { get; set; } = true;
 
     [ObservableProperty]
-    public partial string PageTitle { get; set; } = "Nouveau secteur";
+    public partial string PageTitle { get; set; } = AppResources.GetString("SectorDetails_NewTitle");
 
     public int SectorId
     {
@@ -23,7 +23,7 @@ public partial class SectorDetailsViewModel(ISectorService secteurService) : Obs
         {
             Sector = new Sector();
             IsNew = true;
-            PageTitle = "Nouveau secteur";
+            PageTitle = AppResources.GetString("SectorDetails_NewTitle");
         }
         else
         {
@@ -34,7 +34,7 @@ public partial class SectorDetailsViewModel(ISectorService secteurService) : Obs
     }
 
     [RelayCommand]
-    private async Task SaveAsync()
+    private async Task SaveAsync(CancellationToken stoppingToken)
     {
         if (string.IsNullOrWhiteSpace(Sector.Name))
             return;
@@ -48,7 +48,7 @@ public partial class SectorDetailsViewModel(ISectorService secteurService) : Obs
     }
 
     [RelayCommand]
-    private async Task DeleteAsync()
+    private async Task DeleteAsync(CancellationToken stoppingToken)
     {
         await secteurService.DeleteAsync(Sector);
         await Shell.Current.GoToAsync("..");

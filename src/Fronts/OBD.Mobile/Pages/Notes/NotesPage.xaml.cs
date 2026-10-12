@@ -2,8 +2,6 @@ namespace OBD.Mobile.Pages.Notes;
 
 public partial class NotesPage : ContentPage
 {
-    private DateTime? _lastBackPressTime;
-
     public NotesPage(NotesViewModel vm)
     {
         InitializeComponent();
@@ -17,18 +15,7 @@ public partial class NotesPage : ContentPage
             vm.LoadSectorsCommand.Execute(null);
     }
 
-    protected override bool OnBackButtonPressed()
-    {
-        var now = DateTime.UtcNow;
-        if (_lastBackPressTime.HasValue && (now - _lastBackPressTime.Value).TotalSeconds < 2)
-        {
-            _lastBackPressTime = null;
-            return false;
-        }
-        _lastBackPressTime = now;
-        _ = Toast.Make("Appuyez à nouveau pour quitter").Show();
-        return true;
-    }
+    protected override bool OnBackButtonPressed() => DoubleBackToExit.Handle();
 
     private async void OnSearchClicked(object? sender, EventArgs e)
         => await Shell.Current.GoToAsync(nameof(SearchPage));
@@ -38,11 +25,16 @@ public partial class NotesPage : ContentPage
         var isAvailable = await CrossFingerprint.Current.IsAvailableAsync();
         if (!isAvailable)
         {
-            await DisplayAlertAsync("Non disponible", "L'authentification biométrique n'est pas disponible sur cet appareil.", "OK");
+            await Dialogs.AlertAsync(
+                AppResources.GetString("Notes_NotAvailableTitle"),
+                AppResources.GetString("Notes_BiometricsUnavailableMessage"),
+                AppResources.GetString("Common_Ok"));
             return;
         }
 
-        var request = new AuthenticationRequestConfiguration("Notes sensibles", "Authentifiez-vous pour accéder aux notes sensibles");
+        var request = new AuthenticationRequestConfiguration(
+            AppResources.GetString("Notes_SensitiveAuthTitle"),
+            AppResources.GetString("Notes_SensitiveAuthReason"));
         var result = await CrossFingerprint.Current.AuthenticateAsync(request);
 
         if (result.Authenticated)

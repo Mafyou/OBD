@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:OBD.Mobile.ViewModels"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:strings="clr-namespace:OBD.Mobile.Lib.Resources.Strings;assembly=OBD.Mobile.Lib"
              x:Class="OBD.Mobile.Pages.Persons.PersonDetailsPage"
              x:DataType="vm:PersonDetailsViewModel"
              Title="{Binding PageTitle}"
@@ -24,14 +25,14 @@
                     Padding="12">
                 <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
                 <VerticalStackLayout Spacing="8">
-                    <Label Text="Aucun secteur configuré"
+                    <Label Text="{strings:Translate PersonDetails_NoSectorTitle}"
                            FontFamily="GeistSemiBold"
                            FontSize="14"
                            TextColor="{StaticResource WarningColor}" />
-                    <Label Text="Pour associer une personne à un secteur, créez d'abord un secteur dans les Paramètres."
+                    <Label Text="{strings:Translate PersonDetails_NoSectorMessage}"
                            FontSize="13"
                            TextColor="{StaticResource TextSecondary}" />
-                    <Button Text="Aller aux Paramètres"
+                    <Button Text="{strings:Translate PersonDetails_GoToParameters}"
                             Clicked="OnGoToParametersClicked"
                             BackgroundColor="{StaticResource WarningColor}"
                             TextColor="{StaticResource WarningOnColor}"
@@ -45,7 +46,7 @@
             <Border BackgroundColor="{StaticResource BackgroundSurface}"
                     StrokeThickness="0" Padding="4,0">
                 <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
-                <Entry Placeholder="Nom *"
+                <Entry Placeholder="{strings:Translate PersonDetails_NamePlaceholder}"
 
                        Text="{Binding Person.Name}"
                        TextColor="{StaticResource TextPrimary}"
@@ -56,7 +57,7 @@
             <Border BackgroundColor="{StaticResource BackgroundSurface}"
                     StrokeThickness="0" Padding="4,0">
                 <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
-                <Entry Placeholder="Poste"
+                <Entry Placeholder="{strings:Translate PersonDetails_PositionPlaceholder}"
 
                        Text="{Binding Person.Position}"
                        TextColor="{StaticResource TextPrimary}"
@@ -67,7 +68,7 @@
             <Border BackgroundColor="{StaticResource BackgroundSurface}"
                     StrokeThickness="0" Padding="4,0">
                 <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
-                <Picker Title="Secteur"
+                <Picker Title="{strings:Translate PersonDetails_SectorPickerTitle}"
                         ItemsSource="{Binding Sectors}"
                         ItemDisplayBinding="{Binding Name}"
                         SelectedItem="{Binding SelectedSector}"
@@ -79,7 +80,7 @@
             <Border BackgroundColor="{StaticResource BackgroundSurface}"
                     StrokeThickness="0" Padding="4">
                 <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
-                <Editor Placeholder="Note courte"
+                <Editor Placeholder="{strings:Translate PersonDetails_MemoPlaceholder}"
                         Text="{Binding Person.Memo}"
                         TextColor="{StaticResource TextPrimary}"
                         PlaceholderColor="{StaticResource TextSecondary}"
@@ -88,14 +89,14 @@
                         MinimumHeightRequest="80" />
             </Border>
 
-            <Button Text="Sauvegarder"
+            <Button Text="{strings:Translate Common_Save}"
                     Command="{Binding SaveCommand}"
                     BackgroundColor="{StaticResource AccentPrimary}"
                     TextColor="{StaticResource BackgroundPrimary}"
                     CornerRadius="12"
                     Margin="0,8,0,0" />
 
-            <Button Text="Supprimer"
+            <Button Text="{strings:Translate Common_Delete}"
                     Command="{Binding DeleteCommand}"
                     IsVisible="{Binding IsNew, Converter={StaticResource InvertedBool}}"
                     BackgroundColor="Transparent"

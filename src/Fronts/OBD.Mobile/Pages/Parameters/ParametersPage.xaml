@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:OBD.Mobile.ViewModels"
              xmlns:model="clr-namespace:OBD.Mobile.Lib.Models;assembly=OBD.Mobile.Lib"
+             xmlns:strings="clr-namespace:OBD.Mobile.Lib.Resources.Strings;assembly=OBD.Mobile.Lib"
              x:Class="OBD.Mobile.Pages.Parameters.ParametersPage"
              x:DataType="vm:ParametersViewModel"
-             Title="Paramètres"
+             Title="{strings:Translate Shell_Parameters}"
              Shell.NavBarIsVisible="False"
              BackgroundColor="{StaticResource BackgroundPrimary}">
 
@@ -17,7 +18,7 @@
               ColumnDefinitions="*,Auto"
               Padding="16,12,8,12">
             <Label Grid.Column="0"
-                   Text="Paramètres"
+                   Text="{strings:Translate Shell_Parameters}"
                    FontFamily="GeistSemiBold"
                    FontSize="20"
                    TextColor="{StaticResource TextPrimary}"
@@ -37,7 +38,7 @@
             <VerticalStackLayout Spacing="16" Padding="16">
 
                 <!-- Work habits -->
-                <Label Text="Repères de travail"
+                <Label Text="{strings:Translate Parameters_WorkHabits}"
                        FontFamily="GeistSemiBold"
                        FontSize="18"
                        TextColor="{StaticResource TextPrimary}" />
@@ -46,26 +47,26 @@
                         StrokeThickness="0" Padding="16">
                     <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
                     <VerticalStackLayout Spacing="12">
-                        <Entry Placeholder="Réunions habituelles"
+                        <Entry Placeholder="{strings:Translate Parameters_RegularMeetingsPlaceholder}"
 
                                Text="{Binding WorkHabits.RegularMeetings}"
                                TextColor="{StaticResource TextPrimary}"
                                PlaceholderColor="{StaticResource TextSecondary}"
                                BackgroundColor="Transparent" />
-                        <Entry Placeholder="Jours de télétravail"
+                        <Entry Placeholder="{strings:Translate Parameters_RemoteDaysPlaceholder}"
 
                                Text="{Binding WorkHabits.RemoteWorkDays}"
                                TextColor="{StaticResource TextPrimary}"
                                PlaceholderColor="{StaticResource TextSecondary}"
                                BackgroundColor="Transparent" />
-                        <Picker Title="N+1"
+                        <Picker Title="{strings:Translate Parameters_ManagerPickerTitle}"
                                 ItemsSource="{Binding Persons}"
                                 ItemDisplayBinding="{Binding Name}"
                                 SelectedItem="{Binding SelectedManager}"
                                 TextColor="{StaticResource TextPrimary}"
                                 TitleColor="{StaticResource TextSecondary}"
                                 BackgroundColor="Transparent" />
-                        <Button Text="Sauvegarder"
+                        <Button Text="{strings:Translate Common_Save}"
                                 Command="{Binding SaveWorkHabitsCommand}"
                                 BackgroundColor="{StaticResource AccentPrimary}"
                                 TextColor="{StaticResource BackgroundPrimary}"
@@ -73,9 +74,26 @@
                     </VerticalStackLayout>
                 </Border>
 
+                <!-- Language -->
+                <Label Text="{strings:Translate Parameters_Language}"
+                       FontFamily="GeistSemiBold"
+                       FontSize="18"
+                       TextColor="{StaticResource TextPrimary}"
+                       Margin="0,8,0,0" />
+
+                <Border BackgroundColor="{StaticResource BackgroundSurface}"
+                        StrokeThickness="0" Padding="16">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                    <Picker ItemsSource="{Binding AvailableLanguages}"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding SelectedLanguage}"
+                            TextColor="{StaticResource TextPrimary}"
+                            BackgroundColor="Transparent" />
+                </Border>
+
                 <!-- Sectors -->
                 <Grid ColumnDefinitions="*,Auto" Margin="0,8,0,0">
-                    <Label Text="Secteurs"
+                    <Label Text="{strings:Translate Parameters_Sectors}"
                            FontFamily="GeistSemiBold"
                            FontSize="18"
                            TextColor="{StaticResource TextPrimary}"
@@ -95,7 +113,7 @@
 
                 <CollectionView ItemsSource="{Binding Sectors}">
                     <CollectionView.EmptyView>
-                        <Label Text="Aucun secteur"
+                        <Label Text="{strings:Translate Parameters_NoSector}"
                                TextColor="{StaticResource TextSecondary}"
                                Margin="0,4" />
                     </CollectionView.EmptyView>
@@ -119,7 +137,7 @@
                 </CollectionView>
 
                 <!-- À propos -->
-                <Label Text="À propos"
+                <Label Text="{strings:Translate Parameters_About}"
                        FontFamily="GeistSemiBold"
                        FontSize="18"
                        TextColor="{StaticResource TextPrimary}"
@@ -134,7 +152,7 @@
                                FontSize="14">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span Text="Créé par " />
+                                    <Span Text="{strings:Translate Parameters_CreatedByPrefix}" />
                                     <Span Text="Mafyou"
                                           FontFamily="GeistSemiBold"
                                           TextColor="{StaticResource TextPrimary}" />
@@ -151,7 +169,7 @@
                                 <TapGestureRecognizer Tapped="OnPrivacyPolicyClicked" />
                             </Grid.GestureRecognizers>
                             <Label Grid.Column="0"
-                                   Text="Politique de confidentialité"
+                                   Text="{strings:Translate Parameters_PrivacyPolicy}"
                                    TextColor="{StaticResource TextPrimary}"
                                    FontSize="14"
                                    VerticalOptions="Center" />
@@ -172,10 +190,10 @@
                                 <TapGestureRecognizer Tapped="OnRepoClicked" />
                             </Grid.GestureRecognizers>
                             <VerticalStackLayout Grid.Column="0" Spacing="2" VerticalOptions="Center">
-                                <Label Text="Code source"
+                                <Label Text="{strings:Translate Parameters_SourceCode}"
                                        TextColor="{StaticResource TextPrimary}"
                                        FontSize="14" />
-                                <Label Text="Open source — GitHub"
+                                <Label Text="{strings:Translate Parameters_OpenSourceGithub}"
                                        TextColor="{StaticResource TextSecondary}"
                                        FontSize="12" />
                             </VerticalStackLayout>
@@ -196,7 +214,28 @@
                                 <TapGestureRecognizer Tapped="OnPromoPageClicked" />
                             </Grid.GestureRecognizers>
                             <Label Grid.Column="0"
-                                   Text="Page de présentation"
+                                   Text="{strings:Translate Parameters_PromoPage}"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   FontSize="14"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="1"
+                                   Text="&#xE5C8;"
+                                   FontFamily="MaterialSymbols"
+                                   TextColor="{StaticResource TextSecondary}"
+                                   FontSize="18"
+                                   VerticalOptions="Center" />
+                        </Grid>
+
+                        <BoxView HeightRequest="1"
+                                 BackgroundColor="{StaticResource BackgroundPrimary}"
+                                 Opacity="0.5" />
+
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnGetHelpClicked" />
+                            </Grid.GestureRecognizers>
+                            <Label Grid.Column="0"
+                                   Text="{strings:Translate Parameters_GetHelp}"
                                    TextColor="{StaticResource TextPrimary}"
                                    FontSize="14"
                                    VerticalOptions="Center" />

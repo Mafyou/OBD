@@ -6,6 +6,7 @@
     xmlns:persons="clr-namespace:OBD.Mobile.Pages.Persons"
     xmlns:notes="clr-namespace:OBD.Mobile.Pages.Notes"
     xmlns:parameters="clr-namespace:OBD.Mobile.Pages.Parameters"
+    xmlns:strings="clr-namespace:OBD.Mobile.Lib.Resources.Strings;assembly=OBD.Mobile.Lib"
     Shell.TabBarBackgroundColor="{StaticResource BackgroundSurface}"
     Shell.TabBarForegroundColor="{StaticResource AccentPrimary}"
     Shell.TabBarTitleColor="{StaticResource AccentPrimary}"
@@ -25,7 +26,7 @@
 
     <TabBar>
         <ShellContent
-            Title="Personnes"
+            Title="{strings:Translate Shell_Persons}"
             ContentTemplate="{DataTemplate persons:PersonsPage}">
             <ShellContent.Icon>
                 <FontImageSource Glyph="&#xE7FD;"
@@ -36,7 +37,7 @@
         </ShellContent>
 
         <ShellContent
-            Title="Notes"
+            Title="{strings:Translate Shell_Notes}"
             ContentTemplate="{DataTemplate notes:NotesPage}">
             <ShellContent.Icon>
                 <FontImageSource Glyph="&#xE873;"
@@ -47,7 +48,7 @@
         </ShellContent>
 
         <ShellContent
-            Title="Paramètres"
+            Title="{strings:Translate Shell_Parameters}"
             ContentTemplate="{DataTemplate parameters:ParametersPage}">
             <ShellContent.Icon>
                 <FontImageSource Glyph="&#xE8B8;"

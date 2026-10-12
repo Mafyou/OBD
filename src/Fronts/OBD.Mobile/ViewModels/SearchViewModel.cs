@@ -48,7 +48,7 @@ public partial class SearchViewModel(IPersonService personService, INoteService 
         items.AddRange(notesTask.Result.Select(n =>
             new SearchResult(ResultType.Note, n.DisplayText, n.Keywords, n.Id, n.SectorId, n.Type)));
         items.AddRange(sectorsTask.Result.Select(s =>
-            new SearchResult(ResultType.Sector, s.Name, "Secteur", s.Id, s.Id, TypeNote.Text)));
+            new SearchResult(ResultType.Sector, s.Name, AppResources.GetString("Search_SectorSubtitle"), s.Id, s.Id, TypeNote.Text)));
 
         Results = new ObservableCollection<SearchResult>(items);
         HasResults = items.Count > 0;

@@ -4,6 +4,7 @@
              xmlns:vm="clr-namespace:OBD.Mobile.ViewModels"
              xmlns:models="clr-namespace:OBD.Mobile.Lib.Models;assembly=OBD.Mobile.Lib"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:strings="clr-namespace:OBD.Mobile.Lib.Resources.Strings;assembly=OBD.Mobile.Lib"
              x:Class="OBD.Mobile.Pages.Notes.NoteDetailPage"
              x:DataType="vm:NoteDetailViewModel"
              Title="{Binding PageTitle}"
@@ -41,7 +42,7 @@
                            IsVisible="{Binding Note.Keywords, Converter={toolkit:IsNotNullConverter}}" />
 
                     <!-- Visuels liés -->
-                    <Label Text="Visuels liés"
+                    <Label Text="{strings:Translate NoteDetail_LinkedVisuals}"
                            FontFamily="GeistSemiBold"
                            FontSize="13"
                            TextColor="{StaticResource TextSecondary}"
@@ -70,7 +71,7 @@
                                                TextColor="{StaticResource TextSecondary}"
                                                VerticalOptions="Center" />
                                         <Button Grid.Column="2"
-                                                Text="Voir"
+                                                Text="{strings:Translate NoteDetail_ViewLink}"
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type vm:NoteDetailViewModel}}, Path=OpenLinkedSketchCommand}"
                                                 CommandParameter="{Binding .}"
                                                 BackgroundColor="{StaticResource AccentPrimary}"
@@ -92,7 +93,7 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
 
-                    <Label Text="Tapez un #mot dans la note, puis touchez-le pour le lier à un croquis ou une photo."
+                    <Label Text="{strings:Translate NoteDetail_HashtagHint}"
                            TextColor="{StaticResource TextSecondary}"
                            FontSize="12"
                            FontAttributes="Italic"
@@ -103,7 +104,7 @@
             </ScrollView>
 
             <Button Grid.Row="1"
-                    Text="Modifier"
+                    Text="{strings:Translate Common_Edit}"
                     Command="{Binding EditCommand}"
                     BackgroundColor="{StaticResource AccentPrimary}"
                     TextColor="{StaticResource BackgroundPrimary}"
@@ -118,7 +119,7 @@
                 <Border BackgroundColor="{StaticResource BackgroundSurface}"
                         StrokeThickness="0" Padding="4">
                     <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
-                    <Editor Placeholder="Contenu de la note — utilisez #mot pour lier à un croquis ou une photo"
+                    <Editor Placeholder="{strings:Translate NoteDetail_ContentPlaceholder}"
 
                             Text="{Binding Note.Content}"
                             TextColor="{StaticResource TextPrimary}"
@@ -131,21 +132,21 @@
                 <Border BackgroundColor="{StaticResource BackgroundSurface}"
                         StrokeThickness="0" Padding="4,0">
                     <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
-                    <Entry Placeholder="Mots-clés (séparés par des virgules)"
+                    <Entry Placeholder="{strings:Translate NoteDetail_KeywordsPlaceholder}"
                            Text="{Binding Note.Keywords}"
                            TextColor="{StaticResource TextPrimary}"
                            PlaceholderColor="{StaticResource TextSecondary}"
                            BackgroundColor="Transparent" />
                 </Border>
 
-                <Button Text="Sauvegarder"
+                <Button Text="{strings:Translate Common_Save}"
                         Command="{Binding SaveCommand}"
                         BackgroundColor="{StaticResource AccentPrimary}"
                         TextColor="{StaticResource BackgroundPrimary}"
                         CornerRadius="12"
                         Margin="0,8,0,0" />
 
-                <Button Text="Supprimer"
+                <Button Text="{strings:Translate Common_Delete}"
                         Clicked="OnDeleteClicked"
                         IsVisible="{Binding IsNew, Converter={StaticResource InvertedBool}}"
                         BackgroundColor="Transparent"

@@ -16,8 +16,8 @@ public class DataSeederTests
         var notes = await db.GetAllAsync<Note>();
         var workHabits = await db.GetAllAsync<WorkHabits>();
 
-        sectors.Count.ShouldBe(4);
-        persons.Count.ShouldBe(5);
+        sectors.Count.ShouldBe(5);
+        persons.Count.ShouldBe(6);
         notes.Count.ShouldBe(4);
         workHabits.Count.ShouldBe(1);
     }
@@ -36,8 +36,8 @@ public class DataSeederTests
         var notes = await db.GetAllAsync<Note>();
         var workHabits = await db.GetAllAsync<WorkHabits>();
 
-        sectors.Count.ShouldBe(4);
-        persons.Count.ShouldBe(5);
+        sectors.Count.ShouldBe(5);
+        persons.Count.ShouldBe(6);
         notes.Count.ShouldBe(4);
         workHabits.Count.ShouldBe(1);
     }

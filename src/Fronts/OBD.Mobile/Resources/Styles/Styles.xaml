@@ -109,4 +109,45 @@
         <Setter Property="BarTextColor" Value="{StaticResource TextPrimary}" />
     </Style>
 
+    <!-- Dialogs (CommunityToolkit popups: MessagePopup, ChoicePopup) -->
+    <Style x:Key="DialogSurface" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource BackgroundSurface}" />
+        <Setter Property="StrokeThickness" Value="0" />
+    </Style>
+
+    <Style x:Key="DialogTitle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+        <Setter Property="FontFamily" Value="GeistSemiBold" />
+        <Setter Property="FontSize" Value="17" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="DialogMessage" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource TextSecondary}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="DialogPrimaryButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource AccentPrimary}" />
+        <Setter Property="TextColor" Value="{StaticResource ColorWhite}" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="HeightRequest" Value="44" />
+    </Style>
+
+    <Style x:Key="DialogSecondaryButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource BackgroundPrimary}" />
+        <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="HeightRequest" Value="44" />
+    </Style>
+
+    <Style x:Key="DialogTextButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="{StaticResource TextSecondary}" />
+        <Setter Property="HeightRequest" Value="44" />
+    </Style>
+
 </ResourceDictionary>

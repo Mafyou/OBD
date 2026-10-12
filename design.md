@@ -31,3 +31,21 @@ Geist.
 ## Iconographie
 
 Material Symbols Outlined (Google). Font embarquée dans le projet.
+
+## Boîtes de dialogue
+
+Toujours des popups CommunityToolkit, jamais les boîtes natives (`DisplayAlertAsync`, `DisplayActionSheetAsync`, `DisplayPromptAsync`).
+
+| Appel | Popup | Remplace |
+|---|---|---|
+| `Dialogs.AlertAsync(titre, message, ok)` | `MessagePopup` | `DisplayAlertAsync` à 1 bouton |
+| `Dialogs.ChooseAsync(titre, annuler, destructif, choix…)` | `ChoicePopup` | `DisplayActionSheetAsync` |
+| `new ConfirmPopup(titre, message, …)` | `ConfirmPopup` | `DisplayAlertAsync` à 2 boutons |
+
+- Fichiers dans `Views/` ; habillage commun `Dialogs.Options` (la popup dessine elle-même sa surface arrondie).
+- Styles `Dialog*` dans `Styles.xaml` : surface `BackgroundSurface`, rayon 16, action destructive en `DangerColor`.
+- Les feuilles système restent natives (autorisations, partage, authentification biométrique).
+
+## Bouton Retour (Android)
+
+Sur une page racine (les trois onglets, l'accueil de première ouverture), le premier Retour affiche un Toast CommunityToolkit, le second dans les deux secondes quitte : `DoubleBackToExit.Handle()` dans `OnBackButtonPressed`.

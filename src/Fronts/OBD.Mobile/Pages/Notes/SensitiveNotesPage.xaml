@@ -4,10 +4,11 @@
              xmlns:vm="clr-namespace:OBD.Mobile.ViewModels"
              xmlns:model="clr-namespace:OBD.Mobile.Lib.Models;assembly=OBD.Mobile.Lib"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:strings="clr-namespace:OBD.Mobile.Lib.Resources.Strings;assembly=OBD.Mobile.Lib"
              x:Name="ThisPage"
              x:Class="OBD.Mobile.Pages.Notes.SensitiveNotesPage"
              x:DataType="vm:SensitiveNotesViewModel"
-             Title="Notes 🔒"
+             Title="{strings:Translate SensitiveNotes_Title}"
              Shell.TabBarIsVisible="False"
              BackgroundColor="{StaticResource BackgroundSensitive}">
 
@@ -15,7 +16,7 @@
                 ItemsSource="{Binding Notes}"
                 Margin="0,8">
         <CollectionView.EmptyView>
-            <Label Text="Aucune note sensible"
+            <Label Text="{strings:Translate SensitiveNotes_Empty}"
                TextColor="{StaticResource TextSecondary}"
                HorizontalOptions="Center"
                VerticalOptions="Center" />

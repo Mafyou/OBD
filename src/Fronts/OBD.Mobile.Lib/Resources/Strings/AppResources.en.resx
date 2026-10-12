@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="Common_Save" xml:space="preserve"><value>Save</value></data>
+  <data name="Common_Delete" xml:space="preserve"><value>Delete</value></data>
+  <data name="Common_Edit" xml:space="preserve"><value>Edit</value></data>
+  <data name="Common_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Common_Confirm" xml:space="preserve"><value>Confirm</value></data>
+  <data name="Common_Ok" xml:space="preserve"><value>OK</value></data>
+  <data name="Common_Error" xml:space="preserve"><value>Error</value></data>
+  <data name="Common_IrreversibleAction" xml:space="preserve"><value>This action cannot be undone.</value></data>
+  <data name="Common_PressAgainToExit" xml:space="preserve"><value>Are you sure you want to quit? Press Back again.</value></data>
+
+  <data name="Shell_Persons" xml:space="preserve"><value>People</value></data>
+  <data name="Shell_Notes" xml:space="preserve"><value>Notes</value></data>
+  <data name="Shell_Parameters" xml:space="preserve"><value>Settings</value></data>
+
+  <data name="Persons_FilterPlaceholder" xml:space="preserve"><value>Filter...</value></data>
+  <data name="Persons_Empty" xml:space="preserve"><value>No people yet</value></data>
+
+  <data name="PersonDetails_NewTitle" xml:space="preserve"><value>New person</value></data>
+  <data name="PersonDetails_NoSectorTitle" xml:space="preserve"><value>No sector configured</value></data>
+  <data name="PersonDetails_NoSectorMessage" xml:space="preserve"><value>To assign a person to a sector, first create a sector in Settings.</value></data>
+  <data name="PersonDetails_GoToParameters" xml:space="preserve"><value>Go to Settings</value></data>
+  <data name="PersonDetails_NamePlaceholder" xml:space="preserve"><value>Name *</value></data>
+  <data name="PersonDetails_PositionPlaceholder" xml:space="preserve"><value>Position</value></data>
+  <data name="PersonDetails_SectorPickerTitle" xml:space="preserve"><value>Sector</value></data>
+  <data name="PersonDetails_MemoPlaceholder" xml:space="preserve"><value>Short note</value></data>
+
+  <data name="Notes_NoSectorEmpty" xml:space="preserve"><value>No sectors yet — add one in Settings</value></data>
+  <data name="Notes_NotAvailableTitle" xml:space="preserve"><value>Not available</value></data>
+  <data name="Notes_BiometricsUnavailableMessage" xml:space="preserve"><value>Biometric authentication is not available on this device.</value></data>
+  <data name="Notes_SensitiveAuthTitle" xml:space="preserve"><value>Sensitive notes</value></data>
+  <data name="Notes_SensitiveAuthReason" xml:space="preserve"><value>Authenticate to access sensitive notes</value></data>
+
+  <data name="NotesSector_Empty" xml:space="preserve"><value>No notes yet — tap + to create one</value></data>
+
+  <data name="SensitiveNotes_Title" xml:space="preserve"><value>Notes 🔒</value></data>
+  <data name="SensitiveNotes_Empty" xml:space="preserve"><value>No sensitive notes</value></data>
+
+  <data name="NoteDetail_NewTitle" xml:space="preserve"><value>New note</value></data>
+  <data name="NoteDetail_Title" xml:space="preserve"><value>Note</value></data>
+  <data name="NoteDetail_DefaultVisualName" xml:space="preserve"><value>Visual</value></data>
+  <data name="NoteDetail_LinkedVisuals" xml:space="preserve"><value>Linked visuals</value></data>
+  <data name="NoteDetail_ViewLink" xml:space="preserve"><value>View</value></data>
+  <data name="NoteDetail_HashtagHint" xml:space="preserve"><value>Type a #word in the note, then tap it to link it to a sketch or photo.</value></data>
+  <data name="NoteDetail_ContentPlaceholder" xml:space="preserve"><value>Note content — use #word to link to a sketch or photo</value></data>
+  <data name="NoteDetail_KeywordsPlaceholder" xml:space="preserve"><value>Keywords (comma-separated)</value></data>
+  <data name="NoteDetail_NoVisualTitle" xml:space="preserve"><value>No visual</value></data>
+  <data name="NoteDetail_NoVisualMessage" xml:space="preserve"><value>First create a sketch or photo in this sector.</value></data>
+  <data name="NoteDetail_LinkPromptFormat" xml:space="preserve"><value>Link #{0} to:</value></data>
+  <data name="NoteDetail_DeleteTitle" xml:space="preserve"><value>Delete this note?</value></data>
+
+  <data name="SketchDetail_NewTitle" xml:space="preserve"><value>New sketch</value></data>
+  <data name="SketchDetail_DefaultTitle" xml:space="preserve"><value>Sketch</value></data>
+  <data name="SketchDetail_NamePlaceholder" xml:space="preserve"><value>Sketch name (optional)</value></data>
+  <data name="SketchDetail_LineColor" xml:space="preserve"><value>Line color</value></data>
+  <data name="SketchDetail_PhotoBackground" xml:space="preserve"><value>Photo background</value></data>
+  <data name="SketchDetail_TakePhotoTooltip" xml:space="preserve"><value>Take a photo as background</value></data>
+  <data name="SketchDetail_PickPhotoTooltip" xml:space="preserve"><value>Choose a photo from the gallery</value></data>
+  <data name="SketchDetail_ClearAll" xml:space="preserve"><value>Clear all</value></data>
+  <data name="SketchDetail_DiscardTitle" xml:space="preserve"><value>Leave without saving?</value></data>
+  <data name="SketchDetail_DiscardMessage" xml:space="preserve"><value>Your changes will be lost.</value></data>
+  <data name="SketchDetail_ClearDrawingTitle" xml:space="preserve"><value>Clear the drawing?</value></data>
+  <data name="SketchDetail_ClearDrawingMessage" xml:space="preserve"><value>The strokes will be removed.</value></data>
+  <data name="SketchDetail_ClearBackgroundTitle" xml:space="preserve"><value>Clear the background?</value></data>
+  <data name="SketchDetail_ClearBackgroundMessage" xml:space="preserve"><value>The background photo will be permanently removed.</value></data>
+  <data name="SketchDetail_DeleteTitle" xml:space="preserve"><value>Delete this visual?</value></data>
+  <data name="SketchDetail_CameraErrorMessage" xml:space="preserve"><value>Unable to access the camera.</value></data>
+  <data name="SketchDetail_GalleryErrorMessage" xml:space="preserve"><value>Unable to access the gallery.</value></data>
+
+  <data name="Model_PhotoLabel" xml:space="preserve"><value>Photo</value></data>
+  <data name="Model_SketchLabel" xml:space="preserve"><value>Sketch</value></data>
+
+  <data name="Onboarding_Welcome" xml:space="preserve"><value>Welcome to OBD</value></data>
+  <data name="Onboarding_HowStart" xml:space="preserve"><value>How would you like to get started?</value></data>
+  <data name="Onboarding_PrefilledTitle" xml:space="preserve"><value>Pre-filled OBD</value></data>
+  <data name="Onboarding_PrefilledDesc" xml:space="preserve"><value>Start with sample people, sectors and notes to explore the app.</value></data>
+  <data name="Onboarding_EmptyTitle" xml:space="preserve"><value>Empty OBD</value></data>
+  <data name="Onboarding_EmptyDesc" xml:space="preserve"><value>Start from scratch and build your OBD at your own pace.</value></data>
+
+  <data name="Parameters_WorkHabits" xml:space="preserve"><value>Work habits</value></data>
+  <data name="Parameters_RegularMeetingsPlaceholder" xml:space="preserve"><value>Regular meetings</value></data>
+  <data name="Parameters_RemoteDaysPlaceholder" xml:space="preserve"><value>Remote work days</value></data>
+  <data name="Parameters_ManagerPickerTitle" xml:space="preserve"><value>Manager</value></data>
+  <data name="Parameters_Sectors" xml:space="preserve"><value>Sectors</value></data>
+  <data name="Parameters_NoSector" xml:space="preserve"><value>No sectors</value></data>
+  <data name="Parameters_About" xml:space="preserve"><value>About</value></data>
+  <data name="Parameters_CreatedByPrefix" xml:space="preserve"><value>Created by </value></data>
+  <data name="Parameters_PrivacyPolicy" xml:space="preserve"><value>Privacy policy</value></data>
+  <data name="Parameters_SourceCode" xml:space="preserve"><value>Source code</value></data>
+  <data name="Parameters_OpenSourceGithub" xml:space="preserve"><value>Open source — GitHub</value></data>
+  <data name="Parameters_PromoPage" xml:space="preserve"><value>Overview page</value></data>
+  <data name="Parameters_GetHelp" xml:space="preserve"><value>Get help</value></data>
+  <data name="Parameters_Language" xml:space="preserve"><value>Language</value></data>
+  <data name="Language_French" xml:space="preserve"><value>Français</value></data>
+  <data name="Language_English" xml:space="preserve"><value>English</value></data>
+
+  <data name="SectorDetails_NewTitle" xml:space="preserve"><value>New sector</value></data>
+  <data name="SectorDetails_NamePlaceholder" xml:space="preserve"><value>Sector name *</value></data>
+
+  <data name="Search_Title" xml:space="preserve"><value>Search</value></data>
+  <data name="Search_Placeholder" xml:space="preserve"><value>Search contacts, notes, sectors...</value></data>
+  <data name="Search_PromptEmpty" xml:space="preserve"><value>Enter a term to search</value></data>
+  <data name="Search_NoResults" xml:space="preserve"><value>No results</value></data>
+  <data name="Search_SectorSubtitle" xml:space="preserve"><value>Sector</value></data>
+
+  <data name="CrashReport_EmailSubject" xml:space="preserve"><value>OBD Crash Report</value></data>
+
+  <data name="Logs_Title" xml:space="preserve"><value>Diagnostics</value></data>
+  <data name="Logs_NoCrashRecorded" xml:space="preserve"><value>No crash recorded.</value></data>
+  <data name="Logs_SendReport" xml:space="preserve"><value>Send report by email</value></data>
+  <data name="Logs_ClearCrashData" xml:space="preserve"><value>Clear crash data</value></data>
+  <data name="Logs_EmailSubject" xml:space="preserve"><value>OBD Diagnostic Report</value></data>
+  <data name="Logs_GetHelp" xml:space="preserve"><value>Get help</value></data>
+
+</root>

@@ -2,7 +2,7 @@ namespace OBD.Mobile.Lib.Services;
 
 public class NoteLinkService(DatabaseContext db) : INoteLinkService
 {
-    public Task<List<NoteLink>> GetByNoteAsync(int noteId)
+    public Task<IReadOnlyList<NoteLink>> GetByNoteAsync(int noteId)
         => db.QueryAsync<NoteLink>("SELECT * FROM NoteLink WHERE NoteId = ?", noteId);
 
     public Task<int> InsertAsync(NoteLink link) => db.InsertAsync(link);

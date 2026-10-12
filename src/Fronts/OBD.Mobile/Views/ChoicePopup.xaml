@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               BackgroundColor="Transparent"
+               x:Class="OBD.Mobile.Views.ChoicePopup">
+
+    <Border Style="{StaticResource DialogSurface}">
+        <Border.StrokeShape><RoundRectangle CornerRadius="16" /></Border.StrokeShape>
+        <VerticalStackLayout Spacing="20" Padding="28,24" MinimumWidthRequest="300">
+
+            <Label x:Name="TitleLabel" Style="{StaticResource DialogTitle}" />
+
+            <!-- The list can be long (every sketch and photo): it scrolls instead of growing past the screen -->
+            <ScrollView MaximumHeightRequest="320">
+                <VerticalStackLayout x:Name="ChoicesLayout" Spacing="8">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="x:String">
+                            <Button Text="{Binding .}"
+                                    Style="{StaticResource DialogSecondaryButton}"
+                                    Clicked="OnChoiceClicked" />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <Button x:Name="DestructiveButton"
+                    Style="{StaticResource DialogSecondaryButton}"
+                    TextColor="{StaticResource DangerColor}"
+                    Clicked="OnChoiceClicked" />
+
+            <Button x:Name="CancelButton"
+                    Style="{StaticResource DialogTextButton}"
+                    HorizontalOptions="End"
+                    Clicked="OnCancelClicked" />
+
+        </VerticalStackLayout>
+    </Border>
+
+</toolkit:Popup>

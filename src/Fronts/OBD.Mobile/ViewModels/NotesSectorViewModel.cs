@@ -49,7 +49,7 @@ public partial class NotesSectorViewModel(ISectorService secteurService, INoteSe
         => await Shell.Current.GoToAsync($"{nameof(SketchDetailsPage)}?noteid=0&sectorid={_sectorId}");
 
     [RelayCommand]
-    private async Task MarkSensitiveAsync(Note note)
+    private async Task MarkSensitiveAsync(Note note, CancellationToken stoppingToken)
     {
         note.IsSensitive = true;
         await noteService.UpdateAsync(note);

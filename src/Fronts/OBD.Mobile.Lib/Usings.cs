@@ -1,5 +1,13 @@
+global using System.ComponentModel;
+global using System.Globalization;
+global using System.Resources;
+global using System.Text.RegularExpressions;
 global using OBD.Mobile.Lib.Abstractions;
 global using OBD.Mobile.Lib.Data;
+global using OBD.Mobile.Lib.Diagnostics;
 global using OBD.Mobile.Lib.Models;
+global using OBD.Mobile.Lib.Resources.Strings;
 global using OBD.Mobile.Lib.Services;
+global using OBD.Mobile.Lib.Support;
+global using OBD.Mobile.Lib.Text;
 global using SQLite;

@@ -1,6 +1,9 @@
 namespace OBD.Mobile.ViewModels;
 
-public partial class ParametersViewModel(ISectorService secteurService, IWorkHabitsService workHabitsService, IPersonService personneService) : ObservableObject
+public partial class ParametersViewModel(
+    ISectorService secteurService,
+    IWorkHabitsService workHabitsService,
+    IPersonService personneService) : ObservableObject
 {
     [ObservableProperty]
     public partial ObservableCollection<Sector> Sectors { get; set; } = [];
@@ -16,6 +19,14 @@ public partial class ParametersViewModel(ISectorService secteurService, IWorkHab
 
     [ObservableProperty]
     public partial bool IsLoading { get; set; }
+
+    public IReadOnlyList<LanguageOption> AvailableLanguages { get; } = LocalizationResourceManager.SupportedLanguages;
+
+    [ObservableProperty]
+    public partial LanguageOption SelectedLanguage { get; set; } = LocalizationResourceManager.Instance.CurrentLanguage;
+
+    partial void OnSelectedLanguageChanged(LanguageOption value) =>
+        LocalizationResourceManager.Instance.SetCulture(new CultureInfo(value.Code));
 
     [RelayCommand(IncludeCancelCommand = true)]
     private async Task LoadAsync(CancellationToken stoppingToken)
@@ -41,7 +52,7 @@ public partial class ParametersViewModel(ISectorService secteurService, IWorkHab
     }
 
     [RelayCommand]
-    private async Task SaveWorkHabitsAsync()
+    private async Task SaveWorkHabitsAsync(CancellationToken stoppingToken)
     {
         WorkHabits.ManagerId = SelectedManager?.Id ?? 0;
         await workHabitsService.SaveAsync(WorkHabits);

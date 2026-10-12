@@ -1,7 +1,16 @@
 namespace OBD.Mobile.Lib.UnitTests.Models;
 
-public class NoteTests
+// Note.DisplayText now resolves its placeholder labels ("Croquis"/"Photo") through AppResources,
+// which falls back to CurrentUICulture. Pin the culture to French (the app's resx-neutral default)
+// so these assertions stay deterministic regardless of the host machine's locale.
+public class NoteTests : IDisposable
 {
+    private readonly CultureInfo? _originalCulture = AppResources.Culture;
+
+    public NoteTests() => AppResources.Culture = new CultureInfo("fr");
+
+    public void Dispose() => AppResources.Culture = _originalCulture;
+
     [Fact]
     public void DisplayText_ShouldReturnSketchPlaceholder_WhenTypeIsSketchAndTitleIsEmpty()
     {

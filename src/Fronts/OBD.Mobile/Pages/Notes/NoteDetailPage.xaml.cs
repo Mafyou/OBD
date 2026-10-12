@@ -31,9 +31,9 @@ public partial class NoteDetailPage : ContentPage
     private async void OnDeleteClicked(object? sender, EventArgs e)
     {
         var popup = new ConfirmPopup(
-            "Supprimer cette note ?",
-            "Cette action est irréversible.",
-            confirmText: "Supprimer",
+            AppResources.GetString("NoteDetail_DeleteTitle"),
+            AppResources.GetString("Common_IrreversibleAction"),
+            confirmText: AppResources.GetString("Common_Delete"),
             isDanger: true);
         var result = await App.Current!.Windows[0].Page!.ShowPopupAsync<bool>(popup, new PopupOptions
         {
@@ -63,16 +63,15 @@ public partial class NoteDetailPage : ContentPage
             l => l.Word.ToLower(),
             StringComparer.OrdinalIgnoreCase);
 
-        var parts = Regex.Split(content, @"(#\w+)");
+        var parts = HashtagParser.Split(content);
         var fs = new FormattedString();
 
         foreach (var part in parts)
         {
             if (string.IsNullOrEmpty(part)) continue;
 
-            if (part.StartsWith('#') && part.Length > 1)
+            if (HashtagParser.TryGetWord(part, out var word))
             {
-                var word = part[1..];
                 var isLinked = linksMap.ContainsKey(word);
                 var span = new Span
                 {

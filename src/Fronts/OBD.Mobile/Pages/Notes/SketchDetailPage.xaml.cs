@@ -39,8 +39,8 @@ public partial class SketchDetailsPage : ContentPage
         }
 
         var popup = new ConfirmPopup(
-            "Quitter sans sauvegarder ?",
-            "Les modifications seront perdues.");
+            AppResources.GetString("SketchDetail_DiscardTitle"),
+            AppResources.GetString("SketchDetail_DiscardMessage"));
         var result = await App.Current!.Windows[0].Page!.ShowPopupAsync<bool>(popup, new PopupOptions
         {
             CanBeDismissedByTappingOutsideOfPopup = true,
@@ -62,8 +62,8 @@ public partial class SketchDetailsPage : ContentPage
         if (DrawingCanvas.Lines.Count > 0)
         {
             var popup = new ConfirmPopup(
-                "Effacer le dessin ?",
-                "Les traits seront supprimés.");
+                AppResources.GetString("SketchDetail_ClearDrawingTitle"),
+                AppResources.GetString("SketchDetail_ClearDrawingMessage"));
             var result = await App.Current!.Windows[0].Page!.ShowPopupAsync<bool>(popup, new PopupOptions
             {
                 CanBeDismissedByTappingOutsideOfPopup = true,
@@ -78,8 +78,8 @@ public partial class SketchDetailsPage : ContentPage
         else if (_vm.HasBackground)
         {
             var popup = new ConfirmPopup(
-                "Effacer le fond ?",
-                "La photo de fond sera supprimée définitivement.",
+                AppResources.GetString("SketchDetail_ClearBackgroundTitle"),
+                AppResources.GetString("SketchDetail_ClearBackgroundMessage"),
                 isDanger: true);
             var result = await App.Current!.Windows[0].Page!.ShowPopupAsync<bool>(popup, new PopupOptions
             {
@@ -100,9 +100,9 @@ public partial class SketchDetailsPage : ContentPage
     private async void OnDeleteClicked(object? sender, EventArgs e)
     {
         var popup = new ConfirmPopup(
-            "Supprimer ce visuel ?",
-            "Cette action est irréversible.",
-            confirmText: "Supprimer",
+            AppResources.GetString("SketchDetail_DeleteTitle"),
+            AppResources.GetString("Common_IrreversibleAction"),
+            confirmText: AppResources.GetString("Common_Delete"),
             isDanger: true);
         var result = await App.Current!.Windows[0].Page!.ShowPopupAsync<bool>(popup, new PopupOptions
         {

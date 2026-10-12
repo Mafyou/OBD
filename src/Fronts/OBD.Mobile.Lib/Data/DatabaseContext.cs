@@ -23,7 +23,7 @@ public class DatabaseContext(string databasePath)
         return _connection;
     }
 
-    public async Task<List<T>> GetAllAsync<T>() where T : new()
+    public async Task<IReadOnlyList<T>> GetAllAsync<T>() where T : new()
     {
         var conn = await GetConnectionAsync();
         return await conn.Table<T>().ToListAsync();
@@ -53,7 +53,7 @@ public class DatabaseContext(string databasePath)
         return await conn.DeleteAsync(item);
     }
 
-    public async Task<List<T>> QueryAsync<T>(string query, params object[] args) where T : new()
+    public async Task<IReadOnlyList<T>> QueryAsync<T>(string query, params object[] args) where T : new()
     {
         var conn = await GetConnectionAsync();
         return await conn.QueryAsync<T>(query, args);

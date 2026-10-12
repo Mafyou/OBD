@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:OBD.Mobile.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:strings="clr-namespace:OBD.Mobile.Lib.Resources.Strings;assembly=OBD.Mobile.Lib"
+             x:Class="OBD.Mobile.Pages.Diagnostics.LogsPage"
+             x:DataType="vm:LogsViewModel"
+             Title="{strings:Translate Logs_Title}"
+             BackgroundColor="{StaticResource BackgroundPrimary}">
+
+    <ContentPage.Resources>
+        <toolkit:InvertedBoolConverter x:Key="InvertedBool" />
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*,Auto" Padding="16" RowSpacing="16">
+
+        <ScrollView Grid.Row="0">
+            <Border BackgroundColor="{StaticResource BackgroundSurface}"
+                    Padding="16">
+                <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                <Label Text="{Binding CrashDetails}"
+                       TextColor="{StaticResource TextPrimary}"
+                       FontSize="13"
+                       LineBreakMode="WordWrap" />
+            </Border>
+        </ScrollView>
+
+        <VerticalStackLayout Grid.Row="1" Spacing="12">
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                IsVisible="{Binding IsBusy}" />
+            <Button Text="{strings:Translate Logs_SendReport}"
+                    Command="{Binding SendReportCommand}"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBool}}"
+                    BackgroundColor="{StaticResource AccentPrimary}"
+                    TextColor="{StaticResource BackgroundPrimary}"
+                    CornerRadius="8" />
+            <Button Text="{strings:Translate Logs_ClearCrashData}"
+                    Command="{Binding ClearCrashDataCommand}"
+                    IsVisible="{Binding HasCrashDetails}"
+                    BackgroundColor="{StaticResource BackgroundSurface}"
+                    TextColor="{StaticResource DangerColor}"
+                    CornerRadius="8" />
+            <Button Text="{strings:Translate Logs_GetHelp}"
+                    Command="{Binding OpenHelpCommand}"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource TextSecondary}"
+                    CornerRadius="8" />
+        </VerticalStackLayout>
+
+    </Grid>
+
+</ContentPage>

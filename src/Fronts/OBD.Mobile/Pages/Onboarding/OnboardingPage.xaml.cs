@@ -9,6 +9,9 @@ public partial class OnboardingPage : ContentPage
         vm.OnboardingCompleted += OnCompleted;
     }
 
+    // Root page until the onboarding is done: Back would leave the app.
+    protected override bool OnBackButtonPressed() => DoubleBackToExit.Handle();
+
     private async void OnCompleted()
     {
         if (Application.Current is null) return;

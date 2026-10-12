@@ -9,7 +9,7 @@ public partial class NoteDetailViewModel(INoteService noteService, INoteLinkServ
     public partial bool IsNew { get; set; } = true;
 
     [ObservableProperty]
-    public partial string PageTitle { get; set; } = "Nouvelle note";
+    public partial string PageTitle { get; set; } = AppResources.GetString("NoteDetail_NewTitle");
 
     [ObservableProperty]
     public partial ObservableCollection<NoteLink> Links { get; set; } = [];
@@ -47,7 +47,7 @@ public partial class NoteDetailViewModel(INoteService noteService, INoteLinkServ
             IsNew = true;
             IsViewMode = false;
             IsEditMode = true;
-            PageTitle = "Nouvelle note";
+            PageTitle = AppResources.GetString("NoteDetail_NewTitle");
             Links = [];
             HasLinks = false;
         }
@@ -55,7 +55,7 @@ public partial class NoteDetailViewModel(INoteService noteService, INoteLinkServ
         {
             Note = await noteService.GetAsync(noteId) ?? new Note { SectorId = sectorId };
             IsNew = false;
-            PageTitle = "Note";
+            PageTitle = AppResources.GetString("NoteDetail_Title");
             await RefreshLinksAsync();
             IsViewMode = true;
             IsEditMode = false;
@@ -72,7 +72,7 @@ public partial class NoteDetailViewModel(INoteService noteService, INoteLinkServ
             .ToDictionary(n => n.Id);
 
         foreach (var link in rawLinks)
-            link.LinkedTitle = visualMap.TryGetValue(link.SketchId, out var s) ? s.DisplayText : "Visuel";
+            link.LinkedTitle = visualMap.TryGetValue(link.SketchId, out var s) ? s.DisplayText : AppResources.GetString("NoteDetail_DefaultVisualName");
 
         Links = new ObservableCollection<NoteLink>(rawLinks);
         HasLinks = Links.Count > 0;
@@ -86,13 +86,13 @@ public partial class NoteDetailViewModel(INoteService noteService, INoteLinkServ
     }
 
     [RelayCommand]
-    private async Task SaveAsync()
+    private async Task SaveAsync(CancellationToken stoppingToken)
     {
         if (IsNew)
         {
             await noteService.InsertAsync(Note);
             IsNew = false;
-            PageTitle = "Note";
+            PageTitle = AppResources.GetString("NoteDetail_Title");
         }
         else
         {
@@ -106,7 +106,7 @@ public partial class NoteDetailViewModel(INoteService noteService, INoteLinkServ
     }
 
     [RelayCommand]
-    private async Task DeleteAsync()
+    private async Task DeleteAsync(CancellationToken stoppingToken)
     {
         await noteService.DeleteAsync(Note);
         await Shell.Current.GoToAsync("..");
@@ -128,14 +128,18 @@ public partial class NoteDetailViewModel(INoteService noteService, INoteLinkServ
 
         if (visuals.Count == 0)
         {
-            await Shell.Current.DisplayAlertAsync("Aucun visuel", "Créez d'abord un croquis ou une photo dans ce secteur.", "OK");
+            await Dialogs.AlertAsync(
+                AppResources.GetString("NoteDetail_NoVisualTitle"),
+                AppResources.GetString("NoteDetail_NoVisualMessage"),
+                AppResources.GetString("Common_Ok"));
             return;
         }
 
+        var cancel = AppResources.GetString("Common_Cancel");
         var options = visuals.Select(s => s.DisplayText).ToArray();
-        var chosen = await Shell.Current.DisplayActionSheetAsync($"Lier #{word} à :", "Annuler", null, options);
+        var chosen = await Dialogs.ChooseAsync(AppResources.GetString("NoteDetail_LinkPromptFormat", word), cancel, null, options);
 
-        if (string.IsNullOrEmpty(chosen) || chosen == "Annuler")
+        if (string.IsNullOrEmpty(chosen) || chosen == cancel)
             return;
 
         var visual = visuals.FirstOrDefault(s => s.DisplayText == chosen);
@@ -151,7 +155,7 @@ public partial class NoteDetailViewModel(INoteService noteService, INoteLinkServ
         => await Shell.Current.GoToAsync($"{nameof(SketchDetailsPage)}?noteid={link.SketchId}&sectorid=0");
 
     [RelayCommand]
-    private async Task RemoveLinkAsync(NoteLink link)
+    private async Task RemoveLinkAsync(NoteLink link, CancellationToken stoppingToken)
     {
         await noteLinkService.DeleteAsync(link);
         Links.Remove(link);

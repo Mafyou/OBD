@@ -19,7 +19,7 @@ public partial class PersonDetailsViewModel(IPersonService personneService, ISec
     public partial bool HasNoSectors { get; set; }
 
     [ObservableProperty]
-    public partial string PageTitle { get; set; } = "Nouvelle personne";
+    public partial string PageTitle { get; set; } = AppResources.GetString("PersonDetails_NewTitle");
 
     public int PersonId
     {
@@ -36,7 +36,7 @@ public partial class PersonDetailsViewModel(IPersonService personneService, ISec
         {
             Person = new Person();
             IsNew = true;
-            PageTitle = "Nouvelle personne";
+            PageTitle = AppResources.GetString("PersonDetails_NewTitle");
         }
         else
         {
@@ -48,7 +48,7 @@ public partial class PersonDetailsViewModel(IPersonService personneService, ISec
     }
 
     [RelayCommand]
-    private async Task SaveAsync()
+    private async Task SaveAsync(CancellationToken stoppingToken)
     {
         if (string.IsNullOrWhiteSpace(Person.Name))
             return;
@@ -65,7 +65,7 @@ public partial class PersonDetailsViewModel(IPersonService personneService, ISec
     }
 
     [RelayCommand]
-    private async Task DeleteAsync()
+    private async Task DeleteAsync(CancellationToken stoppingToken)
     {
         await personneService.DeleteAsync(Person);
         await Shell.Current.GoToAsync("..");

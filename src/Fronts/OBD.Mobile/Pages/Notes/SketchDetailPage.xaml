@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:OBD.Mobile.ViewModels"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:strings="clr-namespace:OBD.Mobile.Lib.Resources.Strings;assembly=OBD.Mobile.Lib"
              x:Class="OBD.Mobile.Pages.Notes.SketchDetailsPage"
              x:DataType="vm:SketchDetailsViewModel"
              Title="{Binding PageTitle}"
@@ -31,7 +32,7 @@
                    Aspect="AspectFit"
                    Margin="0" />
             <Button Grid.Row="2"
-                    Text="Modifier"
+                    Text="{strings:Translate Common_Edit}"
                     Command="{Binding EditCommand}"
                     BackgroundColor="{StaticResource AccentPrimary}"
                     TextColor="{StaticResource BackgroundPrimary}"
@@ -50,7 +51,7 @@
                     BackgroundColor="{StaticResource BackgroundSurface}"
                     StrokeThickness="0" Padding="4,0" Margin="16,12,16,0">
                 <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
-                <Entry Placeholder="Nom du croquis (optionnel)"
+                <Entry Placeholder="{strings:Translate SketchDetail_NamePlaceholder}"
 
                        Text="{Binding Note.Title}"
                        TextColor="{StaticResource TextPrimary}"
@@ -75,7 +76,7 @@
             <VerticalStackLayout Grid.Row="2" Spacing="8" Padding="16,0,16,16">
 
                 <!-- Couleur du trait -->
-                <Label Text="Couleur du trait"
+                <Label Text="{strings:Translate SketchDetail_LineColor}"
                        TextColor="{StaticResource TextSecondary}"
                        FontSize="11"
                        HorizontalOptions="Center" />
@@ -119,7 +120,7 @@
                 </HorizontalStackLayout>
 
                 <!-- Fond photo -->
-                <Label Text="Fond photo"
+                <Label Text="{strings:Translate SketchDetail_PhotoBackground}"
                        TextColor="{StaticResource TextSecondary}"
                        FontSize="11"
                        HorizontalOptions="Center" />
@@ -133,7 +134,7 @@
                             CornerRadius="12"
                             HeightRequest="40"
                             FontSize="20"
-                            ToolTipProperties.Text="Prendre une photo comme fond" />
+                            ToolTipProperties.Text="{strings:Translate SketchDetail_TakePhotoTooltip}" />
                     <Button Grid.Column="1"
                             Text="&#xE410;"
                             FontFamily="MaterialSymbols"
@@ -143,20 +144,20 @@
                             CornerRadius="12"
                             HeightRequest="40"
                             FontSize="20"
-                            ToolTipProperties.Text="Choisir une photo depuis la galerie" />
+                            ToolTipProperties.Text="{strings:Translate SketchDetail_PickPhotoTooltip}" />
                 </Grid>
-                <Button Text="Tout effacer"
+                <Button Text="{strings:Translate SketchDetail_ClearAll}"
                         Clicked="OnClearClicked"
                         IsEnabled="{Binding CanClear}"
                         BackgroundColor="{StaticResource BackgroundSurface}"
                         TextColor="{StaticResource TextPrimary}"
                         CornerRadius="12" />
-                <Button Text="Sauvegarder"
+                <Button Text="{strings:Translate Common_Save}"
                         Clicked="OnSaveClicked"
                         BackgroundColor="{StaticResource AccentPrimary}"
                         TextColor="{StaticResource BackgroundPrimary}"
                         CornerRadius="12" />
-                <Button Text="Supprimer"
+                <Button Text="{strings:Translate Common_Delete}"
                         Clicked="OnDeleteClicked"
                         IsVisible="{Binding IsNew, Converter={StaticResource InvertedBool}}"
                         BackgroundColor="Transparent"
