@@ -36,5 +36,12 @@
 	<string>Utilisé pour choisir des photos depuis votre galerie et les ajouter à vos notes</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>fr</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>fr</string>
+		<string>en</string>
+	</array>
 </dict>
 </plist>
