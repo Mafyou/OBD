@@ -49,8 +49,17 @@ public partial class SketchDetailsViewModel(INoteService noteService) : Observab
     [ObservableProperty]
     public partial bool IsEditMode { get; set; } = true;
 
+    // Shell applies the query of the route again each time the page comes back to the front (a popup closed):
+    // only the first application chooses the sketch, or the name and the background being edited would be lost.
+    private bool _isQueryApplied;
+
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
+        if (_isQueryApplied)
+            return;
+
+        _isQueryApplied = true;
+
         int noteId = 0;
         int sectorId = 0;
 

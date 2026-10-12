@@ -15,6 +15,15 @@ public partial class NoteDetailPage : ContentPage
         _vm.ContentRendered += RenderHashtags;
     }
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        // A popup over the page makes it disappear, which ends the subscription: listen again once it is closed
+        _vm.ContentRendered -= RenderHashtags;
+        _vm.ContentRendered += RenderHashtags;
+    }
+
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);

@@ -4,6 +4,7 @@ public partial class SketchDetailsPage : ContentPage
 {
     private readonly SketchDetailsViewModel _vm;
     private bool _isImageCleared;
+    private bool _isCanvasReady;
 
     public SketchDetailsPage(SketchDetailsViewModel vm)
     {
@@ -15,6 +16,12 @@ public partial class SketchDetailsPage : ContentPage
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
+
+        // Raised again when a popup of this page closes: the drawing in progress has to survive "Cancel"
+        if (_isCanvasReady)
+            return;
+
+        _isCanvasReady = true;
         DrawingCanvas.Lines.Clear();
         _isImageCleared = false;
 

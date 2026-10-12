@@ -111,13 +111,15 @@
                             Padding="0" />
                 </Grid>
 
-                <CollectionView ItemsSource="{Binding Sectors}">
-                    <CollectionView.EmptyView>
+                <!-- A plain layout, not a CollectionView: inside this ScrollView its height is unbounded, and its
+                     empty view then asked for a new layout on every frame for as long as it was shown -->
+                <VerticalStackLayout BindableLayout.ItemsSource="{Binding Sectors}">
+                    <BindableLayout.EmptyView>
                         <Label Text="{strings:Translate Parameters_NoSector}"
                                TextColor="{StaticResource TextSecondary}"
                                Margin="0,4" />
-                    </CollectionView.EmptyView>
-                    <CollectionView.ItemTemplate>
+                    </BindableLayout.EmptyView>
+                    <BindableLayout.ItemTemplate>
                         <DataTemplate x:DataType="model:Sector">
                             <Border Margin="0,4"
                                     BackgroundColor="{StaticResource BackgroundSurface}"
@@ -133,8 +135,8 @@
                                        TextColor="{StaticResource TextPrimary}" />
                             </Border>
                         </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
 
                 <!-- À propos -->
                 <Label Text="{strings:Translate Parameters_About}"

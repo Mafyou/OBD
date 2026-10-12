@@ -26,8 +26,22 @@ public partial class NoteDetailViewModel(INoteService noteService, INoteLinkServ
     // Code-behind subscribes to re-render #hashtag spans
     public event Action? ContentRendered;
 
+    // Shell applies the query of the route again each time the page comes back to the front: a popup closed,
+    // a pushed page popped. Only the first application chooses the note, or the one on screen would be replaced.
+    private bool _isQueryApplied;
+
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
+        if (_isQueryApplied)
+        {
+            // Back from a linked sketch: it may have been renamed or deleted
+            if (!IsNew)
+                _ = RefreshLinksAndRenderAsync();
+            return;
+        }
+
+        _isQueryApplied = true;
+
         int noteId = 0;
         int sectorId = 0;
 
@@ -61,6 +75,12 @@ public partial class NoteDetailViewModel(INoteService noteService, INoteLinkServ
             IsEditMode = false;
             ContentRendered?.Invoke();
         }
+    }
+
+    private async Task RefreshLinksAndRenderAsync()
+    {
+        await RefreshLinksAsync();
+        ContentRendered?.Invoke();
     }
 
     private async Task RefreshLinksAsync()

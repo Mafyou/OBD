@@ -85,7 +85,8 @@ public partial class App : Application
     private void OnDoubleShakeDetected(object? sender, EventArgs e) =>
         MainThread.BeginInvokeOnMainThread(async () =>
         {
-            if (Shell.Current is not null)
+            // Shaking again while the logs are open must not stack a second logs page
+            if (Shell.Current is not null && Shell.Current.CurrentPage is not LogsPage)
                 await Shell.Current.GoToAsync(nameof(LogsPage));
         });
 }

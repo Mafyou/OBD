@@ -1,6 +1,6 @@
 # OBD : On-Boarding Day
 
-> **Version :** 2.0 (build 11) · **Technologie :** .NET 11, .NET MAUI 11 · Android 7.0+ (API 24) / iOS 15+ · C# 15 (`LangVersion` latest)
+> **Version :** 2.0 (build 12) · **Technologie :** .NET 11, .NET MAUI 11 · Android 7.0+ (API 24) / iOS 15+ · C# 15 (`LangVersion` latest)
 
 [Google Play](https://play.google.com/store/apps/details?id=fr.mafyou.obd)
 [App Store](https://apps.apple.com/fr/app/obd-on-boarding-day/id6773454327)
@@ -59,7 +59,7 @@ Télécharge OBD sur l'App Store et démarre ton onboarding avec une méthode si
 
 ## 🍎 App Store
 
-> **Paquet :** `fr.mafyou.obd` · **Fiche :** <https://apps.apple.com/fr/app/obd-on-boarding-day/id6773454327> · **Version :** 2.0 (build 11)
+> **Paquet :** `fr.mafyou.obd` · **Fiche :** <https://apps.apple.com/fr/app/obd-on-boarding-day/id6773454327> · **Version :** 2.0 (build 12)
 
 L'App Store n'interprète pas le Markdown et refuse les emojis : les textes ci-dessous se collent tels quels.
 
