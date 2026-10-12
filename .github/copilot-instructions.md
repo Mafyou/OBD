@@ -5,7 +5,7 @@
 
 ## General Guidelines
 - Utilise toujours cette stack:
-  - dotnet 10 (https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-10/overview)
+  - dotnet 11 (https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-11/overview)
   - C#14.0 (https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-14) LangVersion = latest
 - Toujours compiler uniquement le projet dans le quel on est.
 - Compiler juste le projet où on a fait des changements, pas la solution entière.

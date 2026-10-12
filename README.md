@@ -1,6 +1,6 @@
 # OBD : On-Boarding Day
 
-> **Version :** 1.9 (build 10) · **Technologie :** .NET MAUI 10 · Android / iOS · C# 14
+> **Version :** 2.0 (build 11) · **Technologie :** .NET 11, .NET MAUI 11 · Android 7.0+ (API 24) / iOS 15+ · C# 15 (`LangVersion` latest)
 
 [Google Play](https://play.google.com/store/apps/details?id=fr.mafyou.obd)
 [App Store](https://apps.apple.com/fr/app/obd-on-boarding-day/id6773454327)
@@ -56,6 +56,54 @@ OBD est conçue pour les nouveaux collaborateurs en entreprise qui veulent gagne
 
 Appel à l'action :
 Télécharge OBD sur l'App Store et démarre ton onboarding avec une méthode simple, structurée et efficace.
+
+## 🍎 App Store
+
+> **Paquet :** `fr.mafyou.obd` · **Fiche :** <https://apps.apple.com/fr/app/obd-on-boarding-day/id6773454327> · **Version :** 2.0 (build 11)
+
+L'App Store n'interprète pas le Markdown et refuse les emojis : les textes ci-dessous se collent tels quels.
+
+### Nouveautés de la version 2.0 — Français *(4000 caractères max, ici moins de 500)*
+```
+OBD parle maintenant français et anglais. Choisissez votre langue dans Paramètres > Langue : tout l'écran bascule aussitôt.
+
+Si l'application s'est arrêtée sur une erreur, elle ouvre au lancement suivant un e-mail déjà rédigé avec le rapport. Vous décidez de l'envoyer ou non.
+
+Nouvelle page Diagnostics : secouez deux fois le téléphone pour voir le dernier incident, l'envoyer par e-mail ou l'effacer.
+```
+
+### What's New in version 2.0 — English
+```
+OBD now speaks French and English. Pick your language in Settings > Language: the whole screen switches at once.
+
+If the app stopped on an error, the next launch opens an e-mail already written with the report. You decide whether to send it.
+
+New Diagnostics page: shake the phone twice to see the last incident, send it by e-mail or clear it.
+```
+
+### Notes pour la revue Apple *(App Review Information → Notes, en anglais)*
+```
+OBD is a personal notebook for the first weeks in a new job: people, notes and sketches sorted by sector, and work habits. Everything is stored on the device, in a local database.
+
+No account and no sign-in: none exists in the app. No purchase, no subscription, no ads. The app has no server and makes no network request. The links of Settings > About (privacy policy, source code, overview page, help) only open the browser, and the crash report only opens the Mail composer: nothing leaves the device unless the user presses Send.
+
+FIRST LAUNCH
+The app asks once how to start: "Pre-filled OBD" creates sample people, sectors and notes, "Empty OBD" starts from scratch. Pre-filled is the quickest way to review.
+
+LANGUAGE
+French and English. Settings tab > Language switches the whole interface at once.
+
+PERMISSIONS (their purpose strings are written in French)
+- Face ID: Notes tab > the lock button at the top opens the "Sensitive notes" section after Face ID or Touch ID. A note goes there with a long press on it in the list of its sector. On a device without biometrics the app says the section is not available.
+- Camera: while editing a sketch (Notes tab > a sector > a sketch), under "Photo background", the camera button takes a photo used as the background of the drawing.
+- Photo library: same place, the gallery button picks one photo as the background of the drawing.
+The photo stays on the device.
+
+DIAGNOSTICS
+Shaking the device twice opens the "Diagnostics" page: last crash recorded, "Send report by email", "Clear crash data", "Get help".
+```
+
+La version App Store se construit avec le pipeline manuel [`.github/workflows/CICD-iOS.yml`](.github/workflows/CICD-iOS.yml) (macOS 26, Xcode 26.6, SDK .NET 11), qui signe l'IPA et l'envoie sur TestFlight. Le numéro de build vient du csproj (`ApplicationVersion`), le pipeline ne l'incrémente pas.
 
 ## Positionnement
 
@@ -157,15 +205,17 @@ Cette application n'essaie pas de remplacer les outils internes de l'entreprise.
 
 ## Technique
 
-- **.NET 10 MAUI** — Android, iOS, macCatalyst, Windows.
+- **.NET 11 MAUI** (SDK `11.0.100-rc.1.26425.128`, `Microsoft.Maui.Controls` 11.0.0-rc.1.26451.6) — `net11.0-android` (API 24 minimum) et `net11.0-ios` (iOS 15 minimum).
 - **CommunityToolkit.Mvvm 8.4.2** — `[ObservableProperty]`, `[RelayCommand]`, source generators AOT-friendly.
-- **CommunityToolkit.Maui 14.2.0** — `DrawingView` pour les croquis, `TouchBehavior` pour les appuis longs.
-- **SQLite-net-PCL** — stockage local, migration automatique des colonnes.
-- **Plugin.Fingerprint** — authentification biométrique (empreinte / Face ID).
+- **CommunityToolkit.Maui 15.0.1** — `DrawingView` pour les croquis, `TouchBehavior` pour les appuis longs, popups et Toast.
+- **sqlite-net-pcl 1.11.285** et **SQLitePCLRaw.bundle_e_sqlite3 3.0.5** — stockage local, migration automatique des colonnes.
+- **Plugin.Fingerprint 3.0.0-beta.1** — authentification biométrique (empreinte / Face ID).
 - **Material Symbols Outlined** — icônes via font intégrée.
-- **Profiled AOT** activé en Release Android.
+- Release Android : runtime CoreCLR et précompilation ReadyToRun (défauts de .NET 11), pour `arm64-v8a` et `x86_64`.
 - Pas de synchronisation cloud — tout est local pour garantir la confidentialité.
-- Pas de localisation pour l'instant.
+- Interface en français et en anglais (`AppResources.resx` / `AppResources.en.resx`), langue au choix dans les Paramètres.
+- Tests : xUnit v3, Shouldly, Moq (`dotnet test tests/OBD.Mobile.Lib.UnitTests/OBD.Mobile.Lib.UnitTests.csproj`).
+- Compilation : `dotnet build src/Fronts/OBD.Mobile/OBD.Mobile.csproj -f net11.0-android -c Release` (ou `-f net11.0-ios` ; sous Windows sans Mac, seul le code managé iOS est compilé).
 
 ## Architecture
 
