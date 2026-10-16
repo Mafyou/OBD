@@ -123,6 +123,7 @@
   <data name="PersonDetails_PositionPlaceholder" xml:space="preserve"><value>Poste</value></data>
   <data name="PersonDetails_SectorPickerTitle" xml:space="preserve"><value>Secteur</value></data>
   <data name="PersonDetails_MemoPlaceholder" xml:space="preserve"><value>Note courte</value></data>
+  <data name="PersonDetails_DeleteTitle" xml:space="preserve"><value>Supprimer cette personne ?</value></data>
 
   <data name="Notes_NoSectorEmpty" xml:space="preserve"><value>Aucun secteur — ajoutez-en dans les paramètres</value></data>
   <data name="Notes_NotAvailableTitle" xml:space="preserve"><value>Non disponible</value></data>
@@ -195,6 +196,7 @@
 
   <data name="SectorDetails_NewTitle" xml:space="preserve"><value>Nouveau secteur</value></data>
   <data name="SectorDetails_NamePlaceholder" xml:space="preserve"><value>Nom du secteur *</value></data>
+  <data name="SectorDetails_DeleteTitle" xml:space="preserve"><value>Supprimer ce secteur ?</value></data>
 
   <data name="Search_Title" xml:space="preserve"><value>Recherche</value></data>
   <data name="Search_Placeholder" xml:space="preserve"><value>Rechercher contacts, notes, secteurs...</value></data>

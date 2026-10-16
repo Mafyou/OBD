@@ -97,7 +97,7 @@
                     Margin="0,8,0,0" />
 
             <Button Text="{strings:Translate Common_Delete}"
-                    Command="{Binding DeleteCommand}"
+                    Clicked="OnDeleteClicked"
                     IsVisible="{Binding IsNew, Converter={StaticResource InvertedBool}}"
                     BackgroundColor="Transparent"
                     TextColor="{StaticResource DangerColor}"

@@ -12,9 +12,20 @@ public partial class SectorDetailsViewModel(ISectorService secteurService) : Obs
     [ObservableProperty]
     public partial string PageTitle { get; set; } = AppResources.GetString("SectorDetails_NewTitle");
 
+    // Shell applies the query of the route again each time the page comes back to the front, a popup closed among
+    // others ("Cancel" on the delete confirmation): only the first application chooses the sector, or the form being
+    // edited would be replaced. The page and its view model are built for each visit.
+    private bool _isQueryApplied;
+
     public int SectorId
     {
-        set => _ = LoadAsync(value);
+        set
+        {
+            if (_isQueryApplied) return;
+
+            _isQueryApplied = true;
+            _ = LoadAsync(value);
+        }
     }
 
     private async Task LoadAsync(int id)

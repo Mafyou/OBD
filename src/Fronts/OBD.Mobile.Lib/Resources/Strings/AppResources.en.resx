@@ -84,6 +84,7 @@
   <data name="PersonDetails_PositionPlaceholder" xml:space="preserve"><value>Position</value></data>
   <data name="PersonDetails_SectorPickerTitle" xml:space="preserve"><value>Sector</value></data>
   <data name="PersonDetails_MemoPlaceholder" xml:space="preserve"><value>Short note</value></data>
+  <data name="PersonDetails_DeleteTitle" xml:space="preserve"><value>Delete this person?</value></data>
 
   <data name="Notes_NoSectorEmpty" xml:space="preserve"><value>No sectors yet — add one in Settings</value></data>
   <data name="Notes_NotAvailableTitle" xml:space="preserve"><value>Not available</value></data>
@@ -156,6 +157,7 @@
 
   <data name="SectorDetails_NewTitle" xml:space="preserve"><value>New sector</value></data>
   <data name="SectorDetails_NamePlaceholder" xml:space="preserve"><value>Sector name *</value></data>
+  <data name="SectorDetails_DeleteTitle" xml:space="preserve"><value>Delete this sector?</value></data>
 
   <data name="Search_Title" xml:space="preserve"><value>Search</value></data>
   <data name="Search_Placeholder" xml:space="preserve"><value>Search contacts, notes, sectors...</value></data>

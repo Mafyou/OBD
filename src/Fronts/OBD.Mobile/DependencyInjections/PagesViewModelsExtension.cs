@@ -9,8 +9,9 @@ public static class PagesViewModelsExtension
             services.AddSingleton<AppShell>();
             services.AddSingletonWithShellRoute<OnboardingPage, OnboardingViewModel>(nameof(OnboardingPage));
             services.AddSingletonWithShellRoute<PersonsPage, PersonsViewModel>(nameof(PersonsPage));
-            services.AddSingletonWithShellRoute<PersonDetailsPage, PersonDetailsViewModel>(nameof(PersonDetailsPage));
-            services.AddSingletonWithShellRoute<SectorDetailsPage, SectorDetailsViewModel>(nameof(SectorDetailsPage));
+            // Built for each visit, as the note and the visual: the query of the route is applied once per page
+            services.AddTransientWithShellRoute<PersonDetailsPage, PersonDetailsViewModel>(nameof(PersonDetailsPage));
+            services.AddTransientWithShellRoute<SectorDetailsPage, SectorDetailsViewModel>(nameof(SectorDetailsPage));
             services.AddSingletonWithShellRoute<NotesPage, NotesViewModel>(nameof(NotesPage));
             services.AddSingletonWithShellRoute<NotesSectorPage, NotesSectorViewModel>(nameof(NotesSectorPage));
             services.AddTransientWithShellRoute<NoteDetailPage, NoteDetailViewModel>(nameof(NoteDetailPage));
