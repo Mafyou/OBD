@@ -26,7 +26,7 @@ public partial class ParametersViewModel(
     public partial LanguageOption SelectedLanguage { get; set; } = LocalizationResourceManager.Instance.CurrentLanguage;
 
     partial void OnSelectedLanguageChanged(LanguageOption value) =>
-        LocalizationResourceManager.Instance.SetCulture(new CultureInfo(value.Code));
+        LocalizationResourceManager.Instance.SetLanguage(value.Code);
 
     [RelayCommand(IncludeCancelCommand = true)]
     private async Task LoadAsync(CancellationToken stoppingToken)
