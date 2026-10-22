@@ -11,7 +11,11 @@
 
             <Label x:Name="TitleLabel" Style="{StaticResource DialogTitle}" />
 
-            <Label x:Name="MessageLabel" Style="{StaticResource DialogMessage}" />
+            <!-- A long message scrolls, the button stays in view: on a short window (the outer screen of a foldable,
+                 410 units tall) it pushed the button below the bottom edge (MessagePopup.xaml.cs) -->
+            <ScrollView x:Name="MessageScroll">
+                <Label x:Name="MessageLabel" Style="{StaticResource DialogMessage}" />
+            </ScrollView>
 
             <Button x:Name="AcceptButton"
                     Style="{StaticResource DialogPrimaryButton}"

@@ -11,6 +11,32 @@ public partial class SketchDetailsPage : ContentPage
         InitializeComponent();
         BindingContext = vm;
         _vm = vm;
+
+        ScreenFit.FollowWindow(this, PlaceEditTools);
+    }
+
+    // Width of the column of buttons beside the canvas on a short window
+    private const double SideToolsWidth = 184;
+
+    /// <summary>
+    /// The buttons of the edit mode under the canvas, or beside it on a short window (the outer screen of a foldable,
+    /// 480 x 410 units): under it they took all of its height there, and Save was below the bottom edge.
+    /// </summary>
+    private void PlaceEditTools()
+    {
+        var isShort = ScreenFit.IsShort();
+
+        EditGrid.RowDefinitions = isShort
+            ? [new RowDefinition(GridLength.Auto), new RowDefinition(GridLength.Star)]
+            : [new RowDefinition(GridLength.Auto), new RowDefinition(GridLength.Star), new RowDefinition(GridLength.Auto)];
+        EditGrid.ColumnDefinitions = isShort
+            ? [new ColumnDefinition(GridLength.Star), new ColumnDefinition(SideToolsWidth)]
+            : [new ColumnDefinition(GridLength.Star)];
+
+        Grid.SetRow(EditTools, isShort ? 0 : 2);
+        Grid.SetRowSpan(EditTools, isShort ? 2 : 1);
+        Grid.SetColumn(EditTools, isShort ? 1 : 0);
+        EditToolsLayout.Padding = isShort ? new Thickness(0, 12, 16, 16) : new Thickness(16, 0, 16, 16);
     }
 
     protected override void OnNavigatedTo(NavigatedToEventArgs args)

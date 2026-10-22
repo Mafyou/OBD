@@ -19,7 +19,22 @@ public partial class ChoicePopup : Popup
         DestructiveButton.Text = destruction;
         DestructiveButton.IsVisible = destruction is not null;
         BindableLayout.SetItemsSource(ChoicesLayout, choices);
+
+        // Sized from the window of the app, again each time it changes size: on the outer screen of a foldable
+        // (410 units tall) a list 320 units high pushed "Cancel" below the bottom edge
+        ScreenFit.FollowWindow(this, () => ChoicesScroll.MaximumHeightRequest = PopupFit.ScrollableHeight(
+            ScreenFit.WindowHeight(),
+            fixedHeight: DestructiveButton.IsVisible ? AroundListWithDestruction : AroundList,
+            preferred: PreferredListHeight));
     }
+
+    private const double PreferredListHeight = 320;
+
+    // Around the list: the paddings (48), the title (30), "Cancel" (44) and the spaces between them (40)
+    private const double AroundList = 162;
+
+    // The same with the destructive action and the space above it
+    private const double AroundListWithDestruction = AroundList + 64;
 
     private async void OnChoiceClicked(object? sender, EventArgs e)
     {

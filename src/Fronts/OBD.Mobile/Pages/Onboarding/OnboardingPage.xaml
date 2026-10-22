@@ -3,70 +3,78 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:OBD.Mobile.ViewModels"
              xmlns:strings="clr-namespace:OBD.Mobile.Lib.Resources.Strings;assembly=OBD.Mobile.Lib"
+             xmlns:fit="clr-namespace:OBD.Mobile.Views"
              x:Class="OBD.Mobile.Pages.Onboarding.OnboardingPage"
              x:DataType="vm:OnboardingViewModel"
              BackgroundColor="{StaticResource BackgroundPrimary}"
              NavigationPage.HasNavigationBar="False">
 
-    <Grid RowDefinitions="*,Auto,*" Padding="32">
+    <!-- Centered as tall as its content, it scrolls once that outruns the window: on a short one (the outer screen
+         of a foldable, 410 units tall) the second choice was below the bottom edge. The padding is inside what
+         scrolls, so that none of the window is lost around it. -->
+    <Grid>
 
         <!-- Logo + titre -->
-        <VerticalStackLayout Grid.Row="1" Spacing="32" VerticalOptions="Center">
+        <ScrollView VerticalOptions="Center">
+            <VerticalStackLayout Spacing="32" Padding="32">
 
-            <Image Source="logo.png"
-                   HeightRequest="80"
-                   Aspect="AspectFit"
-                   HorizontalOptions="Center" />
+                <!-- Only decorates: gives way on a short window, the welcome title stays -->
+                <Image Source="logo.png"
+                       HeightRequest="80"
+                       Aspect="AspectFit"
+                       HorizontalOptions="Center"
+                       fit:ScreenFit.TallOnly="True" />
 
-            <Label Text="{strings:Translate Onboarding_Welcome}"
-                   FontSize="26"
-                   FontFamily="GeistSemiBold"
-                   TextColor="{StaticResource TextPrimary}"
-                   HorizontalOptions="Center" />
+                <Label Text="{strings:Translate Onboarding_Welcome}"
+                       FontSize="26"
+                       FontFamily="GeistSemiBold"
+                       TextColor="{StaticResource TextPrimary}"
+                       HorizontalOptions="Center" />
 
-            <Label Text="{strings:Translate Onboarding_HowStart}"
-                   FontSize="15"
-                   TextColor="{StaticResource TextSecondary}"
-                   HorizontalOptions="Center"
-                   HorizontalTextAlignment="Center" />
+                <Label Text="{strings:Translate Onboarding_HowStart}"
+                       FontSize="15"
+                       TextColor="{StaticResource TextSecondary}"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center" />
 
-            <!-- Choix pré-rempli -->
-            <Border BackgroundColor="{StaticResource BackgroundSurface}"
-                    StrokeShape="RoundRectangle 12"
-                    Padding="20,16">
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ChoosePrefilledCommand}" />
-                </Border.GestureRecognizers>
-                <VerticalStackLayout Spacing="6">
-                    <Label Text="{strings:Translate Onboarding_PrefilledTitle}"
-                           FontSize="16"
-                           FontFamily="GeistSemiBold"
-                           TextColor="{StaticResource AccentPrimary}" />
-                    <Label Text="{strings:Translate Onboarding_PrefilledDesc}"
-                           FontSize="13"
-                           TextColor="{StaticResource TextSecondary}" />
-                </VerticalStackLayout>
-            </Border>
+                <!-- Choix pré-rempli -->
+                <Border BackgroundColor="{StaticResource BackgroundSurface}"
+                        StrokeShape="RoundRectangle 12"
+                        Padding="20,16">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChoosePrefilledCommand}" />
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="{strings:Translate Onboarding_PrefilledTitle}"
+                               FontSize="16"
+                               FontFamily="GeistSemiBold"
+                               TextColor="{StaticResource AccentPrimary}" />
+                        <Label Text="{strings:Translate Onboarding_PrefilledDesc}"
+                               FontSize="13"
+                               TextColor="{StaticResource TextSecondary}" />
+                    </VerticalStackLayout>
+                </Border>
 
-            <!-- Choix vide -->
-            <Border BackgroundColor="{StaticResource BackgroundSurface}"
-                    StrokeShape="RoundRectangle 12"
-                    Padding="20,16">
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ChooseEmptyCommand}" />
-                </Border.GestureRecognizers>
-                <VerticalStackLayout Spacing="6">
-                    <Label Text="{strings:Translate Onboarding_EmptyTitle}"
-                           FontSize="16"
-                           FontFamily="GeistSemiBold"
-                           TextColor="{StaticResource TextPrimary}" />
-                    <Label Text="{strings:Translate Onboarding_EmptyDesc}"
-                           FontSize="13"
-                           TextColor="{StaticResource TextSecondary}" />
-                </VerticalStackLayout>
-            </Border>
+                <!-- Choix vide -->
+                <Border BackgroundColor="{StaticResource BackgroundSurface}"
+                        StrokeShape="RoundRectangle 12"
+                        Padding="20,16">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChooseEmptyCommand}" />
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="{strings:Translate Onboarding_EmptyTitle}"
+                               FontSize="16"
+                               FontFamily="GeistSemiBold"
+                               TextColor="{StaticResource TextPrimary}" />
+                        <Label Text="{strings:Translate Onboarding_EmptyDesc}"
+                               FontSize="13"
+                               TextColor="{StaticResource TextSecondary}" />
+                    </VerticalStackLayout>
+                </Border>
 
-        </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
 
     </Grid>
 
