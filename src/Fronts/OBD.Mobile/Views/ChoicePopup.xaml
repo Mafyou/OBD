@@ -11,8 +11,9 @@
 
             <Label x:Name="TitleLabel" Style="{StaticResource DialogTitle}" />
 
-            <!-- The list can be long (every sketch and photo): it scrolls instead of growing past the screen -->
-            <ScrollView MaximumHeightRequest="320">
+            <!-- The list can be long (every sketch and photo): it scrolls instead of growing past the window, at most
+                 320 units high and less on a short window (ChoicePopup.xaml.cs) -->
+            <ScrollView x:Name="ChoicesScroll">
                 <VerticalStackLayout x:Name="ChoicesLayout" Spacing="8">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate x:DataType="x:String">

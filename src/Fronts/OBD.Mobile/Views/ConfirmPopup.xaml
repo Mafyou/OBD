@@ -19,11 +19,15 @@
                HorizontalOptions="Center"
                HorizontalTextAlignment="Center" />
 
-        <Label x:Name="MessageLabel"
-               TextColor="{StaticResource TextSecondary}"
-               FontSize="14"
-               HorizontalOptions="Center"
-               HorizontalTextAlignment="Center" />
+        <!-- A long message scrolls, the buttons stay in view: on a short window (the outer screen of a foldable,
+             410 units tall) it pushed them below the bottom edge (ConfirmPopup.xaml.cs) -->
+        <ScrollView x:Name="MessageScroll">
+            <Label x:Name="MessageLabel"
+                   TextColor="{StaticResource TextSecondary}"
+                   FontSize="14"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center" />
+        </ScrollView>
 
         <Grid ColumnDefinitions="*,*" ColumnSpacing="12" Margin="0,4,0,0">
             <Button Grid.Column="0"

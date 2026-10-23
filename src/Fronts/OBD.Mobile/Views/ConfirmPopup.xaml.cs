@@ -11,6 +11,11 @@ public partial class ConfirmPopup : Popup<bool>
         ConfirmButton.BackgroundColor = isDanger
             ? (Color)Application.Current!.Resources["DangerColor"]
             : (Color)Application.Current!.Resources["AccentPrimary"];
+
+        // Around the message: the paddings (48), the title (30), the buttons and their margin (48), the spaces (40);
+        // measured on the window of the app, again each time it changes size (a foldable closed, a phone turned)
+        ScreenFit.FollowWindow(this, () =>
+            MessageScroll.MaximumHeightRequest = PopupFit.ScrollableHeight(ScreenFit.WindowHeight(), fixedHeight: 166, preferred: double.PositiveInfinity));
     }
 
     private async void OnConfirmClicked(object? sender, EventArgs e) => await CloseAsync(true);
