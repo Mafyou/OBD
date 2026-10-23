@@ -152,6 +152,14 @@
   <data name="Parameters_PromoPage" xml:space="preserve"><value>Overview page</value></data>
   <data name="Parameters_GetHelp" xml:space="preserve"><value>Get help</value></data>
   <data name="Parameters_Language" xml:space="preserve"><value>Language</value></data>
+  <data name="Parameters_MyData" xml:space="preserve"><value>My data</value></data>
+  <data name="Parameters_ExportData" xml:space="preserve"><value>Export my data</value></data>
+  <data name="Parameters_ExportDataDescription" xml:space="preserve"><value>ZIP archive: sectors, people, notes, sketches and work habits</value></data>
+  <data name="Export_SensitiveTitle" xml:space="preserve"><value>Include sensitive notes?</value></data>
+  <data name="Export_WithSensitive" xml:space="preserve"><value>Yes, after biometrics</value></data>
+  <data name="Export_WithoutSensitive" xml:space="preserve"><value>No, leave them out</value></data>
+  <data name="Export_ShareTitle" xml:space="preserve"><value>My OBD data</value></data>
+  <data name="Export_ErrorMessage" xml:space="preserve"><value>The export could not be created. Please try again.</value></data>
   <data name="Language_French" xml:space="preserve"><value>Français</value></data>
   <data name="Language_English" xml:space="preserve"><value>English</value></data>
 

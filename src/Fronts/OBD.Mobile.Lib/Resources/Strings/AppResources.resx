@@ -191,6 +191,14 @@
   <data name="Parameters_PromoPage" xml:space="preserve"><value>Page de présentation</value></data>
   <data name="Parameters_GetHelp" xml:space="preserve"><value>Obtenir de l'aide</value></data>
   <data name="Parameters_Language" xml:space="preserve"><value>Langue</value></data>
+  <data name="Parameters_MyData" xml:space="preserve"><value>Mes données</value></data>
+  <data name="Parameters_ExportData" xml:space="preserve"><value>Exporter mes données</value></data>
+  <data name="Parameters_ExportDataDescription" xml:space="preserve"><value>Archive ZIP : secteurs, personnes, notes, croquis et repères</value></data>
+  <data name="Export_SensitiveTitle" xml:space="preserve"><value>Inclure les notes sensibles ?</value></data>
+  <data name="Export_WithSensitive" xml:space="preserve"><value>Oui, après la biométrie</value></data>
+  <data name="Export_WithoutSensitive" xml:space="preserve"><value>Non, les laisser de côté</value></data>
+  <data name="Export_ShareTitle" xml:space="preserve"><value>Mes données OBD</value></data>
+  <data name="Export_ErrorMessage" xml:space="preserve"><value>L'export n'a pas pu être créé. Réessayez.</value></data>
   <data name="Language_French" xml:space="preserve"><value>Français</value></data>
   <data name="Language_English" xml:space="preserve"><value>English</value></data>
 

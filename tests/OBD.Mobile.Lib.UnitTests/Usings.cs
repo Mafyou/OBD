@@ -1,4 +1,7 @@
 global using System.Globalization;
+global using System.IO.Compression;
+global using System.Text;
+global using System.Text.Json;
 global using OBD.Mobile.Lib.Data;
 global using OBD.Mobile.Lib.Diagnostics;
 global using OBD.Mobile.Lib.Models;

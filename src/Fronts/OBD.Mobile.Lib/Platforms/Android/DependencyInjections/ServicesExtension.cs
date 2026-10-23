@@ -11,6 +11,7 @@ public static partial class ServicesExtension
             services.AddSingleton<ISectorService, SectorService>();
             services.AddSingleton<INoteLinkService, NoteLinkService>();
             services.AddSingleton<IWorkHabitsService, WorkHabitsService>();
+            services.AddSingleton<IDataExportService, DataExportService>();
             services.AddSingleton<IAppCrashStateService>(_ => new AppCrashStateService(FileSystem.AppDataDirectory));
             services.AddSingleton<ICrashReportMailer, CrashReportMailer>();
             services.AddSingleton<IShakeDetectionService, ShakeDetectionService>();
