@@ -86,9 +86,12 @@ public partial class ParametersViewModel(
             var folder = Path.Combine(FileSystem.CacheDirectory, "exports");
             if (Directory.Exists(folder))
                 Directory.Delete(folder, recursive: true);
-            Directory.CreateDirectory(folder);
+            // Each export in a folder of its own: on Android an app the previous archive was shared with keeps its
+            // read grant on that path, and would read a new archive written at the same place, sensitive notes included
+            var exportFolder = Path.Combine(folder, $"{Guid.NewGuid():N}");
+            Directory.CreateDirectory(exportFolder);
 
-            var path = Path.Combine(folder, $"OBD-{DateTime.Now:yyyy-MM-dd-HHmm}.zip");
+            var path = Path.Combine(exportFolder, $"OBD-{DateTime.Now:yyyy-MM-dd-HHmm}.zip");
             await using (var file = File.Create(path))
                 await dataExportService.WriteArchiveAsync(file, includeSensitive, stoppingToken);
 
