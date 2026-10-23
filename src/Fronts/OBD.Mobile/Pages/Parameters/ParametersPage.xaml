@@ -3,12 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:OBD.Mobile.ViewModels"
              xmlns:model="clr-namespace:OBD.Mobile.Lib.Models;assembly=OBD.Mobile.Lib"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:strings="clr-namespace:OBD.Mobile.Lib.Resources.Strings;assembly=OBD.Mobile.Lib"
              x:Class="OBD.Mobile.Pages.Parameters.ParametersPage"
              x:DataType="vm:ParametersViewModel"
              Title="{strings:Translate Shell_Parameters}"
              Shell.NavBarIsVisible="False"
              BackgroundColor="{StaticResource BackgroundPrimary}">
+
+    <ContentPage.Resources>
+        <toolkit:InvertedBoolConverter x:Key="InvertedBool" />
+    </ContentPage.Resources>
 
     <Grid RowDefinitions="Auto,*">
 
@@ -137,6 +142,44 @@
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>
                 </VerticalStackLayout>
+
+                <!-- My data -->
+                <Label Text="{strings:Translate Parameters_MyData}"
+                       FontFamily="GeistSemiBold"
+                       FontSize="18"
+                       TextColor="{StaticResource TextPrimary}"
+                       Margin="0,8,0,0" />
+
+                <Border BackgroundColor="{StaticResource BackgroundSurface}"
+                        StrokeThickness="0" Padding="16">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ExportDataCommand}" />
+                        </Grid.GestureRecognizers>
+                        <VerticalStackLayout Grid.Column="0" Spacing="2" VerticalOptions="Center">
+                            <Label Text="{strings:Translate Parameters_ExportData}"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   FontSize="14" />
+                            <Label Text="{strings:Translate Parameters_ExportDataDescription}"
+                                   TextColor="{StaticResource TextSecondary}"
+                                   FontSize="12" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="1"
+                               Text="&#xE2C4;"
+                               FontFamily="MaterialSymbols"
+                               TextColor="{StaticResource AccentPrimary}"
+                               FontSize="22"
+                               VerticalOptions="Center"
+                               IsVisible="{Binding ExportDataCommand.IsRunning, Converter={StaticResource InvertedBool}}" />
+                        <ActivityIndicator Grid.Column="1"
+                                           IsRunning="{Binding ExportDataCommand.IsRunning}"
+                                           IsVisible="{Binding ExportDataCommand.IsRunning}"
+                                           Color="{StaticResource AccentPrimary}"
+                                           WidthRequest="22"
+                                           HeightRequest="22" />
+                    </Grid>
+                </Border>
 
                 <!-- À propos -->
                 <Label Text="{strings:Translate Parameters_About}"

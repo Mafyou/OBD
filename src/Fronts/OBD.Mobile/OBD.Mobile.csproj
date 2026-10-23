@@ -34,8 +34,8 @@
 		<ApplicationId>fr.mafyou.obd</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>2.5</ApplicationDisplayVersion>
-		<ApplicationVersion>18</ApplicationVersion>
+		<ApplicationDisplayVersion>2.6</ApplicationDisplayVersion>
+		<ApplicationVersion>20</ApplicationVersion>
 
 		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
 		<WindowsPackageType>None</WindowsPackageType>

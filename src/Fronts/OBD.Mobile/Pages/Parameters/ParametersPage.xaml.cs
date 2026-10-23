@@ -11,7 +11,10 @@ public partial class ParametersPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        if (BindingContext is ParametersViewModel vm)
+
+        // The popups of the export make the page appear again when they close: reloading then would wipe
+        // the work habits being typed
+        if (BindingContext is ParametersViewModel vm && !vm.ExportDataCommand.IsRunning)
             vm.LoadCommand.Execute(null);
     }
 

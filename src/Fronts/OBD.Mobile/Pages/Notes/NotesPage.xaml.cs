@@ -22,22 +22,7 @@ public partial class NotesPage : ContentPage
 
     private async void OnSensitiveClicked(object? sender, EventArgs e)
     {
-        var isAvailable = await CrossFingerprint.Current.IsAvailableAsync();
-        if (!isAvailable)
-        {
-            await Dialogs.AlertAsync(
-                AppResources.GetString("Notes_NotAvailableTitle"),
-                AppResources.GetString("Notes_BiometricsUnavailableMessage"),
-                AppResources.GetString("Common_Ok"));
-            return;
-        }
-
-        var request = new AuthenticationRequestConfiguration(
-            AppResources.GetString("Notes_SensitiveAuthTitle"),
-            AppResources.GetString("Notes_SensitiveAuthReason"));
-        var result = await CrossFingerprint.Current.AuthenticateAsync(request);
-
-        if (result.Authenticated)
+        if (await SensitiveAccess.AuthenticateAsync())
             await Shell.Current.GoToAsync(nameof(SensitiveNotesPage));
     }
 }
