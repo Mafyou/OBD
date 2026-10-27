@@ -72,6 +72,20 @@ public class DataExportServiceTests
     }
 
     [Fact]
+    public async Task WriteArchiveAsync_ShouldKeepTheContent_WhenASketchHoldsNoValidImage()
+    {
+        var db = await TestDatabaseHelper.CreateCleanDatabaseContextAsync();
+        _ = await db.InsertAsync(new Note { Type = TypeNote.Sketch, Title = "Plan", Content = "not base64 !" });
+
+        var (export, archive) = await ExportAsync(db, includeSensitive: false);
+
+        var exported = export.Notes.ShouldHaveSingleItem();
+        exported.Content.ShouldBe("not base64 !");
+        exported.Image.ShouldBeNull();
+        archive.Entries.ShouldNotContain(e => e.FullName.StartsWith(DataExportService.ImageFolder));
+    }
+
+    [Fact]
     public async Task WriteArchiveAsync_ShouldLeaveOutSensitiveNotesAndTheirLinks_WhenNotIncluded()
     {
         var db = await TestDatabaseHelper.CreateCleanDatabaseContextAsync();
