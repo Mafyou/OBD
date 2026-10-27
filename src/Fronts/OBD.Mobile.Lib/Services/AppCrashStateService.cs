@@ -24,8 +24,13 @@ public class AppCrashStateService(string appDataDirectory) : IAppCrashStateServi
     public void RecordCrash(Exception exception, string source) =>
         TryIo(() => File.WriteAllText(LastCrashPath, BuildCrashDetails(exception, source)));
 
-    public string? GetLastCrashDetails() =>
-        File.Exists(LastCrashPath) ? File.ReadAllText(LastCrashPath) : null;
+    // Read at start-up: a file that cannot be read must not stop the app a second time
+    public string? GetLastCrashDetails()
+    {
+        string? details = null;
+        TryIo(() => details = File.Exists(LastCrashPath) ? File.ReadAllText(LastCrashPath) : null);
+        return details;
+    }
 
     public void ClearCrashData() => TryIo(() =>
     {

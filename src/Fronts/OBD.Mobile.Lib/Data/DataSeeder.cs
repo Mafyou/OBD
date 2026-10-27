@@ -2,22 +2,31 @@ namespace OBD.Mobile.Lib.Data;
 
 public class DataSeeder(DatabaseContext db)
 {
+    /// <summary>
+    /// Fills an empty notebook with an example team. All of it is written in one transaction: an app closed half-way
+    /// left a few sectors behind, and since the notebook was then no longer empty, the rest never came.
+    /// </summary>
     public async Task SeedAsync()
     {
-        var existing = await db.GetAllAsync<Sector>();
-        if (existing.Count > 0) return;
+        var sectorCount = await db.ExecuteScalarAsync<int>("SELECT COUNT(*) FROM Sector");
+        if (sectorCount > 0) return;
 
+        await db.RunInTransactionAsync(Seed);
+    }
+
+    private static void Seed(SQLiteConnection connection)
+    {
         var dev = new Sector { Name = "Développement" };
         var product = new Sector { Name = "Produit" };
         var design = new Sector { Name = "Design" };
         var management = new Sector { Name = "Management" };
         var rh = new Sector { Name = "RH" };
 
-        await db.InsertAsync(dev);
-        await db.InsertAsync(product);
-        await db.InsertAsync(design);
-        await db.InsertAsync(management);
-        await db.InsertAsync(rh);
+        connection.Insert(dev);
+        connection.Insert(product);
+        connection.Insert(design);
+        connection.Insert(management);
+        connection.Insert(rh);
 
         var sophie = new Person
         {
@@ -26,36 +35,36 @@ public class DataSeeder(DatabaseContext db)
             SectorId = management.Id,
             Memo = "Mon N+1. Réunion 1:1 tous les mardis à 10h."
         };
-        await db.InsertAsync(sophie);
-        await db.InsertAsync(new Person
+        connection.Insert(sophie);
+        connection.Insert(new Person
         {
             Name = "Thomas Dubois",
             Position = "Lead Développeur",
             SectorId = dev.Id,
             Memo = "Référent technique. Préfère les échanges en async sur Slack."
         });
-        await db.InsertAsync(new Person
+        connection.Insert(new Person
         {
             Name = "Léa Bernard",
             Position = "Product Owner",
             SectorId = product.Id,
             Memo = "Valider les specs avec elle avant tout dev."
         });
-        await db.InsertAsync(new Person
+        connection.Insert(new Person
         {
             Name = "Alice Dupont",
             Position = "Responsable RH",
             SectorId = rh.Id,
             Memo = "Gérer les questions RH et les congés."
         });
-        await db.InsertAsync(new Person
+        connection.Insert(new Person
         {
             Name = "Marc Leroy",
             Position = "Designer UX",
             SectorId = design.Id,
             Memo = "Figma pour tous les designs. Demander accès au projet OBD."
         });
-        await db.InsertAsync(new Person
+        connection.Insert(new Person
         {
             Name = "Julie Petit",
             Position = "Développeuse Senior",
@@ -63,7 +72,7 @@ public class DataSeeder(DatabaseContext db)
             Memo = "Experte CI/CD et infra. À contacter pour les questions de déploiement."
         });
 
-        await db.InsertAsync(new Note
+        connection.Insert(new Note
         {
             SectorId = dev.Id,
             Type = TypeNote.Text,
@@ -71,7 +80,7 @@ public class DataSeeder(DatabaseContext db)
             Keywords = "réunion,daily,9h30",
             CreatedAt = DateTime.UtcNow
         });
-        await db.InsertAsync(new Note
+        connection.Insert(new Note
         {
             SectorId = product.Id,
             Type = TypeNote.Text,
@@ -79,7 +88,7 @@ public class DataSeeder(DatabaseContext db)
             Keywords = "specs,confluence,validation",
             CreatedAt = DateTime.UtcNow
         });
-        await db.InsertAsync(new Note
+        connection.Insert(new Note
         {
             SectorId = design.Id,
             Type = TypeNote.Text,
@@ -87,7 +96,7 @@ public class DataSeeder(DatabaseContext db)
             Keywords = "figma,design system,accès",
             CreatedAt = DateTime.UtcNow
         });
-        await db.InsertAsync(new Note
+        connection.Insert(new Note
         {
             SectorId = management.Id,
             Type = TypeNote.Text,
@@ -96,45 +105,11 @@ public class DataSeeder(DatabaseContext db)
             CreatedAt = DateTime.UtcNow
         });
 
-        await db.InsertAsync(new WorkHabits
+        connection.Insert(new WorkHabits
         {
             RegularMeetings = "Daily 9h30 · Rétro vendredi 16h · 1:1 mardi 10h",
             RemoteWorkDays = "Lundi et vendredi",
             ManagerId = sophie.Id
-        });
-    }
-
-    public async Task SeedIfEmptyAsync()
-    {
-        var existing = await db.GetAllAsync<Sector>();
-        if (existing.Count > 0) return;
-
-        var product = new Sector { Name = "Produit" };
-
-        await db.InsertAsync(product);
-
-        var john = new Person
-        {
-            Name = "John Doe",
-            Position = "Product Owner",
-            SectorId = product.Id,
-            Memo = "Valider les specs avec lui avant tout dev."
-        };
-        await db.InsertAsync(john);
-        await db.InsertAsync(new Note
-        {
-            SectorId = product.Id,
-            Type = TypeNote.Text,
-            Content = "Une fois les specs sont rédigées. Toujours valider avec John avant de commencer un ticket.",
-            Keywords = "specs,validation",
-            CreatedAt = DateTime.UtcNow
-        });
-
-        await db.InsertAsync(new WorkHabits
-        {
-            RegularMeetings = "Daily 9h30 · Rétro vendredi 16h · 1:1 mardi 10h",
-            RemoteWorkDays = "Lundi et vendredi",
-            ManagerId = john.Id
         });
     }
 }

@@ -7,13 +7,16 @@ public class PersonService(DatabaseContext db) : IPersonService
     public Task<Person?> GetAsync(int id) => db.GetAsync<Person>(id);
 
     public Task<IReadOnlyList<Person>> SearchAsync(string query)
-        => db.QueryAsync<Person>(
-            "SELECT * FROM Person WHERE Name LIKE ? OR Position LIKE ? OR Memo LIKE ?",
-            $"%{query}%", $"%{query}%", $"%{query}%");
+    {
+        var pattern = SqlLike.Contains(query);
+        return db.QueryAsync<Person>(
+            $"SELECT * FROM Person WHERE Name LIKE ? {SqlLike.EscapeClause} OR Position LIKE ? {SqlLike.EscapeClause} OR Memo LIKE ? {SqlLike.EscapeClause}",
+            pattern, pattern, pattern);
+    }
 
-    public Task<int> InsertAsync(Person personne) => db.InsertAsync(personne);
+    public Task<int> InsertAsync(Person person) => db.InsertAsync(person);
 
-    public Task<int> UpdateAsync(Person personne) => db.UpdateAsync(personne);
+    public Task<int> UpdateAsync(Person person) => db.UpdateAsync(person);
 
-    public Task<int> DeleteAsync(Person personne) => db.DeleteAsync(personne);
+    public Task<int> DeleteAsync(Person person) => db.DeleteAsync(person);
 }

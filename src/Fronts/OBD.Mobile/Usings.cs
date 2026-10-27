@@ -16,6 +16,7 @@ global using OBD.Mobile.Lib.Resources.Strings;
 global using OBD.Mobile.Lib.Services;
 global using OBD.Mobile.Lib.Support;
 global using OBD.Mobile.Lib.Text;
+global using OBD.Mobile.Lib.Threading;
 global using OBD.Mobile.Pages.Diagnostics;
 global using OBD.Mobile.Pages.Notes;
 global using OBD.Mobile.Pages.Onboarding;

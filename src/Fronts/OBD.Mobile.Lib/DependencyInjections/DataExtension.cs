@@ -1,6 +1,6 @@
-﻿namespace OBD.Mobile.Lib.DependencyInjections;
+namespace OBD.Mobile.Lib.DependencyInjections;
 
-public static partial class DataExtension
+public static class DataExtension
 {
     extension(IServiceCollection services)
     {
@@ -8,6 +8,7 @@ public static partial class DataExtension
         {
             var dbPath = Path.Combine(FileSystem.AppDataDirectory, "obd.db3");
             services.AddSingleton(_ => new DatabaseContext(dbPath));
+            services.AddTransient<DataSeeder>();
         }
     }
 }

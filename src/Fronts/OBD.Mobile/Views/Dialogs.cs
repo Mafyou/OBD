@@ -22,6 +22,12 @@ public static class Dialogs
         await Host.ShowPopupAsync(new MessagePopup(title, message, accept), Options);
 
     /// <summary>
+    /// Shows a <see cref="ConfirmPopup"/>: its result is true on "Confirm", and says whether the user tapped outside instead.
+    /// </summary>
+    public static async Task<IPopupResult<bool>> ConfirmAsync(ConfirmPopup popup) =>
+        await Host.ShowPopupAsync<bool>(popup, Options);
+
+    /// <summary>
     /// Returns the label of the chosen action, or null when the user cancelled.
     /// </summary>
     public static async Task<string?> ChooseAsync(string title, string cancel, string? destruction, params string[] choices)

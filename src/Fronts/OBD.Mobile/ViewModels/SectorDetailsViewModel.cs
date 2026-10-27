@@ -1,7 +1,7 @@
 namespace OBD.Mobile.ViewModels;
 
 [QueryProperty(nameof(SectorId), "id")]
-public partial class SectorDetailsViewModel(ISectorService secteurService) : ObservableObject
+public partial class SectorDetailsViewModel(ISectorService sectorService) : ObservableObject
 {
     [ObservableProperty]
     public partial Sector Sector { get; set; } = new();
@@ -38,7 +38,7 @@ public partial class SectorDetailsViewModel(ISectorService secteurService) : Obs
         }
         else
         {
-            Sector = await secteurService.GetAsync(id) ?? new Sector();
+            Sector = await sectorService.GetAsync(id) ?? new Sector();
             IsNew = false;
             PageTitle = Sector.Name;
         }
@@ -51,9 +51,9 @@ public partial class SectorDetailsViewModel(ISectorService secteurService) : Obs
             return;
 
         if (IsNew)
-            await secteurService.InsertAsync(Sector);
+            await sectorService.InsertAsync(Sector);
         else
-            await secteurService.UpdateAsync(Sector);
+            await sectorService.UpdateAsync(Sector);
 
         await Shell.Current.GoToAsync("..");
     }
@@ -61,7 +61,7 @@ public partial class SectorDetailsViewModel(ISectorService secteurService) : Obs
     [RelayCommand]
     private async Task DeleteAsync(CancellationToken stoppingToken)
     {
-        await secteurService.DeleteAsync(Sector);
+        await sectorService.DeleteAsync(Sector);
         await Shell.Current.GoToAsync("..");
     }
 }

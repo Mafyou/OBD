@@ -74,12 +74,7 @@ public partial class SketchDetailsPage : ContentPage
         var popup = new ConfirmPopup(
             AppResources.GetString("SketchDetail_DiscardTitle"),
             AppResources.GetString("SketchDetail_DiscardMessage"));
-        var result = await App.Current!.Windows[0].Page!.ShowPopupAsync<bool>(popup, new PopupOptions
-        {
-            CanBeDismissedByTappingOutsideOfPopup = true,
-            Shadow = null,
-            Shape = null,
-        });
+        var result = await Dialogs.ConfirmAsync(popup);
         if (result.WasDismissedByTappingOutsideOfPopup)
             return;
         if (result.Result is true)
@@ -97,12 +92,7 @@ public partial class SketchDetailsPage : ContentPage
             var popup = new ConfirmPopup(
                 AppResources.GetString("SketchDetail_ClearDrawingTitle"),
                 AppResources.GetString("SketchDetail_ClearDrawingMessage"));
-            var result = await App.Current!.Windows[0].Page!.ShowPopupAsync<bool>(popup, new PopupOptions
-            {
-                CanBeDismissedByTappingOutsideOfPopup = true,
-                Shadow = null,
-                Shape = null,
-            });
+            var result = await Dialogs.ConfirmAsync(popup);
             if (result.Result is true)
                 DrawingCanvas.Lines.Clear();
             else
@@ -114,12 +104,7 @@ public partial class SketchDetailsPage : ContentPage
                 AppResources.GetString("SketchDetail_ClearBackgroundTitle"),
                 AppResources.GetString("SketchDetail_ClearBackgroundMessage"),
                 isDanger: true);
-            var result = await App.Current!.Windows[0].Page!.ShowPopupAsync<bool>(popup, new PopupOptions
-            {
-                CanBeDismissedByTappingOutsideOfPopup = true,
-                Shadow = null,
-                Shape = null,
-            });
+            var result = await Dialogs.ConfirmAsync(popup);
             if (result.Result is true)
             {
                 _vm.CurrentImage = null;
@@ -137,12 +122,7 @@ public partial class SketchDetailsPage : ContentPage
             AppResources.GetString("Common_IrreversibleAction"),
             confirmText: AppResources.GetString("Common_Delete"),
             isDanger: true);
-        var result = await App.Current!.Windows[0].Page!.ShowPopupAsync<bool>(popup, new PopupOptions
-        {
-            CanBeDismissedByTappingOutsideOfPopup = true,
-            Shadow = null,
-            Shape = null,
-        });
+        var result = await Dialogs.ConfirmAsync(popup);
         if (result.Result is true && _vm.DeleteCommand is IAsyncRelayCommand asyncCmd)
             await asyncCmd.ExecuteAsync(null);
     }

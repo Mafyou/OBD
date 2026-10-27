@@ -1,4 +1,4 @@
-namespace OBD.Mobile.Lib.Services;
+namespace OBD.Mobile.Lib.Abstractions;
 
 public interface IWorkHabitsService
 {

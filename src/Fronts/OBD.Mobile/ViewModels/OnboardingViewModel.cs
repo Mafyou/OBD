@@ -1,6 +1,6 @@
 namespace OBD.Mobile.ViewModels;
 
-public partial class OnboardingViewModel(DatabaseContext db) : ObservableObject
+public partial class OnboardingViewModel(DataSeeder dataSeeder) : ObservableObject
 {
     public const string OnboardingCompletedKey = "onboarding_completed";
 
@@ -9,7 +9,7 @@ public partial class OnboardingViewModel(DatabaseContext db) : ObservableObject
     [RelayCommand]
     private async Task ChoosePrefilledAsync(CancellationToken stoppingToken)
     {
-        await new DataSeeder(db).SeedAsync();
+        await dataSeeder.SeedAsync();
         Complete();
     }
 

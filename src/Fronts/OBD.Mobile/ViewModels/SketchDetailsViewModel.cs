@@ -26,7 +26,7 @@ public partial class SketchDetailsViewModel(INoteService noteService) : Observab
     public bool CanClear => HasBackground;
 
     [ObservableProperty]
-    public partial Color LineColor { get; set; } = Colors.White;
+    public partial Color LineColor { get; set; } = AppColors.Get("ColorWhite", Colors.White);
 
     [ObservableProperty]
     public partial string SelectedColorName { get; set; } = "White";
@@ -37,9 +37,9 @@ public partial class SketchDetailsViewModel(INoteService noteService) : Observab
         SelectedColorName = colorName;
         LineColor = colorName switch
         {
-            "Green" => Color.FromArgb("#10B981"),
-            "Red" => Color.FromArgb("#EF4444"),
-            _ => Colors.White,
+            "Green" => AppColors.Get("AccentPrimary", Colors.White),
+            "Red" => AppColors.Get("DangerColor", Colors.White),
+            _ => AppColors.Get("ColorWhite", Colors.White),
         };
     }
 
@@ -111,7 +111,7 @@ public partial class SketchDetailsViewModel(INoteService noteService) : Observab
         {
             using var mem = new MemoryStream();
             await imageStream.CopyToAsync(mem);
-            Note.Content = Convert.ToBase64String(mem.ToArray());
+            Note.Content = Convert.ToBase64String(mem.GetBuffer().AsSpan(0, (int)mem.Length));
         }
         else if (clearImage)
         {

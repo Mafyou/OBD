@@ -28,6 +28,16 @@ public class DataExportServiceTests
     }
 
     [Fact]
+    public async Task HasSensitiveNotesAsync_ShouldBeFalse_WhenTheNotebookIsEmpty()
+    {
+        var db = await TestDatabaseHelper.CreateCleanDatabaseContextAsync();
+
+        var result = await new DataExportService(db).HasSensitiveNotesAsync();
+
+        result.ShouldBeFalse();
+    }
+
+    [Fact]
     public async Task WriteArchiveAsync_ShouldExportEveryRecord()
     {
         var db = await TestDatabaseHelper.CreateCleanDatabaseContextAsync();

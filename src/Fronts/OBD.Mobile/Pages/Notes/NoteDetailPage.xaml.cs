@@ -4,8 +4,8 @@ public partial class NoteDetailPage : ContentPage
 {
     private readonly NoteDetailViewModel _vm;
 
-    private static Color AccentColor => (Color)Application.Current!.Resources["AccentPrimary"];
-    private static Color TextColor => (Color)Application.Current!.Resources["TextPrimary"];
+    private static Color AccentColor => AppColors.Get("AccentPrimary", Colors.White);
+    private static Color TextColor => AppColors.Get("TextPrimary", Colors.White);
 
     public NoteDetailPage(NoteDetailViewModel vm)
     {
@@ -44,12 +44,7 @@ public partial class NoteDetailPage : ContentPage
             AppResources.GetString("Common_IrreversibleAction"),
             confirmText: AppResources.GetString("Common_Delete"),
             isDanger: true);
-        var result = await App.Current!.Windows[0].Page!.ShowPopupAsync<bool>(popup, new PopupOptions
-        {
-            CanBeDismissedByTappingOutsideOfPopup = true,
-            Shadow = null,
-            Shape = null,
-        });
+        var result = await Dialogs.ConfirmAsync(popup);
         if (result.WasDismissedByTappingOutsideOfPopup)
             return;
         if (result.Result is true && _vm.DeleteCommand is IAsyncRelayCommand asyncCmd)
@@ -68,9 +63,8 @@ public partial class NoteDetailPage : ContentPage
             return;
         }
 
-        var linksMap = _vm.Links.ToDictionary(
-            l => l.Word.ToLower(),
-            StringComparer.OrdinalIgnoreCase);
+        // A set, not a dictionary: two links on the same word (a double tap) made ToDictionary throw and closed the app
+        var linkedWords = _vm.Links.Select(l => l.Word).ToHashSet(StringComparer.OrdinalIgnoreCase);
 
         var parts = HashtagParser.Split(content);
         var fs = new FormattedString();
@@ -81,7 +75,7 @@ public partial class NoteDetailPage : ContentPage
 
             if (HashtagParser.TryGetWord(part, out var word))
             {
-                var isLinked = linksMap.ContainsKey(word);
+                var isLinked = linkedWords.Contains(word);
                 var span = new Span
                 {
                     Text = part,

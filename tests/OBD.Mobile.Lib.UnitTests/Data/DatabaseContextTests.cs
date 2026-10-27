@@ -77,4 +77,31 @@ public class DatabaseContextTests
         visibleNotes.Count.ShouldBe(1);
         visibleNotes[0].Content.ShouldBe("Visible");
     }
+
+    [Fact]
+    public async Task FirstQueries_ShouldShareOneConnection_WhenStartedTogether()
+    {
+        var db = new DatabaseContext(Path.Combine(Path.GetTempPath(), $"obd-tests-{Guid.NewGuid():N}.db3"));
+
+        var queries = Enumerable.Range(0, 8).Select(_ => db.GetAllAsync<Note>()).ToArray();
+        await Task.WhenAll(queries);
+        _ = await db.InsertAsync(new Sector { Name = "Ops" });
+
+        queries.ShouldAllBe(q => q.Result.Count == 0);
+        (await db.GetAllAsync<Sector>()).ShouldHaveSingleItem().Name.ShouldBe("Ops");
+    }
+
+    [Fact]
+    public async Task RunInTransactionAsync_ShouldWriteNothing_WhenTheWorkThrows()
+    {
+        var db = await TestDatabaseHelper.CreateCleanDatabaseContextAsync();
+
+        await Should.ThrowAsync<InvalidOperationException>(() => db.RunInTransactionAsync(connection =>
+        {
+            connection.Insert(new Sector { Name = "Half-way" });
+            throw new InvalidOperationException("Closed half-way");
+        }));
+
+        (await db.GetAllAsync<Sector>()).ShouldBeEmpty();
+    }
 }
