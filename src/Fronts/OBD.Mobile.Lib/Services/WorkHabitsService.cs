@@ -2,10 +2,11 @@ namespace OBD.Mobile.Lib.Services;
 
 public class WorkHabitsService(DatabaseContext db) : IWorkHabitsService
 {
+    // The notebook keeps a single row of work habits
     public async Task<WorkHabits?> GetAsync()
     {
-        var all = await db.GetAllAsync<WorkHabits>();
-        return all.FirstOrDefault();
+        var first = await db.QueryAsync<WorkHabits>("SELECT * FROM WorkHabits ORDER BY Id LIMIT 1");
+        return first.Count > 0 ? first[0] : null;
     }
 
     public async Task SaveAsync(WorkHabits workHabits)

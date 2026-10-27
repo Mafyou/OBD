@@ -1,7 +1,7 @@
 namespace OBD.Mobile.ViewModels;
 
 [QueryProperty(nameof(PersonId), "id")]
-public partial class PersonDetailsViewModel(IPersonService personneService, ISectorService secteurService) : ObservableObject
+public partial class PersonDetailsViewModel(IPersonService personService, ISectorService sectorService) : ObservableObject
 {
     [ObservableProperty]
     public partial Person Person { get; set; } = new();
@@ -39,8 +39,8 @@ public partial class PersonDetailsViewModel(IPersonService personneService, ISec
 
     private async Task LoadAsync(int id)
     {
-        var secteurs = await secteurService.GetAllAsync();
-        Sectors = new ObservableCollection<Sector>(secteurs);
+        var sectors = await sectorService.GetAllAsync();
+        Sectors = new ObservableCollection<Sector>(sectors);
         HasNoSectors = Sectors.Count == 0;
 
         if (id is 0)
@@ -51,7 +51,7 @@ public partial class PersonDetailsViewModel(IPersonService personneService, ISec
         }
         else
         {
-            Person = await personneService.GetAsync(id) ?? new Person();
+            Person = await personService.GetAsync(id) ?? new Person();
             IsNew = false;
             PageTitle = Person.Name;
             SelectedSector = Sectors.FirstOrDefault(s => s.Id == Person.SectorId);
@@ -68,9 +68,9 @@ public partial class PersonDetailsViewModel(IPersonService personneService, ISec
             Person.SectorId = SelectedSector.Id;
 
         if (IsNew)
-            await personneService.InsertAsync(Person);
+            await personService.InsertAsync(Person);
         else
-            await personneService.UpdateAsync(Person);
+            await personService.UpdateAsync(Person);
 
         await Shell.Current.GoToAsync("..");
     }
@@ -78,7 +78,7 @@ public partial class PersonDetailsViewModel(IPersonService personneService, ISec
     [RelayCommand]
     private async Task DeleteAsync(CancellationToken stoppingToken)
     {
-        await personneService.DeleteAsync(Person);
+        await personService.DeleteAsync(Person);
         await Shell.Current.GoToAsync("..");
     }
 }

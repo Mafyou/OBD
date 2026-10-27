@@ -21,12 +21,7 @@ public partial class PersonDetailsPage : ContentPage
             AppResources.GetString("Common_IrreversibleAction"),
             confirmText: AppResources.GetString("Common_Delete"),
             isDanger: true);
-        var result = await App.Current!.Windows[0].Page!.ShowPopupAsync<bool>(popup, new PopupOptions
-        {
-            CanBeDismissedByTappingOutsideOfPopup = true,
-            Shadow = null,
-            Shape = null,
-        });
+        var result = await Dialogs.ConfirmAsync(popup);
         if (result.Result is true && _vm.DeleteCommand is IAsyncRelayCommand asyncCmd)
             await asyncCmd.ExecuteAsync(null);
     }

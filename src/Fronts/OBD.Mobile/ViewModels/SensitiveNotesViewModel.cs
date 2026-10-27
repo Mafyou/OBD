@@ -8,22 +8,24 @@ public partial class SensitiveNotesViewModel(INoteService noteService) : Observa
     [RelayCommand]
     public async Task LoadAsync(CancellationToken stoppingToken)
     {
-        var list = await noteService.GetSensiblesAsync();
-        Notes = new ObservableCollection<Note>(list);
+        var list = await noteService.GetSensitiveAsync();
+        Notes = [.. list];
     }
 
     [RelayCommand]
     private async Task OpenNoteDetailAsync(Note note)
     {
-        var route = note.Type == TypeNote.Sketch ? nameof(SketchDetailsPage) : nameof(NoteDetailPage);
+        // As everywhere else: anything but a text opens in the sketch page (a photo showed its base64 as text)
+        var route = note.Type is TypeNote.Text ? nameof(NoteDetailPage) : nameof(SketchDetailsPage);
         await Shell.Current.GoToAsync($"{route}?noteid={note.Id}&sectorid={note.SectorId}");
     }
 
     [RelayCommand]
     private async Task UnmarkSensitiveAsync(Note note, CancellationToken stoppingToken)
     {
+        // Only the flag: a note of the list is read without the image of a sketch, and saving it whole would erase it
+        await noteService.SetSensitiveAsync(note.Id, isSensitive: false);
         note.IsSensitive = false;
-        await noteService.UpdateAsync(note);
         Notes.Remove(note);
     }
 }

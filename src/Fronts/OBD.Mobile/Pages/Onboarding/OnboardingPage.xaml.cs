@@ -12,7 +12,7 @@ public partial class OnboardingPage : ContentPage
     // Root page until the onboarding is done: Back would leave the app.
     protected override bool OnBackButtonPressed() => DoubleBackToExit.Handle();
 
-    private async void OnCompleted()
+    private void OnCompleted()
     {
         if (Application.Current is null) return;
         Application.Current.Windows[0].Page = IPlatformApplication.Current!.Services.GetRequiredService<AppShell>();

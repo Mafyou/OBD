@@ -1,6 +1,6 @@
 namespace OBD.Mobile.ViewModels;
 
-public partial class NotesViewModel(ISectorService secteurService) : ObservableObject
+public partial class NotesViewModel(ISectorService sectorService) : ObservableObject
 {
     [ObservableProperty]
     public partial ObservableCollection<Sector> Sectors { get; set; } = [];
@@ -12,12 +12,12 @@ public partial class NotesViewModel(ISectorService secteurService) : ObservableO
     private async Task LoadSectorsAsync(CancellationToken stoppingToken)
     {
         IsLoading = true;
-        var list = await secteurService.GetAllAsync();
+        var list = await sectorService.GetAllAsync();
         Sectors = new ObservableCollection<Sector>(list);
         IsLoading = false;
     }
 
     [RelayCommand]
-    private static async Task OpenSectorAsync(Sector secteur)
-        => await Shell.Current.GoToAsync($"{nameof(NotesSectorPage)}?sectorid={secteur.Id}");
+    private static async Task OpenSectorAsync(Sector sector)
+        => await Shell.Current.GoToAsync($"{nameof(NotesSectorPage)}?sectorid={sector.Id}");
 }

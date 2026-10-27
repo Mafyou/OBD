@@ -28,6 +28,16 @@ public class DataExportServiceTests
     }
 
     [Fact]
+    public async Task HasSensitiveNotesAsync_ShouldBeFalse_WhenTheNotebookIsEmpty()
+    {
+        var db = await TestDatabaseHelper.CreateCleanDatabaseContextAsync();
+
+        var result = await new DataExportService(db).HasSensitiveNotesAsync();
+
+        result.ShouldBeFalse();
+    }
+
+    [Fact]
     public async Task WriteArchiveAsync_ShouldExportEveryRecord()
     {
         var db = await TestDatabaseHelper.CreateCleanDatabaseContextAsync();
@@ -59,6 +69,20 @@ public class DataExportServiceTests
         using var copy = new MemoryStream();
         await image.CopyToAsync(copy, TestContext.Current.CancellationToken);
         copy.ToArray().ShouldBe(PngBytes);
+    }
+
+    [Fact]
+    public async Task WriteArchiveAsync_ShouldKeepTheContent_WhenASketchHoldsNoValidImage()
+    {
+        var db = await TestDatabaseHelper.CreateCleanDatabaseContextAsync();
+        _ = await db.InsertAsync(new Note { Type = TypeNote.Sketch, Title = "Plan", Content = "not base64 !" });
+
+        var (export, archive) = await ExportAsync(db, includeSensitive: false);
+
+        var exported = export.Notes.ShouldHaveSingleItem();
+        exported.Content.ShouldBe("not base64 !");
+        exported.Image.ShouldBeNull();
+        archive.Entries.ShouldNotContain(e => e.FullName.StartsWith(DataExportService.ImageFolder));
     }
 
     [Fact]

@@ -86,10 +86,8 @@ public partial class NoteDetailViewModel(INoteService noteService, INoteLinkServ
     private async Task RefreshLinksAsync()
     {
         var rawLinks = await noteLinkService.GetByNoteAsync(Note.Id);
-        var allNotes = await noteService.GetAllAsync();
-        var visualMap = allNotes
-            .Where(n => n.Type != TypeNote.Text)
-            .ToDictionary(n => n.Id);
+        // Titles only: reading every note brought the image of each sketch along
+        var visualMap = (await noteService.GetVisualsAsync()).ToDictionary(n => n.Id);
 
         foreach (var link in rawLinks)
             link.LinkedTitle = visualMap.TryGetValue(link.SketchId, out var s) ? s.DisplayText : AppResources.GetString("NoteDetail_DefaultVisualName");
@@ -143,10 +141,9 @@ public partial class NoteDetailViewModel(INoteService noteService, INoteLinkServ
             return;
         }
 
-        var allNotes = await noteService.GetAllAsync();
-        var visuals = allNotes.Where(n => n.Type != TypeNote.Text).ToList();
+        var visuals = await noteService.GetVisualsAsync();
 
-        if (visuals.Count == 0)
+        if (visuals.Count is 0)
         {
             await Dialogs.AlertAsync(
                 AppResources.GetString("NoteDetail_NoVisualTitle"),

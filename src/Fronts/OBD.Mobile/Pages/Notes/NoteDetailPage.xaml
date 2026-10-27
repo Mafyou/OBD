@@ -49,10 +49,11 @@
                            Margin="4,4,0,0"
                            IsVisible="{Binding HasLinks}" />
 
-                    <CollectionView ItemsSource="{Binding Links}"
-                                    IsVisible="{Binding HasLinks}"
-                                    HeightRequest="160">
-                        <CollectionView.ItemTemplate>
+                    <!-- A plain layout, not a CollectionView: inside this ScrollView a list scrolled in a box of its own,
+                         160 units high, within the page that scrolls too -->
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Links}"
+                                         IsVisible="{Binding HasLinks}">
+                        <BindableLayout.ItemTemplate>
                             <DataTemplate x:DataType="models:NoteLink">
                                 <Border Margin="0,3"
                                         BackgroundColor="{StaticResource BackgroundSurface}"
@@ -90,8 +91,8 @@
                                     </Grid>
                                 </Border>
                             </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
 
                     <Label Text="{strings:Translate NoteDetail_HashtagHint}"
                            TextColor="{StaticResource TextSecondary}"

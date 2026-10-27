@@ -9,8 +9,7 @@ public static class CrashExceptionFilter
 {
     public static bool ShouldIgnore(Exception exception) => exception switch
     {
-        TaskCanceledException => true,
-        OperationCanceledException => true,
+        OperationCanceledException => true, // TaskCanceledException among them
         HttpRequestException => true,
         IOException => true,
         TimeoutException => true,

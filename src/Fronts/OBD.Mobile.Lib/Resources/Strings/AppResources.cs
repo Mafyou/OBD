@@ -16,6 +16,6 @@ public static class AppResources
 
     public static string GetString(string name) => resourceManager.GetString(name, Culture) ?? name;
 
-    public static string GetString(string name, params object[] args) =>
+    public static string GetString(string name, params ReadOnlySpan<object?> args) =>
         string.Format(Culture, GetString(name), args);
 }

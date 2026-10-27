@@ -1,9 +1,9 @@
 namespace OBD.Mobile.ViewModels;
 
 public partial class ParametersViewModel(
-    ISectorService secteurService,
+    ISectorService sectorService,
     IWorkHabitsService workHabitsService,
-    IPersonService personneService,
+    IPersonService personService,
     IDataExportService dataExportService) : ObservableObject
 {
     [ObservableProperty]
@@ -33,10 +33,10 @@ public partial class ParametersViewModel(
     private async Task LoadAsync(CancellationToken stoppingToken)
     {
         IsLoading = true;
-        var secteursList = await secteurService.GetAllAsync();
-        Sectors = new ObservableCollection<Sector>(secteursList);
+        var sectorList = await sectorService.GetAllAsync();
+        Sectors = new ObservableCollection<Sector>(sectorList);
 
-        var personsList = await personneService.GetAllAsync();
+        var personsList = await personService.GetAllAsync();
         Persons = new ObservableCollection<Person>(personsList);
 
         WorkHabits = await workHabitsService.GetAsync() ?? new WorkHabits();
@@ -46,9 +46,9 @@ public partial class ParametersViewModel(
     }
 
     [RelayCommand]
-    private static async Task OpenSectorDetailAsync(Sector? secteur)
+    private static async Task OpenSectorDetailAsync(Sector? sector)
     {
-        int id = secteur?.Id ?? 0;
+        int id = sector?.Id ?? 0;
         await Shell.Current.GoToAsync($"{nameof(SectorDetailsPage)}?id={id}");
     }
 
@@ -82,18 +82,26 @@ public partial class ParametersViewModel(
 
         try
         {
-            // One archive at a time in the cache: the previous one, sensitive notes included, does not stay behind
-            var folder = Path.Combine(FileSystem.CacheDirectory, "exports");
-            if (Directory.Exists(folder))
-                Directory.Delete(folder, recursive: true);
-            // Each export in a folder of its own: on Android an app the previous archive was shared with keeps its
-            // read grant on that path, and would read a new archive written at the same place, sensitive notes included
-            var exportFolder = Path.Combine(folder, $"{Guid.NewGuid():N}");
-            Directory.CreateDirectory(exportFolder);
+            var cacheDirectory = FileSystem.CacheDirectory;
+            var fileName = $"OBD-{DateTime.Now:yyyy-MM-dd-HHmm}.zip";
 
-            var path = Path.Combine(exportFolder, $"OBD-{DateTime.Now:yyyy-MM-dd-HHmm}.zip");
-            await using (var file = File.Create(path))
-                await dataExportService.WriteArchiveAsync(file, includeSensitive, stoppingToken);
+            // Files and compression off the main thread: a notebook full of sketches froze the screen meanwhile
+            var path = await Task.Run(async () =>
+            {
+                // One archive at a time in the cache: the previous one, sensitive notes included, does not stay behind
+                var folder = Path.Combine(cacheDirectory, "exports");
+                if (Directory.Exists(folder))
+                    Directory.Delete(folder, recursive: true);
+                // Each export in a folder of its own: on Android an app the previous archive was shared with keeps its
+                // read grant on that path, and would read a new archive written at the same place, sensitive notes included
+                var exportFolder = Path.Combine(folder, $"{Guid.NewGuid():N}");
+                Directory.CreateDirectory(exportFolder);
+
+                var archivePath = Path.Combine(exportFolder, fileName);
+                await using (var file = File.Create(archivePath))
+                    await dataExportService.WriteArchiveAsync(file, includeSensitive, stoppingToken);
+                return archivePath;
+            }, stoppingToken);
 
             await Share.Default.RequestAsync(new ShareFileRequest(
                 AppResources.GetString("Export_ShareTitle"),
