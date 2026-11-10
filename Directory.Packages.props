@@ -1,0 +1,28 @@
+<Project>
+
+	<!-- Versions of every NuGet package used by the projects of the repository: csproj files reference
+	     packages without a version. -->
+	<PropertyGroup>
+		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+		<!-- The versions below also apply to the packages that only come transitively -->
+		<CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageVersion Include="CommunityToolkit.Maui" Version="16.0.0" />
+		<PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+		<PackageVersion Include="coverlet.collector" Version="10.1.0" />
+		<PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="11.0.0-rc.3.26522.148" />
+		<PackageVersion Include="Microsoft.Maui.Controls" Version="11.0.0-rc.2.26505.5" />
+		<PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
+		<PackageVersion Include="Moq" Version="4.21.0" />
+		<PackageVersion Include="Plugin.Fingerprint" Version="3.0.0-beta.1" />
+		<PackageVersion Include="Shouldly" Version="4.3.0" />
+		<PackageVersion Include="sqlite-net-pcl" Version="1.11.285" />
+		<!-- SQLitePCLRaw 3 has no bundle_green; its SQLite is no longer the vulnerable one of GHSA-2m69-gcr7-jv3q (NU1903) -->
+		<PackageVersion Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.5" />
+		<PackageVersion Include="xunit.runner.visualstudio" Version="4.0.1" />
+		<PackageVersion Include="xunit.v3" Version="4.0.3" />
+	</ItemGroup>
+
+</Project>

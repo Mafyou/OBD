@@ -205,9 +205,9 @@ Cette application n'essaie pas de remplacer les outils internes de l'entreprise.
 
 ## Technique
 
-- **.NET 11 MAUI** (SDK `11.0.100-rc.1.26425.128`, `Microsoft.Maui.Controls` 11.0.0-rc.1.26451.6) — `net11.0-android` (API 24 minimum) et `net11.0-ios` (iOS 15 minimum).
+- **.NET 11 MAUI** (SDK `11.0.100-rc.3.26522.148`, `Microsoft.Maui.Controls` 11.0.0-rc.2.26505.5 ; propriétés communes dans `Directory.Build.props`, versions des paquets dans `Directory.Packages.props`) — `net11.0-android` (API 24 minimum) et `net11.0-ios` (iOS 15 minimum).
 - **CommunityToolkit.Mvvm 8.4.2** — `[ObservableProperty]`, `[RelayCommand]`, source generators AOT-friendly.
-- **CommunityToolkit.Maui 15.0.1** — `DrawingView` pour les croquis, `TouchBehavior` pour les appuis longs, popups et Toast.
+- **CommunityToolkit.Maui 16.0.0** — `DrawingView` pour les croquis, `TouchBehavior` pour les appuis longs, popups et Toast.
 - **sqlite-net-pcl 1.11.285** et **SQLitePCLRaw.bundle_e_sqlite3 3.0.5** — stockage local, migration automatique des colonnes.
 - **Plugin.Fingerprint 3.0.0-beta.1** — authentification biométrique (empreinte / Face ID).
 - **Material Symbols Outlined** — icônes via font intégrée.

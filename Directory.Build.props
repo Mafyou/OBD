@@ -1,0 +1,22 @@
+<Project>
+
+	<!-- Properties shared by every project of the repository (.NET 11 / C# 15) -->
+	<PropertyGroup>
+		<!-- The .NET of every project: the csproj files build their TargetFramework(s) from it -->
+		<NetTargetFramework>net11.0</NetTargetFramework>
+
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<LangVersion>preview</LangVersion>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
+		<!-- API 24 minimum (.NET 11) -->
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">24.0</SupportedOSPlatformVersion>
+
+		<!-- AndroidX transitive packages resolve to newer, compatible versions than their declared
+		     constraints; unconditional so it also applies during cross-TFM restore.
+		     1701;1702 are the SDK defaults, which it only adds when NoWarn is still empty. -->
+		<NoWarn>$(NoWarn);1701;1702;NU1608</NoWarn>
+	</PropertyGroup>
+
+</Project>
