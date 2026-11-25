@@ -18,6 +18,19 @@
     <Color x:Key="WarningOnColor">#1A1A1A</Color>
     <Color x:Key="ColorWhite">#FFFFFF</Color>
 
+    <!-- Launch splash (Views/BrandSplash.cs), read by BrandSplashView: the layout of every Mafyou IT app, in the
+         colours of OBD. Background = BackgroundPrimary (also the system splash colour), name = TextPrimary,
+         signature and Skip = TextSecondary, frame around the name and progress line = AccentPrimary.
+         The app runs dark only and its palette has one value per colour: light repeats dark. -->
+    <Color x:Key="BrandSplashBackgroundLight">#0F1117</Color>
+    <Color x:Key="BrandSplashBackgroundDark">#0F1117</Color>
+    <Color x:Key="BrandSplashTitleLight">#F1F5F9</Color>
+    <Color x:Key="BrandSplashTitleDark">#F1F5F9</Color>
+    <Color x:Key="BrandSplashSignatureLight">#64748B</Color>
+    <Color x:Key="BrandSplashSignatureDark">#64748B</Color>
+    <Color x:Key="BrandSplashAccentLight">#10B981</Color>
+    <Color x:Key="BrandSplashAccentDark">#10B981</Color>
+
     <!-- Brushes -->
     <SolidColorBrush x:Key="BackgroundPrimaryBrush" Color="{StaticResource BackgroundPrimary}" />
     <SolidColorBrush x:Key="BackgroundSurfaceBrush" Color="{StaticResource BackgroundSurface}" />

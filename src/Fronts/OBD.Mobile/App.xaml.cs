@@ -33,6 +33,12 @@ public partial class App : Application
             : services.GetRequiredService<OnboardingPage>();
 
         var window = new Window(startPage);
+        // Over the onboarding page on a first launch, over the Shell afterwards: the splash goes once that first page
+        // is on display, whole. The name in Geist, the font of the app's titles (MauiProgram)
+        if (onboardingDone)
+            BrandSplash.ShowOver<PersonsPage>(window, "OBD", tagline: AppResources.GetString("Splash_Tagline"), nameFont: "GeistSemiBold");
+        else
+            BrandSplash.ShowOver<OnboardingPage>(window, "OBD", tagline: AppResources.GetString("Splash_Tagline"), nameFont: "GeistSemiBold");
         window.Destroying += (_, _) => _crashStateService.MarkAppClosedCleanly();
         return window;
     }
@@ -65,6 +71,8 @@ public partial class App : Application
 
     private async Task SendPendingCrashReportAsync(string details)
     {
+        // The mail app opens above everything: not over the launch splash
+        await BrandSplash.LetPopupThroughAsync();
         await _crashReportMailer.SendReportAsync(AppResources.GetString("CrashReport_EmailSubject"), details);
         _crashStateService.ClearCrashData();
     }

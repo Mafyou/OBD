@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- The launch splash, laid over the whole window above the app's first page by BrandSplash: the name of the app in a
+     frame of its accent colour (with, for an app that frames it with a phrase, a line in large letters above it and
+     one under it: "Restez" / Fit / "Grâce aux Chronos"), and its signature, "by Mafyou", in small letters at the foot
+     of the screen. A line along the bottom fills up over the 5 seconds; "Skip", a tap anywhere or Back cut them short,
+     the splash sliding up off the screen once the app is ready. The same layout in every Mafyou IT app, in the
+     colours of this one: the BrandSplash* keys of its Colors.xaml (BrandSplashView.xaml.cs). -->
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OBD.Mobile.Views.BrandSplashView">
+
+    <Grid x:Name="Root" SafeAreaEdges="None">
+        <!-- A tap anywhere skips; it also keeps the touches away from the page under the splash -->
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnTapped" />
+        </Grid.GestureRecognizers>
+
+        <VerticalStackLayout x:Name="Titles"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Padding="32,0"
+                             Spacing="18"
+                             Opacity="0"
+                             TranslationY="12">
+
+            <!-- Above the name, for an app that frames it with a phrase; hidden in the others -->
+            <Label x:Name="Lead"
+                   FontSize="40"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   LineBreakMode="WordWrap"
+                   IsVisible="False" />
+
+            <Border x:Name="NameFrame"
+                    StrokeThickness="3"
+                    BackgroundColor="Transparent"
+                    Padding="28,6,28,10"
+                    HorizontalOptions="Center"
+                    Scale="0.9">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20" />
+                </Border.StrokeShape>
+
+                <Label x:Name="AppName"
+                       FontSize="40"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"
+                       LineBreakMode="WordWrap"
+                       SemanticProperties.HeadingLevel="Level1" />
+            </Border>
+
+            <!-- Under the name, for an app that frames it with a phrase; hidden in the others -->
+            <Label x:Name="Tagline"
+                   FontSize="22"
+                   HorizontalTextAlignment="Center"
+                   LineBreakMode="WordWrap"
+                   IsVisible="False" />
+        </VerticalStackLayout>
+
+        <!-- The signature, in small letters at the foot of the screen, clear of the gesture bar -->
+        <Label x:Name="Signature"
+               Text="by Mafyou"
+               FontSize="13"
+               FontAttributes="Italic"
+               CharacterSpacing="2"
+               HorizontalOptions="Center"
+               VerticalOptions="End"
+               Margin="0,0,0,74"
+               Opacity="0" />
+
+        <Button x:Name="SkipButton"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                Margin="0,0,20,64"
+                Padding="18,8"
+                BackgroundColor="Transparent"
+                BorderWidth="1"
+                CornerRadius="18"
+                FontSize="14"
+                Opacity="0"
+                Clicked="OnSkip" />
+
+        <!-- Fills up from the left over the 5 seconds, in the accent colour itself: lightened, it turned brown on a dark background -->
+        <BoxView x:Name="Progress"
+                 HeightRequest="3"
+                 VerticalOptions="End"
+                 Margin="0,0,0,40"
+                 AnchorX="0"
+                 BackgroundColor="Transparent"
+                 ScaleX="0" />
+    </Grid>
+
+</ContentView>

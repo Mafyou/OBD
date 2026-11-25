@@ -107,6 +107,9 @@
   <data name="Common_Error" xml:space="preserve"><value>Erreur</value></data>
   <data name="Common_IrreversibleAction" xml:space="preserve"><value>Cette action est irréversible.</value></data>
   <data name="Common_PressAgainToExit" xml:space="preserve"><value>Êtes-vous sûr de vouloir quitter ? Appuyez de nouveau sur Retour.</value></data>
+  <data name="Splash_Skip" xml:space="preserve"><value>Passer</value></data>
+  <data name="Splash_SkipHint" xml:space="preserve"><value>Ouvre l'application sans attendre</value></data>
+  <data name="Splash_Tagline" xml:space="preserve"><value>Ton carnet d'arrivée en entreprise</value></data>
 
   <data name="Shell_Persons" xml:space="preserve"><value>Personnes</value></data>
   <data name="Shell_Notes" xml:space="preserve"><value>Notes</value></data>
