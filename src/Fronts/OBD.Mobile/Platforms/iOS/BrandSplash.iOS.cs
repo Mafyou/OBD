@@ -14,10 +14,19 @@ public static partial class BrandSplash
         view.AutoresizingMask = UIKit.UIViewAutoresizing.FlexibleWidth | UIKit.UIViewAutoresizing.FlexibleHeight;
         platformWindow.AddSubview(view);
 
+        // The window is created before it is made visible (by the scene delegate, with the UIScene lifecycle): the
+        // root view controller's view may be put in it after the splash. Brought to the front once that is done
+        MainThread.BeginInvokeOnMainThread(BringToFront);
+
+        void BringToFront() => Safely(() =>
+        {
+            if (view.Superview == platformWindow) platformWindow.BringSubviewToFront(view);
+        }, "The splash could not be brought to the front");
+
         void KeepInFront(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Window.Page))
-                MainThread.BeginInvokeOnMainThread(() => platformWindow.BringSubviewToFront(view));
+                MainThread.BeginInvokeOnMainThread(BringToFront);
         }
 
         window.PropertyChanged += KeepInFront;
