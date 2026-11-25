@@ -144,7 +144,9 @@ public static partial class BrandSplash
         void OnCreated(object? sender, EventArgs e)
         {
             window.Created -= OnCreated;
-            Show(window, appName, lead, tagline, nameFont, isFirstPage);
+            // Raised while the platform creates the window: whatever goes wrong, the app opens without the splash
+            Safely(() => Show(window, appName, lead, tagline, nameFont, isFirstPage), "The splash could not be shown");
+            if (Current is null) LetEverythingThrough();
         }
     }
 
@@ -277,10 +279,24 @@ public static partial class BrandSplash
     private static async Task WatchAsync(BrandSplashView splash, Action remove)
     {
         await Task.Delay(StartPatience);
-        MainThread.BeginInvokeOnMainThread(splash.Start);
+        MainThread.BeginInvokeOnMainThread(() => Safely(splash.Start, "The splash could not start"));
 
         await Task.Delay(RemovalPatience - StartPatience);
-        MainThread.BeginInvokeOnMainThread(remove);
+        MainThread.BeginInvokeOnMainThread(() => Safely(remove, "The splash could not be taken off the window"));
+    }
+
+    /// <summary>Runs what the splash does from a callback of the platform or of the main loop, where an exception
+    /// would end the app (on iOS above all): the splash may fail, the app must start.</summary>
+    internal static void Safely(Action action, string failure)
+    {
+        try
+        {
+            action();
+        }
+        catch (Exception exception)
+        {
+            Warn(exception, failure);
+        }
     }
 
     /// <summary>Puts the splash's platform view above everything in the window; returns how to take it away, or null

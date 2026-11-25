@@ -40,7 +40,20 @@ public partial class BrandSplashView : ContentView
         Paint();
 
         Loaded += OnLoaded;
-        Root.SizeChanged += (_, _) => FitName();
+        Root.SizeChanged += OnRootSizeChanged;
+    }
+
+    // An exception in an event handler ends the app on iOS: the name keeps its size rather than take the app down
+    private void OnRootSizeChanged(object? sender, EventArgs e)
+    {
+        try
+        {
+            FitName();
+        }
+        catch (Exception exception)
+        {
+            BrandSplash.Warn(exception, "The name could not be fitted to the screen");
+        }
     }
 
     /// <summary>The splash has slid away: the app is uncovered and the splash can be taken off the window.</summary>
@@ -195,7 +208,14 @@ public partial class BrandSplashView : ContentView
             BrandSplash.Warn(exception, "The splash could not slide away");
         }
 
-        Closed?.Invoke(this, EventArgs.Empty);
+        try
+        {
+            Closed?.Invoke(this, EventArgs.Empty);
+        }
+        catch (Exception exception)
+        {
+            BrandSplash.Warn(exception, "The splash could not be taken off the window");
+        }
     }
 
     private void OnSkip(object? sender, EventArgs e) => Skip();
