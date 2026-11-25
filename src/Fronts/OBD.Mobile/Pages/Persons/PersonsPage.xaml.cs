@@ -13,8 +13,12 @@ public partial class PersonsPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        if (BindingContext is PersonsViewModel vm)
-            vm.LoadCommand.Execute(null);
+        if (BindingContext is not PersonsViewModel vm) return;
+
+        vm.LoadCommand.Execute(null);
+        // At launch the list is on display, filled, as the splash goes: not its empty state first
+        if (vm.LoadCommand.ExecutionTask is { } loading)
+            BrandSplash.HoldUntil(loading);
     }
 
     private async void OnSearchClicked(object? sender, EventArgs e)
