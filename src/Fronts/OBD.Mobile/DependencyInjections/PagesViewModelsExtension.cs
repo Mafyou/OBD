@@ -4,7 +4,7 @@ public static class PagesViewModelsExtension
 {
     extension(IServiceCollection services)
     {
-        public void AddPagesViewModels()
+        public IServiceCollection AddPagesViewModels()
         {
             services.AddSingleton<AppShell>();
             services.AddSingletonWithShellRoute<OnboardingPage, OnboardingViewModel>(nameof(OnboardingPage));
@@ -20,6 +20,7 @@ public static class PagesViewModelsExtension
             services.AddSingletonWithShellRoute<ParametersPage, ParametersViewModel>(nameof(ParametersPage));
             services.AddSingletonWithShellRoute<SensitiveNotesPage, SensitiveNotesViewModel>(nameof(SensitiveNotesPage));
             services.AddTransientWithShellRoute<LogsPage, LogsViewModel>(nameof(LogsPage));
+            return services;
         }
     }
 }

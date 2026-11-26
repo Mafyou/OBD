@@ -4,7 +4,7 @@ public static class ServicesExtension
 {
     extension(IServiceCollection services)
     {
-        public void AddServices()
+        public IServiceCollection AddServices()
         {
             services.AddSingleton(TimeProvider.System);
             services.AddSingleton<IPersonService, PersonService>();
@@ -16,6 +16,7 @@ public static class ServicesExtension
             services.AddSingleton<IAppCrashStateService>(_ => new AppCrashStateService(FileSystem.AppDataDirectory));
             services.AddSingleton<ICrashReportMailer, CrashReportMailer>();
             services.AddSingleton<IShakeDetectionService, ShakeDetectionService>();
+            return services;
         }
     }
 }
