@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>$(NetTargetFramework)</TargetFramework>
+    <!-- xUnit v3: a test project is its own executable -->
+    <OutputType>Exe</OutputType>
+    <!-- xunit.v3 4 declares the project to Microsoft.Testing.Platform, which "dotnet test" refuses to run through
+         VSTest from the .NET 10 SDK on, unless the whole repository opts in to it (global.json). This project
+         stays on VSTest, with xunit.runner.visualstudio. -->
+    <IsTestingPlatformApplication>false</IsTestingPlatformApplication>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <!-- The source generators of the view models ([ObservableProperty], [RelayCommand]) -->
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="Microsoft.Extensions.TimeProvider.Testing" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="Moq" />
+    <PackageReference Include="Shouldly" />
+    <PackageReference Include="xunit.v3" />
+    <PackageReference Include="xunit.runner.visualstudio">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Fronts\OBD.Mobile.Lib\OBD.Mobile.Lib.csproj" />
+  </ItemGroup>
+
+  <!-- The app itself only builds for Android and iOS: its view models are compiled here from their own sources, against
+       the real services of OBD.Mobile.Lib. The MAUI entry points they reach for (Shell, Preferences, Share, the popups…)
+       are the fakes of Platform/, declared in the namespace of the view models so they are found first. -->
+  <ItemGroup>
+    <Compile Include="..\..\src\Fronts\OBD.Mobile\ViewModels\*.cs" Link="AppViewModels\%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+</Project>
