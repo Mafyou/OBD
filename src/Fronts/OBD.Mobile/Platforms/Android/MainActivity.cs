@@ -19,6 +19,8 @@ public class MainActivity : MauiAppCompatActivity
     protected override void OnCreate(Android.OS.Bundle? savedInstanceState)
     {
         base.OnCreate(savedInstanceState);
+        // From Android 16, Back on a root page never reached it, or the app was never left: DoubleBackToExit
+        BackKey.GiveToTheApp(this);
         CrossFingerprint.SetCurrentActivityResolver(() => Microsoft.Maui.ApplicationModel.Platform.CurrentActivity);
     }
 }

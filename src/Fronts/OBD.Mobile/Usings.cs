@@ -13,6 +13,7 @@ global using OBD.Mobile.Lib.Data;
 global using OBD.Mobile.Lib.DependencyInjections;
 global using OBD.Mobile.Lib.Diagnostics;
 global using OBD.Mobile.Lib.Models;
+global using OBD.Mobile.Lib.Navigation;
 global using OBD.Mobile.Lib.Resources.Strings;
 global using OBD.Mobile.Lib.Services;
 global using OBD.Mobile.Lib.Support;
