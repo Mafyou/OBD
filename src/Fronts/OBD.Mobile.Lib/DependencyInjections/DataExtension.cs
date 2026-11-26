@@ -4,11 +4,12 @@ public static class DataExtension
 {
     extension(IServiceCollection services)
     {
-        public void AddData()
+        public IServiceCollection AddData()
         {
             var dbPath = Path.Combine(FileSystem.AppDataDirectory, "obd.db3");
             services.AddSingleton(_ => new DatabaseContext(dbPath));
             services.AddTransient<DataSeeder>();
+            return services;
         }
     }
 }
