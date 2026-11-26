@@ -30,6 +30,7 @@
                    VerticalOptions="Center" />
             <Button Grid.Column="1"
                     Text="&#xE8B6;"
+                    SemanticProperties.Description="{strings:Translate A11y_Search}"
                     FontFamily="MaterialSymbols"
                     Clicked="OnSearchClicked"
                     BackgroundColor="Transparent"
@@ -105,6 +106,7 @@
                            VerticalOptions="Center" />
                     <Button Grid.Column="1"
                             Text="&#xE145;"
+                            SemanticProperties.Description="{strings:Translate SectorDetails_NewTitle}"
                             FontFamily="MaterialSymbols"
                             Command="{Binding OpenSectorDetailCommand}"
                             BackgroundColor="{StaticResource AccentPrimary}"
@@ -168,6 +170,7 @@
                         <Label Grid.Column="1"
                                Text="&#xE2C4;"
                                FontFamily="MaterialSymbols"
+                               AutomationProperties.IsInAccessibleTree="False"
                                TextColor="{StaticResource AccentPrimary}"
                                FontSize="22"
                                VerticalOptions="Center"
@@ -221,6 +224,7 @@
                             <Label Grid.Column="1"
                                    Text="&#xE5C8;"
                                    FontFamily="MaterialSymbols"
+                                   AutomationProperties.IsInAccessibleTree="False"
                                    TextColor="{StaticResource TextSecondary}"
                                    FontSize="18"
                                    VerticalOptions="Center" />
@@ -245,6 +249,7 @@
                             <Label Grid.Column="1"
                                    Text="&#xE5C8;"
                                    FontFamily="MaterialSymbols"
+                                   AutomationProperties.IsInAccessibleTree="False"
                                    TextColor="{StaticResource TextSecondary}"
                                    FontSize="18"
                                    VerticalOptions="Center" />
@@ -266,6 +271,7 @@
                             <Label Grid.Column="1"
                                    Text="&#xE5C8;"
                                    FontFamily="MaterialSymbols"
+                                   AutomationProperties.IsInAccessibleTree="False"
                                    TextColor="{StaticResource TextSecondary}"
                                    FontSize="18"
                                    VerticalOptions="Center" />
@@ -287,6 +293,7 @@
                             <Label Grid.Column="1"
                                    Text="&#xE5C8;"
                                    FontFamily="MaterialSymbols"
+                                   AutomationProperties.IsInAccessibleTree="False"
                                    TextColor="{StaticResource TextSecondary}"
                                    FontSize="18"
                                    VerticalOptions="Center" />

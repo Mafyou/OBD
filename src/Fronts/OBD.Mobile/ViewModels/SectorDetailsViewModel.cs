@@ -58,6 +58,9 @@ public partial class SectorDetailsViewModel(ISectorService sectorService) : Obse
         await Shell.Current.GoToAsync("..");
     }
 
+    /// <summary>The notes and people deleted with the sector, for the confirmation.</summary>
+    public Task<SectorContents> GetContentsAsync() => sectorService.GetContentsAsync(Sector.Id);
+
     [RelayCommand]
     private async Task DeleteAsync(CancellationToken stoppingToken)
     {

@@ -57,6 +57,7 @@
         <VerticalStackLayout HorizontalOptions="End" VerticalOptions="End"
                              Margin="0,0,20,20" Spacing="12">
             <Button Text="&#xE3C9;"
+                    SemanticProperties.Description="{strings:Translate A11y_NewSketch}"
                     FontFamily="MaterialSymbols"
                     Command="{Binding OpenNewSketchCommand}"
                     BackgroundColor="{StaticResource BackgroundSurface}"
@@ -65,6 +66,7 @@
                     CornerRadius="24"
                     FontSize="22" Padding="0" />
             <Button Text="&#xE145;"
+                    SemanticProperties.Description="{strings:Translate A11y_NewNote}"
                     FontFamily="MaterialSymbols"
                     Command="{Binding OpenNewTextNoteCommand}"
                     BackgroundColor="{StaticResource AccentPrimary}"

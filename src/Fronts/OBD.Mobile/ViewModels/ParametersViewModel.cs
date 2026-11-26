@@ -33,16 +33,19 @@ public partial class ParametersViewModel(
     private async Task LoadAsync(CancellationToken stoppingToken)
     {
         IsLoading = true;
-        var sectorList = await sectorService.GetAllAsync();
-        Sectors = new ObservableCollection<Sector>(sectorList);
+        // A failed read left the page loading for good
+        try
+        {
+            Sectors = [.. await sectorService.GetAllAsync()];
+            Persons = [.. await personService.GetAllAsync()];
 
-        var personsList = await personService.GetAllAsync();
-        Persons = new ObservableCollection<Person>(personsList);
-
-        WorkHabits = await workHabitsService.GetAsync() ?? new WorkHabits();
-        SelectedManager = Persons.FirstOrDefault(p => p.Id == WorkHabits.ManagerId);
-
-        IsLoading = false;
+            WorkHabits = await workHabitsService.GetAsync() ?? new WorkHabits();
+            SelectedManager = Persons.FirstOrDefault(p => p.Id == WorkHabits.ManagerId);
+        }
+        finally
+        {
+            IsLoading = false;
+        }
     }
 
     [RelayCommand]

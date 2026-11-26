@@ -1,4 +1,5 @@
 global using System.ComponentModel;
+global using System.Diagnostics;
 global using System.Globalization;
 global using System.IO.Compression;
 global using System.Resources;

@@ -1,0 +1,4 @@
+/* The permission prompts of iOS on a phone set to English */
+"NSFaceIDUsageDescription" = "Used to open your sensitive notes";
+"NSCameraUsageDescription" = "Used to take photos and add them to your notes";
+"NSPhotoLibraryUsageDescription" = "Used to choose photos from your library and add them to your notes";

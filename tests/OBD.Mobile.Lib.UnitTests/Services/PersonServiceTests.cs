@@ -42,4 +42,36 @@ public class PersonServiceTests
         deleteCount.ShouldBe(1);
         deleted.ShouldBeNull();
     }
+
+    [Fact]
+    public async Task DeleteAsync_ShouldClearTheManagerOfTheWorkHabits_WhenThePersonWasIt()
+    {
+        var db = await TestDatabaseHelper.CreateCleanDatabaseContextAsync();
+        var manager = new Person { Name = "Sophie" };
+        _ = await db.InsertAsync(manager);
+        _ = await db.InsertAsync(new WorkHabits { RemoteWorkDays = "Monday", ManagerId = manager.Id });
+
+        var deleted = await new PersonService(db).DeleteAsync(manager);
+
+        deleted.ShouldBe(1);
+        var habits = await new WorkHabitsService(db).GetAsync();
+        habits.ShouldNotBeNull();
+        habits.ManagerId.ShouldBe(0);
+        habits.RemoteWorkDays.ShouldBe("Monday");
+    }
+
+    [Fact]
+    public async Task DeleteAsync_ShouldKeepTheManager_WhenAnotherPersonIsDeleted()
+    {
+        var db = await TestDatabaseHelper.CreateCleanDatabaseContextAsync();
+        var manager = new Person { Name = "Sophie" };
+        var colleague = new Person { Name = "Thomas" };
+        _ = await db.InsertAsync(manager);
+        _ = await db.InsertAsync(colleague);
+        _ = await db.InsertAsync(new WorkHabits { ManagerId = manager.Id });
+
+        _ = await new PersonService(db).DeleteAsync(colleague);
+
+        (await new WorkHabitsService(db).GetAsync())!.ManagerId.ShouldBe(manager.Id);
+    }
 }

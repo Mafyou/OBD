@@ -1,0 +1,4 @@
+/* The permission prompts of iOS, in French (the app's default language); en.lproj holds them in English */
+"NSFaceIDUsageDescription" = "Utilisé pour accéder aux notes sensibles";
+"NSCameraUsageDescription" = "Utilisé pour prendre des photos et les ajouter à vos notes";
+"NSPhotoLibraryUsageDescription" = "Utilisé pour choisir des photos depuis votre galerie et les ajouter à vos notes";

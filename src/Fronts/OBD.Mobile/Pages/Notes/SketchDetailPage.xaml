@@ -130,6 +130,7 @@
                     <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
                         <Button Grid.Column="0"
                                 Text="&#xE3B0;"
+                                SemanticProperties.Description="{strings:Translate SketchDetail_TakePhotoTooltip}"
                                 FontFamily="MaterialSymbols"
                                 Command="{Binding TakePhotoAsBackgroundCommand}"
                                 BackgroundColor="{StaticResource BackgroundSurface}"
@@ -140,6 +141,7 @@
                                 ToolTipProperties.Text="{strings:Translate SketchDetail_TakePhotoTooltip}" />
                         <Button Grid.Column="1"
                                 Text="&#xE410;"
+                                SemanticProperties.Description="{strings:Translate SketchDetail_PickPhotoTooltip}"
                                 FontFamily="MaterialSymbols"
                                 Command="{Binding PickPhotoAsBackgroundCommand}"
                                 BackgroundColor="{StaticResource BackgroundSurface}"

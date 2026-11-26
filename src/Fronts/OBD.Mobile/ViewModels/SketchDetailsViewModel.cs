@@ -90,12 +90,23 @@ public partial class SketchDetailsViewModel(INoteService noteService) : Observab
             IsViewMode = true;
             IsEditMode = false;
 
-            if (!string.IsNullOrEmpty(Note.Content))
-            {
-                var bytes = Convert.FromBase64String(Note.Content);
-                CurrentImage = ImageSource.FromStream(() => new MemoryStream(bytes));
-            }
+            // Content that is not base64 (a text note opened here) threw from a load nobody awaited: no image instead
+            if (TryDecodeImage(Note.Content) is { } image)
+                CurrentImage = ImageSource.FromStream(() => new MemoryStream(image.Array!, image.Offset, image.Count, writable: false));
         }
+    }
+
+    private static ArraySegment<byte>? TryDecodeImage(string? content)
+    {
+        if (string.IsNullOrEmpty(content))
+            return null;
+
+        var buffer = new byte[content.Length * 3 / 4];
+        // Not a conditional expression: its null would become an empty segment, through the conversion from an array
+        if (!Convert.TryFromBase64String(content, buffer, out var written))
+            return null;
+
+        return new ArraySegment<byte>(buffer, 0, written);
     }
 
     [RelayCommand]
