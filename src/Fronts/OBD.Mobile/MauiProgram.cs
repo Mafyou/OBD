@@ -8,21 +8,13 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
-            .ConfigureFonts(fonts =>
-            {
-                fonts.AddFont("Geist-SemiBold.ttf", "GeistSemiBold");
-                fonts.AddFont("MaterialSymbolsOutlined-SemiBold.ttf", "MaterialSymbols");
-            });
+            .UseObdFonts()
+            .UseObdLogging();
 
-        builder.Services.AddData();
-
-        builder.Services.AddServices();
-
-        builder.Services.AddPagesViewModels();
-
-#if DEBUG
-        builder.Logging.AddDebug();
-#endif
+        builder.Services
+            .AddData()
+            .AddServices()
+            .AddPagesViewModels();
 
         return builder.Build();
     }

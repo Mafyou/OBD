@@ -7,6 +7,7 @@ global using CommunityToolkit.Mvvm.ComponentModel;
 global using CommunityToolkit.Mvvm.Input;
 global using Microsoft.Extensions.Logging;
 global using OBD.Mobile.DependencyInjections;
+global using OBD.Mobile.Extensions;
 global using OBD.Mobile.Lib.Abstractions;
 global using OBD.Mobile.Lib.Data;
 global using OBD.Mobile.Lib.DependencyInjections;
