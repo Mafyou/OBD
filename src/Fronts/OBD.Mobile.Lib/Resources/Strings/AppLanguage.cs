@@ -16,6 +16,27 @@ public static class AppLanguage
         return string.Equals(language, English, StringComparison.OrdinalIgnoreCase) ? English : French;
     }
 
+    /// <summary>
+    /// The culture the system gives the app: the language picked for it in the settings (Android 13+, App languages,
+    /// given as tags such as "en-US,fr-FR"), the phone's when none is picked or the tags are unknown. Read at start-up;
+    /// the app starts again when it changes while it runs (Android, AppLanguageTags).
+    /// </summary>
+    public static CultureInfo SystemCulture(string? appLanguageTags, CultureInfo phoneCulture)
+    {
+        var first = appLanguageTags?.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).FirstOrDefault();
+        if (string.IsNullOrEmpty(first)) return phoneCulture;
+
+        try
+        {
+            var culture = CultureInfo.GetCultureInfo(first);
+            return string.IsNullOrEmpty(culture.Name) ? phoneCulture : culture;
+        }
+        catch (CultureNotFoundException)
+        {
+            return phoneCulture;
+        }
+    }
+
     /// <summary>Language of the app at start-up: the saved choice when there is one (a saved value that is neither
     /// fr nor en reads as French), otherwise the language of the phone (<see cref="FromCode"/>).</summary>
     public static string Resolve(string? savedCode, CultureInfo phoneCulture) =>

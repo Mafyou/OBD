@@ -20,8 +20,16 @@ public sealed class LocalizationResourceManager : INotifyPropertyChanged
         new(AppLanguage.English, AppResources.GetString("Language_English")),
     ];
 
-    // The culture of the phone, read before the app sets its own.
-    private readonly CultureInfo _phoneCulture = CultureInfo.CurrentUICulture;
+    // The culture the system gives the app, read before the app sets its own: the language picked for the app under
+    // App languages (Android 13+), the phone's when none.
+    // iOS gives the language picked for the app through the preferred languages, which .NET reads.
+    private readonly CultureInfo _phoneCulture = AppLanguage.SystemCulture(
+#if ANDROID
+        AppLanguageTags.Read(),
+#else
+        null,
+#endif
+        CultureInfo.CurrentUICulture);
 
     private LocalizationResourceManager()
     {
