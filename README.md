@@ -214,7 +214,7 @@ Cette application n'essaie pas de remplacer les outils internes de l'entreprise.
 - Release Android : runtime CoreCLR et précompilation ReadyToRun (défauts de .NET 11), pour `arm64-v8a` et `x86_64`.
 - Pas de synchronisation cloud — tout est local pour garantir la confidentialité.
 - Interface en français et en anglais (`AppResources.resx` / `AppResources.en.resx`), langue au choix dans les Paramètres.
-- Tests : xUnit v3, Shouldly, Moq (`dotnet test tests/OBD.Mobile.Lib.UnitTests/OBD.Mobile.Lib.UnitTests.csproj`).
+- Tests : xUnit v3, Shouldly, Moq — unitaires, d'intégration (services sur une vraie base SQLite dans un dossier temporaire) et fonctionnels (parcours des ViewModels sur les vrais services, seule la plateforme est simulée), lancés par [`.github/workflows/tests.yml`](.github/workflows/tests.yml) (`dotnet test tests/<projet>/<projet>.csproj`).
 - Compilation : `dotnet build src/Fronts/OBD.Mobile/OBD.Mobile.csproj -f net11.0-android -c Release` (ou `-f net11.0-ios` ; sous Windows sans Mac, seul le code managé iOS est compilé).
 
 ## Architecture
@@ -227,6 +227,8 @@ src/Fronts/
     └── Platforms/iOS      → DI platform-specific
 tests/
   OBD.Mobile.Lib.UnitTests → Tests xUnit / Shouldly / Moq (cible OBD.Mobile.Lib)
+  OBD.Mobile.Lib.IntegrationTests → Services câblés ensemble, base et fichiers réels
+  OBD.Mobile.FunctionalTests → Parcours utilisateur sur les ViewModels de l'app
 ```
 
 Règle : tout ce qui n'est pas ViewModel ou page va dans `OBD.Mobile.Lib`.
