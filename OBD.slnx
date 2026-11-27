@@ -3,6 +3,7 @@
     <File Path=".github/CLAUDE.md" />
     <File Path=".github/copilot-instructions.md" />
     <File Path=".github/workflows/CICD-iOS.yml" />
+    <File Path=".github/workflows/tests.yml" />
     <File Path="design.md" />
     <File Path="LICENSE.md" />
     <File Path="README.md" />
@@ -14,6 +15,8 @@
     </Project>
   </Folder>
   <Folder Name="/Tests/">
+    <Project Path="tests/OBD.Mobile.FunctionalTests/OBD.Mobile.FunctionalTests.csproj" Id="3b137b1a-396f-4e5f-9ef3-ff40c296f749" />
+    <Project Path="tests/OBD.Mobile.Lib.IntegrationTests/OBD.Mobile.Lib.IntegrationTests.csproj" Id="a06bf85d-8838-4214-b522-e4dc25cf1797" />
     <Project Path="tests/OBD.Mobile.Lib.UnitTests/OBD.Mobile.Lib.UnitTests.csproj" Id="93801d5c-a194-4909-aa75-23473ba15250" />
   </Folder>
 </Solution>
