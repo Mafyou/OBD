@@ -223,5 +223,16 @@
   <data name="Logs_ClearCrashData" xml:space="preserve"><value>Effacer les données de plantage</value></data>
   <data name="Logs_EmailSubject" xml:space="preserve"><value>Rapport de diagnostic OBD</value></data>
   <data name="Logs_GetHelp" xml:space="preserve"><value>Obtenir de l'aide</value></data>
+  <data name="SectorDetails_DeleteContentsFormat" xml:space="preserve"><value>Ce secteur et tout son contenu ({0}) seront supprimés. Cette action est irréversible.</value></data>
+  <data name="SectorDetails_NoteCountOne" xml:space="preserve"><value>1 note</value></data>
+  <data name="SectorDetails_NoteCountMany" xml:space="preserve"><value>{0} notes</value></data>
+  <data name="SectorDetails_PersonCountOne" xml:space="preserve"><value>1 personne</value></data>
+  <data name="SectorDetails_PersonCountMany" xml:space="preserve"><value>{0} personnes</value></data>
+  <data name="Common_And" xml:space="preserve"><value> et </value></data>
+  <data name="A11y_Search" xml:space="preserve"><value>Rechercher</value></data>
+  <data name="A11y_NewNote" xml:space="preserve"><value>Nouvelle note</value></data>
+  <data name="A11y_NewSketch" xml:space="preserve"><value>Nouveau croquis</value></data>
+  <data name="A11y_NewPerson" xml:space="preserve"><value>Nouvelle personne</value></data>
+  <data name="A11y_RemoveLink" xml:space="preserve"><value>Retirer le lien</value></data>
 
 </root>

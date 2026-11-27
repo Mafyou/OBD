@@ -2,28 +2,44 @@ namespace OBD.Mobile.Views;
 
 /// <summary>
 /// Double Back to leave the app. On a root page (one from which Back would leave the app), the first
-/// Back press only shows a toast; a second press within <see cref="ConfirmationDelay"/> leaves.
+/// Back press only shows a toast; a second press within <see cref="DoubleBackGate.Window"/> leaves (the rules:
+/// <see cref="DoubleBackGate"/>).
 /// Usage, in the root page: <c>protected override bool OnBackButtonPressed() => DoubleBackToExit.Handle();</c>
 /// </summary>
 public static class DoubleBackToExit
 {
-    private static readonly TimeSpan ConfirmationDelay = TimeSpan.FromSeconds(2);
-
     // Shared by every root page: the second press counts even when it lands on another tab.
-    private static long? _lastBackPress;
+    private static readonly DoubleBackGate Gate = new(TimeProvider.System);
 
-    /// <returns>True when Back was consumed (the toast is shown); false when the app may be left.</returns>
+    /// <summary>
+    /// Always true: Back is consumed. The confirming press leaves the app itself: from Android 16 on, MAUI 11 no longer
+    /// leaves when a root page lets Back go, and every press then showed the toast again (seen on a phone).
+    /// </summary>
     public static bool Handle()
     {
-        var now = Environment.TickCount64;
-        if (_lastBackPress is not null && now - _lastBackPress.Value < ConfirmationDelay.TotalMilliseconds)
+        switch (Gate.Press())
         {
-            _lastBackPress = null;
-            return false;
+            case BackPress.Ask:
+                _ = Toast.Make(AppResources.GetString("Common_PressAgainToExit")).Show();
+                break;
+            case BackPress.Leave:
+                LeaveApp();
+                break;
+            case BackPress.SamePress:
+                // Already leaving: the same press, asked a second time
+                break;
+            default:
+                throw new System.Diagnostics.UnreachableException();
         }
 
-        _lastBackPress = now;
-        _ = Toast.Make(AppResources.GetString("Common_PressAgainToExit")).Show();
         return true;
+    }
+
+    private static void LeaveApp()
+    {
+#if ANDROID
+        if (Microsoft.Maui.ApplicationModel.Platform.CurrentActivity is { } activity)
+            BackKey.Leave(activity);
+#endif
     }
 }

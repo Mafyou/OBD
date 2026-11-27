@@ -25,6 +25,7 @@
                    VerticalOptions="Center" />
             <Button Grid.Column="1"
                     Text="&#xE897;"
+                    SemanticProperties.Description="{strings:Translate SensitiveNotes_Title}"
                     FontFamily="MaterialSymbols"
                     Clicked="OnSensitiveClicked"
                     BackgroundColor="Transparent"
@@ -34,6 +35,7 @@
                     HeightRequest="44" />
             <Button Grid.Column="2"
                     Text="&#xE8B6;"
+                    SemanticProperties.Description="{strings:Translate A11y_Search}"
                     FontFamily="MaterialSymbols"
                     Clicked="OnSearchClicked"
                     BackgroundColor="Transparent"

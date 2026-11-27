@@ -38,22 +38,19 @@ public class DataExportService(DatabaseContext db) : IDataExportService
         List<ExportedNote> exportedNotes = new(notes.Count);
         foreach (var note in notes)
         {
-            var (included, image, content) = note.Type is TypeNote.Text
-                ? (true, null, note.Content)
+            ExportedContent exported = note.Type is TypeNote.Text
+                ? new KeptContent(note.Content)
                 : await WriteImageAsync(archive, note.Id, includeSensitive, stoppingToken).ConfigureAwait(false);
-            if (!included)
-                continue;
 
-            exportedNotes.Add(new ExportedNote(
-                note.Id,
-                note.SectorId,
-                note.Type,
-                note.Title,
-                content,
-                image,
-                note.Keywords,
-                note.IsSensitive,
-                note.CreatedAt));
+            ExportedNote? exportedNote = exported switch
+            {
+                LeftOut => null,
+                ArchivedImage archived => ToExported(note, image: archived.Path, content: string.Empty),
+                KeptContent kept => ToExported(note, image: null, content: kept.Content),
+                null => throw new UnreachableException(),
+            };
+            if (exportedNote is { } included)
+                exportedNotes.Add(included);
         }
 
         // A link from a note to a sketch left out of the export would point at nothing
@@ -77,22 +74,45 @@ public class DataExportService(DatabaseContext db) : IDataExportService
         await JsonSerializer.SerializeAsync(stream, export, Json.DataExport, stoppingToken).ConfigureAwait(false);
     }
 
+    /// <summary>What a note brings to the export: nothing, an image in the archive, or the content in the data file.</summary>
+    private readonly union ExportedContent(LeftOut, ArchivedImage, KeptContent);
+
+    /// <summary>The note stays out of the export: sensitive, or deleted since the list was read.</summary>
+    private readonly record struct LeftOut;
+
+    /// <summary>The image of the note, at <paramref name="Path"/> in the archive.</summary>
+    private readonly record struct ArchivedImage(string Path);
+
+    /// <summary>The content of the note, kept as it is in the data file.</summary>
+    private readonly record struct KeptContent(string Content);
+
+    private static ExportedNote ToExported(Note note, string? image, string content) => new(
+        note.Id,
+        note.SectorId,
+        note.Type,
+        note.Title,
+        content,
+        image,
+        note.Keywords,
+        note.IsSensitive,
+        note.CreatedAt);
+
     /// <summary>
-    /// Writes the image of a sketch as a file of its own. Returns whether the note still belongs in the export, the path
-    /// of its image in the archive, and the content to keep in the data file when there is no image.
+    /// Writes the image of a sketch as a file of its own, or tells why there is none: the note is left out, or it holds
+    /// something else than an image, kept in the data file.
     /// </summary>
-    private async Task<(bool Included, string? Image, string Content)> WriteImageAsync(ZipArchive archive, int noteId, bool includeSensitive, CancellationToken stoppingToken)
+    private async Task<ExportedContent> WriteImageAsync(ZipArchive archive, int noteId, bool includeSensitive, CancellationToken stoppingToken)
     {
         // The image and its sensitivity are read together: a sketch marked sensitive (or deleted) since the list was read
         // must not leave with its image
         var current = (await db.QueryAsync<Note>("SELECT Id, Content, IsSensitive FROM Note WHERE Id = ?", noteId).ConfigureAwait(false))
             .FirstOrDefault();
         if (current is null || (current.IsSensitive && !includeSensitive))
-            return (false, null, string.Empty);
+            return new LeftOut();
 
         var content = current.Content ?? string.Empty;
         if (content.Length == 0)
-            return (true, null, content);
+            return new KeptContent(content);
 
         byte[] bytes;
         try
@@ -102,7 +122,7 @@ public class DataExportService(DatabaseContext db) : IDataExportService
         catch (FormatException)
         {
             // Not an image after all: the data file keeps what the note holds
-            return (true, null, content);
+            return new KeptContent(content);
         }
 
         var isJpeg = bytes is [0xFF, 0xD8, ..];
@@ -112,6 +132,6 @@ public class DataExportService(DatabaseContext db) : IDataExportService
         var entry = archive.CreateEntry(path, CompressionLevel.NoCompression);
         await using var stream = await entry.OpenAsync(stoppingToken).ConfigureAwait(false);
         await stream.WriteAsync(bytes, stoppingToken).ConfigureAwait(false);
-        return (true, path, string.Empty);
+        return new ArchivedImage(path);
     }
 }

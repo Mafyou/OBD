@@ -25,6 +25,7 @@
                    VerticalOptions="Center" />
             <Button Grid.Column="1"
                     Text="&#xE8B6;"
+                    SemanticProperties.Description="{strings:Translate A11y_Search}"
                     FontFamily="MaterialSymbols"
                     Clicked="OnSearchClicked"
                     BackgroundColor="Transparent"
@@ -79,6 +80,7 @@
 
             <!-- FAB -->
             <Button Text="&#xE145;"
+                    SemanticProperties.Description="{strings:Translate A11y_NewPerson}"
                     FontFamily="MaterialSymbols"
                     Command="{Binding OpenDetailCommand}"
                     BackgroundColor="{StaticResource AccentPrimary}"

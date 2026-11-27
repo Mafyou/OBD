@@ -18,5 +18,15 @@ public class PersonService(DatabaseContext db) : IPersonService
 
     public Task<int> UpdateAsync(Person person) => db.UpdateAsync(person);
 
-    public Task<int> DeleteAsync(Person person) => db.DeleteAsync(person);
+    // The work habits kept the id of a deleted manager, and the export pointed at someone no longer in it
+    public async Task<int> DeleteAsync(Person person)
+    {
+        var deleted = 0;
+        await db.RunInTransactionAsync(conn =>
+        {
+            conn.Execute("UPDATE WorkHabits SET ManagerId = 0 WHERE ManagerId = ?", person.Id);
+            deleted = conn.Delete(person);
+        }).ConfigureAwait(false);
+        return deleted;
+    }
 }

@@ -1,4 +1,5 @@
 global using System.ComponentModel;
+global using System.Diagnostics;
 global using System.Globalization;
 global using System.IO.Compression;
 global using System.Resources;
@@ -10,6 +11,7 @@ global using OBD.Mobile.Lib.Abstractions;
 global using OBD.Mobile.Lib.Data;
 global using OBD.Mobile.Lib.Diagnostics;
 global using OBD.Mobile.Lib.Models;
+global using OBD.Mobile.Lib.Navigation;
 global using OBD.Mobile.Lib.Resources.Strings;
 global using OBD.Mobile.Lib.Services;
 global using OBD.Mobile.Lib.Support;

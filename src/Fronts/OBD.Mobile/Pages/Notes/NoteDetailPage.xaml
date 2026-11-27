@@ -81,6 +81,7 @@
                                                 Padding="10,0" HeightRequest="32" Margin="8,0,4,0" />
                                         <Button Grid.Column="3"
                                                 Text="&#xE5CD;"
+                                                SemanticProperties.Description="{strings:Translate A11y_RemoveLink}"
                                                 FontFamily="MaterialSymbols"
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type vm:NoteDetailViewModel}}, Path=RemoveLinkCommand}"
                                                 CommandParameter="{Binding .}"

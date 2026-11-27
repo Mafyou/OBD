@@ -10,12 +10,14 @@ public partial class SectorDetailsPage : ContentPage
         BindingContext = _vm = vm;
     }
 
-    // "Delete" used to delete the sector at once: it asks first, as for a note or a visual
+    // "Delete" used to delete the sector at once: it asks first, as for a note or a visual, and says how many notes and
+    // people go with it
     private async void OnDeleteClicked(object? sender, EventArgs e)
     {
+        var contents = await _vm.GetContentsAsync();
         var popup = new ConfirmPopup(
             AppResources.GetString("SectorDetails_DeleteTitle"),
-            AppResources.GetString("Common_IrreversibleAction"),
+            contents.DeleteMessage(),
             confirmText: AppResources.GetString("Common_Delete"),
             isDanger: true);
         var result = await Dialogs.ConfirmAsync(popup);

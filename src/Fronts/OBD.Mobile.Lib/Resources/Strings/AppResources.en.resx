@@ -184,5 +184,16 @@
   <data name="Logs_ClearCrashData" xml:space="preserve"><value>Clear crash data</value></data>
   <data name="Logs_EmailSubject" xml:space="preserve"><value>OBD Diagnostic Report</value></data>
   <data name="Logs_GetHelp" xml:space="preserve"><value>Get help</value></data>
+  <data name="SectorDetails_DeleteContentsFormat" xml:space="preserve"><value>This sector and everything in it ({0}) will be deleted. This action cannot be undone.</value></data>
+  <data name="SectorDetails_NoteCountOne" xml:space="preserve"><value>1 note</value></data>
+  <data name="SectorDetails_NoteCountMany" xml:space="preserve"><value>{0} notes</value></data>
+  <data name="SectorDetails_PersonCountOne" xml:space="preserve"><value>1 person</value></data>
+  <data name="SectorDetails_PersonCountMany" xml:space="preserve"><value>{0} people</value></data>
+  <data name="Common_And" xml:space="preserve"><value> and </value></data>
+  <data name="A11y_Search" xml:space="preserve"><value>Search</value></data>
+  <data name="A11y_NewNote" xml:space="preserve"><value>New note</value></data>
+  <data name="A11y_NewSketch" xml:space="preserve"><value>New sketch</value></data>
+  <data name="A11y_NewPerson" xml:space="preserve"><value>New person</value></data>
+  <data name="A11y_RemoveLink" xml:space="preserve"><value>Remove link</value></data>
 
 </root>
