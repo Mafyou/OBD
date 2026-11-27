@@ -1,9 +1,14 @@
 # OBD : On-Boarding Day
 
-> **Version :** 2.0 (build 12) · **Technologie :** .NET 11, .NET MAUI 11 · Android 7.0+ (API 24) / iOS 15+ · C# 15 (`LangVersion` latest)
+> **Version :** 2.9 · **Technologie :** .NET 11, .NET MAUI 11 · Android 7.0+ (API 24) / iOS 15+ · C# 15 (`LangVersion` latest)
 
-[Google Play](https://play.google.com/store/apps/details?id=fr.mafyou.obd)
-[App Store](https://apps.apple.com/fr/app/obd-on-boarding-day/id6773454327)
+## Télécharger
+
+| | Lien |
+|---|---|
+| 🤖 Android | [Google Play](https://play.google.com/store/apps/details?id=fr.mafyou.obd) |
+| 🍏 iPhone | [App Store](https://apps.apple.com/fr/app/obd-on-boarding-day/id6773454327) |
+| 📦 APK Android | [Dernière release GitHub](https://github.com/Mafyou/OBD/releases/latest) |
 
 Application mobile pensée pour accompagner une personne en entreprise pendant son onboarding. La promesse produit est simple : aider à réussir son arrivée dans l'entreprise sans se perdre dans les informations, les personnes à retenir et les habitudes internes.
 
